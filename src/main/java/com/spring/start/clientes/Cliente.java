@@ -9,7 +9,7 @@ import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.spring.start.maquinas.Maquina;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -34,10 +34,10 @@ public class Cliente {
 	@Column
 	private Date fechaVencimientoContrato;
 
-	// relacion 1:N con maquinas, cada local tiene una o varias maquinas.
+	// relacion 1:N con maquinas, cada local tiene una o varias maquinas, normalmente tienen entre 1 y 2.
 	@OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
 	@Fetch(value = FetchMode.SUBSELECT)
-	@JsonManagedReference
+	@JsonBackReference
 	@Cascade(CascadeType.ALL)
 	private List<Maquina> maquinas = new ArrayList<Maquina>();
 

@@ -11,6 +11,9 @@
 
 <body>
 
+	<div class="row" th:insert="~{menuTop :: menuTop}"></div>
+
+
 	<div class="container text-center">
 		<div class="row align-items-center">
 			<div class="col col-md-4">
@@ -35,10 +38,10 @@
 					</div>
 				</div>
 			</div>
-			<div class="col col-md-4">
-			</div>
+			<div class="col col-md-4"></div>
 		</div>
-			<a th:href="@{~/usuario}" class="btn btn-primary btn-sm col col-md-1">Atrás</a>
+		<a th:href="@{~/usuario/edit/{id}(id = ${usuario.id})}" class="btn btn-warning btn-sm col col-md-1">Editar</a>
+		<a th:href="@{~/usuario}" class="btn btn-primary btn-sm col col-md-1">Atrás</a>
 	</div>
 </body>
 

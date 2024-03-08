@@ -1,20 +1,21 @@
 package com.spring.start.maquinas;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.spring.start.recaudaciones.Recaudacion;
+import com.spring.start.clientes.ClienteDAO;
 import com.spring.start.recaudaciones.RecaudacionDAO;
+import com.spring.start.tiene.TieneDAO;
+import com.spring.start.usuarios.UsuarioDAO;
 
 @RestController
 public class MaquinaController {
@@ -23,76 +24,92 @@ public class MaquinaController {
 	MaquinaDAO maquinaDAO;
 	
 	@Autowired
+	UsuarioDAO usuarioDAO;
+	
+	@Autowired
+	ClienteDAO clienteDAO;
+	
+	@Autowired
 	RecaudacionDAO recaudacionDAO;
+	
+	@Autowired
+	TieneDAO tieneDAO;
 
 	
 	
 	@GetMapping("/maquina")
-	public List<Maquina> getMaquinas() {
-		return (List<Maquina>) maquinaDAO.findAll();
+	public ModelAndView getMaquinas() {
+		ModelAndView model = new ModelAndView();
+		model.setViewName("maquinas");
+		model.addObject("maquinas", maquinaDAO.findAll());
+		return model;
 	}
 
 	@GetMapping("/maquina/{id}")
-	public Optional<Maquina> getMaquina(@PathVariable Long id) {
-		return maquinaDAO.findById(id);
-	}
-
-	@GetMapping("/maquina/{id}/recaudacion")
-	public List<Recaudacion> getRecaudaciones(@PathVariable Long id) {
+	public ModelAndView getMaquina(@PathVariable Long id) {
+		ModelAndView model = new ModelAndView();
+		model.setViewName("maquina");
+		
 		Maquina maquina = maquinaDAO.findById(id).get();
-		return maquina.getRecaudaciones();
+		model.addObject("maquina", maquina);
+		return model;
+
 	}
 
-	@DeleteMapping("/maquina/{id}")
-	public ResponseEntity<Maquina> deleteMaquina(@PathVariable Long id) {
+	@GetMapping("/maquina/add")
+	public ModelAndView addMaquina() {
+		ModelAndView model = new ModelAndView();
+		model.setViewName("formMaquina");
+		model.addObject("maquina", new Maquina());
+		model.addObject("clientes", clienteDAO.findAll());
+		return model;
+	}
+	
+	@GetMapping("/maquina/edit/{id}")
+	public ModelAndView editMaquina(@PathVariable long id) {
+
+		ModelAndView model = new ModelAndView();
 		Optional<Maquina> maquina = maquinaDAO.findById(id);
 
 		if (maquina.isPresent()) {
-			maquinaDAO.delete(maquina.get());
-			return ResponseEntity.status(HttpStatus.FOUND).body(maquina.get());
-		}
 
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+			model.addObject("maquina", maquina.get());
+			model.addObject("clientes", clienteDAO.findAll());
+			model.setViewName("formMaquina");
+		}
+		else model.setViewName("redirect:/maquina");
+		
+		return model;
 	}
 	
-	@PostMapping("/maquina")
-	public ResponseEntity<Maquina> postMaquina(@RequestBody Maquina maquina) {
-		maquinaDAO.save(maquina);
+	@GetMapping("/maquina/del/{id}")
+	public ModelAndView deleteMaquina(@PathVariable long id) {
 
-		List<Recaudacion> recaudaciones = maquina.getRecaudaciones();
-		for (Recaudacion r : recaudaciones) {
-
-			recaudacionDAO.save(r);
-		}
-
-		return ResponseEntity.status(HttpStatus.CREATED).body(maquina);
+		maquinaDAO.deleteById(id);
+		ModelAndView model = new ModelAndView();
+		model.setViewName("redirect:/maquina");
+		return model;
 	}
+	
+	@PostMapping("/maquina/save")
+	public ModelAndView formMaquina(@ModelAttribute @Validated Maquina maquina, BindingResult bindingResult) {
 
-	/*
-	 * @GetMapping("/maquina/betweenFechas") public List<Maquina>
-	 * getMaquinasEntreFechasVencimientoLicencia(@RequestParam Date fecha1,
-	 * 
-	 * @RequestParam Date fecha2) { return
-	 * maquinaDAO.findByFechaVencimientoLicenciaBetween(fecha1, fecha2); }
-	 * 
-	 * @GetMapping("/maquina/betweenIds") public List<Maquina>
-	 * getMaquinasEntreIds(@RequestParam Long id1, @RequestParam Long id2) { return
-	 * maquinaDAO.findByIdBetween(id1, id2); }
-	 * 
-	 * @GetMapping("/maquina/endingWithCadena") public List<Maquina>
-	 * getMaquinasEndingWith(@RequestParam String cadena) { return
-	 * maquinaDAO.findByNombreEndingWith(cadena); }
-	 * 
-	 * @GetMapping("/maquina/betweenId/orderByNombre") public List<Maquina>
-	 * getMaquinasEntreIdsOrdenAlfabetico(@RequestParam Long id1, @RequestParam Long
-	 * id2) { return maquinaDAO.findByIdBetweenOrderByNombreAsc(id1, id2); }
-	 * 
-	 * @GetMapping("/maquina/idNotIn") public List<Maquina>
-	 * getMaquinasExcluyendoIds(@RequestParam List<Long> idsExcluidos) { return
-	 * maquinaDAO.findByIdNotIn(idsExcluidos); }
-	 * 
-	 * @GetMapping("/maquina/byNombre") public List<Maquina>
-	 * getMaquinasPorNombre(@RequestParam("nombre") String nombre) { return
-	 * maquinaDAO.findByNombreIgnoreCase(nombre); }
-	 */
+		ModelAndView model = new ModelAndView();
+		if (bindingResult.hasErrors()) {
+
+			model.setViewName("formMaquina");
+			model.addObject("maquina", maquina);
+			
+			maquina.setCliente(null);
+			
+			model.addObject("clientes", clienteDAO.findAll());
+			
+			return model;
+		}
+		
+		maquinaDAO.save(maquina);
+		model.setViewName("redirect:/maquina");
+
+		return model;
+	}
 }

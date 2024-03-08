@@ -31,7 +31,6 @@ public class UsuarioController {
 		model.setViewName("usuarios");
 
 		List<Usuario> usuarios = (List<Usuario>) usuarioDAO.findAll();
-
 		model.addObject("usuarios", usuarios);
 
 		return model;
@@ -55,10 +54,8 @@ public class UsuarioController {
 
 		ModelAndView model = new ModelAndView();
 		model.setViewName("formUsuario");
-
 		model.addObject("usuario", new Usuario());
-		model.addObject("maquinas", maquinaDAO.findAll());
-
+ 
 		return model;
 	}
 
@@ -71,6 +68,7 @@ public class UsuarioController {
 		if (user.isPresent()) {
 
 			model.addObject("usuario", user.get());
+			
 			model.setViewName("formUsuario");
 		}
 		else model.setViewName("redirect:/usuario");
@@ -95,10 +93,11 @@ public class UsuarioController {
 
 			model.setViewName("formUsuario");
 			model.addObject("usuario", usuario);
+			
+			return model;
 		}
-
+		
 		usuarioDAO.save(usuario);
-
 		model.setViewName("redirect:/usuario");
 
 		return model;
