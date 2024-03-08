@@ -21,7 +21,8 @@
 	<div class="row">
 		<div class="col-2"></div>
 		<div class="col-8">
-
+			<p th:if="${#lists.isEmpty(maquinas)}">No hay maquinas, registra una -> <a class="btn btn-outline-primary"
+					th:href="@{~/maquina/add}">+</a></p>
 			<table class="table table-sm table-hover">
 				<thead>
 					<tr>
@@ -30,7 +31,7 @@
 						<th scope="col">Vence</th>
 						<th scope="col">Almacenada?</th>
 						<th scope="col">Local</th>
-						<th scope="col">Eliminar</th>
+						<th sec:authorize="hasAuthority('ADMIN')" scope="col">Eliminar</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -52,7 +53,8 @@
 							<span th:text="${maquina.cliente.local}">Local donde se encuentra</span>
 						</td>
 						<td>
-							<a class="badge badge-pill badge-danger" th:href="@{~/maquina/del/{id}(id = ${maquina.id})}">Borrar</a>
+							<a sec:authorize="hasAuthority('ADMIN')" class="badge badge-pill badge-danger"
+								th:href="@{~/maquina/del/{id}(id = ${maquina.id})}">Borrar</a>
 						</td>
 					</tr>
 				</tbody>

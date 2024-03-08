@@ -22,21 +22,19 @@ public class MaquinaController {
 
 	@Autowired
 	MaquinaDAO maquinaDAO;
-	
+
 	@Autowired
 	UsuarioDAO usuarioDAO;
-	
+
 	@Autowired
 	ClienteDAO clienteDAO;
-	
+
 	@Autowired
 	RecaudacionDAO recaudacionDAO;
-	
+
 	@Autowired
 	TieneDAO tieneDAO;
 
-	
-	
 	@GetMapping("/maquina")
 	public ModelAndView getMaquinas() {
 		ModelAndView model = new ModelAndView();
@@ -49,7 +47,7 @@ public class MaquinaController {
 	public ModelAndView getMaquina(@PathVariable Long id) {
 		ModelAndView model = new ModelAndView();
 		model.setViewName("maquina");
-		
+
 		Maquina maquina = maquinaDAO.findById(id).get();
 		model.addObject("maquina", maquina);
 		return model;
@@ -64,7 +62,7 @@ public class MaquinaController {
 		model.addObject("clientes", clienteDAO.findAll());
 		return model;
 	}
-	
+
 	@GetMapping("/maquina/edit/{id}")
 	public ModelAndView editMaquina(@PathVariable long id) {
 
@@ -76,12 +74,12 @@ public class MaquinaController {
 			model.addObject("maquina", maquina.get());
 			model.addObject("clientes", clienteDAO.findAll());
 			model.setViewName("formMaquina");
-		}
-		else model.setViewName("redirect:/maquina");
-		
+		} else
+			model.setViewName("redirect:/maquina");
+
 		return model;
 	}
-	
+
 	@GetMapping("/maquina/del/{id}")
 	public ModelAndView deleteMaquina(@PathVariable long id) {
 
@@ -90,7 +88,7 @@ public class MaquinaController {
 		model.setViewName("redirect:/maquina");
 		return model;
 	}
-	
+
 	@PostMapping("/maquina/save")
 	public ModelAndView formMaquina(@ModelAttribute @Validated Maquina maquina, BindingResult bindingResult) {
 
@@ -99,11 +97,11 @@ public class MaquinaController {
 
 			model.setViewName("formMaquina");
 			model.addObject("maquina", maquina);
-			
+
 			maquina.setCliente(null);
-			
+
 			model.addObject("clientes", clienteDAO.findAll());
-			
+
 			return model;
 		}
 		

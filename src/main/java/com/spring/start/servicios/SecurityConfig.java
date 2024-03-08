@@ -18,7 +18,7 @@ public class SecurityConfig  {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 			.requestMatchers("/").permitAll()	
-			.requestMatchers("/usuario", "/maquina").authenticated()
+			.requestMatchers("/usuario", "/maquina", "/tiene").authenticated()
 			.requestMatchers("/usuario/delete/**", "/m/delete/**").hasAuthority("ADMIN")
 			.and()
 			.formLogin();

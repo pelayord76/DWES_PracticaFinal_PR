@@ -7,11 +7,10 @@
 		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 			<a class="btn btn-primary" href="#" th:href="@{~/}">Home</a>
 			<div class="navbar-nav">
+				<a sec:authorize="isAuthenticated()" class="nav-item nav-link disabled">Hola <span sec:authentication="name"></span></a>
 				<a class="nav-item nav-link" href="#" th:href="@{~/usuario}">Usuarios</a>
 				<a class="nav-item nav-link" href="#" th:href="@{~/maquina}">Maquinas</a>
 				<a class="nav-item nav-link" href="#" th:href="@{~/tiene}">Relaciones</a>
-				<a sec:authorize="hasAuthority('ADMIN')">Hola admin</a>
-				<a sec:authorize="hasAuthority('USER')">Hola usuario</p>
 				<a sec:authorize="isAuthenticated()" class="nav-item nav-link" href="#" th:href="@{~/logout}">Cerrar sesión</a>
 			</div>
 		</div>

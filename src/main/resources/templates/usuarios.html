@@ -21,14 +21,15 @@
 	<div class="row">
 		<div class="col-2"></div>
 		<div class="col-8">
-
+			<p th:if="${#lists.isEmpty(usuarios)}">No hay usuarios, registra uno -> <a class="btn btn-outline-primary"
+					th:href="@{~/usuario/add}">+</a></p>
 			<table class="table table-sm table-hover">
 				<thead>
 					<tr>
 						<th scope="col">id</th>
 						<th scope="col">Nombre</th>
 						<th scope="col">Email</th>
-						<th scope="col">X</th>
+						<th sec:authorize="hasAuthority('ADMIN')" scope="col">X</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -41,7 +42,7 @@
 							<span th:text="${usuario.email}">Email</span>
 						</td>
 						<td>
-							<a class="badge badge-pill badge-danger"
+							<a sec:authorize="hasAuthority('ADMIN')" class="badge badge-pill badge-danger"
 								th:href="@{~/usuario/del/{id}(id = ${usuario.id})}">Borrar</a>
 						</td>
 					</tr>

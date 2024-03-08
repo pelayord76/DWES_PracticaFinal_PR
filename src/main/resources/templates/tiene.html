@@ -16,25 +16,25 @@
 	    <div class="col col-md-1">
 	    </div>
 	    <div class="col col-md-10">
-			  <p th:if="${#lists.isEmpty(tiene)}">Vacía la tabla</p>
+			  <p th:if="${#lists.isEmpty(tiene)}">No hay relaciones, crea una -> <a class="btn btn-outline-primary" th:href="@{~/tiene/add}">+</a></p>
 	          <table class="table table-sm table-hover" th:unless="${#lists.isEmpty(tiene)}">
 			    <thead>
 			    <tr>
 			        <th>Usuario</th>
 			        <th>Maquina</th>
-			        <th>-</th>
+			        <th sec:authorize="hasAuthority('ADMIN')">x</th>
 			    </tr>
 			    </thead>
 			    <tbody>
 				    <tr th:each="t : ${tiene}">
 						<td th:text="${t.usuario.id}+'# '+${t.usuario.nombre}"></td>
 						<td th:text="${t.maquina.id}+'# '+${t.maquina.nombre}"></td>
-						<td><a th:href="@{~/tiene/del/{idUsuario}/{idMaquina}(idUsuario=${t.usuario.id}, idMaquina=${t.maquina.id})}">Eliminar</a></td>
+						<td><a sec:authorize="hasAuthority('ADMIN')" th:href="@{~/tiene/del/{idUsuario}/{idMaquina}(idUsuario=${t.usuario.id}, idMaquina=${t.maquina.id})}">Eliminar</a></td>
 				    </tr>
 				</tbody>
 			</table>
 	    </div> 
-	    <div class="col col-md-1">
+	    <div  class="col col-md-1">
 	      <p><a class="btn btn-outline-primary" th:href="@{~/tiene/add}">+</a></p>
 	    </div>
 	  </div>

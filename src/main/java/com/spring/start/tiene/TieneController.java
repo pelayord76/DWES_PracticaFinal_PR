@@ -57,7 +57,7 @@ public class TieneController {
 		tieneDAO.save(tiene);
 
 		ModelAndView model = new ModelAndView();
-		model.setViewName("redirect:/usuario/" + tiene.getUsuario().getId());
+		model.setViewName("redirect:/tiene/" + tiene.getUsuario().getId());
 
 		return model;
 	}

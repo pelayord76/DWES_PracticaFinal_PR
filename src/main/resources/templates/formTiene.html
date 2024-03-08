@@ -30,7 +30,7 @@
 									class="list-group-item list-group-item-action list-group-item-warning list-group-item d-flex justify-content-between align-items-center">
 									Usuario:
 									<select class="form-control" th:field="*{usuario}">
-										<option th:each="u:${usuario}" th:value="${u.id}" th:text="${u.nombre}">OPCION
+										<option th:each="u:${usuarios}" th:value="${u.id}" th:text="${u.nombre}">OPCION
 										</option>
 									</select>
 								</li>
@@ -38,7 +38,7 @@
 									class="list-group-item list-group-item-action list-group-item-warning list-group-item d-flex justify-content-between align-items-center">
 									Maquina:
 									<select class="form-control" th:field="*{maquina}">
-										<option th:each="m:${maquina}" th:value="${m.id}" th:text="${m.nombre}">OPCION
+										<option th:each="m:${maquinas}" th:value="${m.id}" th:text="${m.nombre}">OPCION
 										</option>
 									</select>
 								</li>
