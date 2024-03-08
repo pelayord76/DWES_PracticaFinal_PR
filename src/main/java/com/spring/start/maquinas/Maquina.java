@@ -14,7 +14,6 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.spring.start.clientes.Cliente;
 import com.spring.start.recaudaciones.Recaudacion;
 import com.spring.start.tiene.Tiene;
-import com.spring.start.usuarios.Usuario;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -48,7 +47,7 @@ public class Maquina {
 	@OneToMany(targetEntity = Tiene.class, mappedBy = "maquina")
 	@JsonBackReference
 	@Cascade(CascadeType.ALL)
-	private List<Usuario> usuarios = new ArrayList<Usuario>();
+	private List<Tiene> tiene;
 
 	// relacion N:1 con cliente, cada maquina esta en un solo local.
 	@JoinColumn(name = "FK_CLIENTE")
@@ -98,12 +97,12 @@ public class Maquina {
 		this.almacenada = almacenada;
 	}
 
-	public List<Usuario> getUsuarios() {
-		return usuarios;
+	public List<Tiene> getTiene() {
+		return tiene;
 	}
 
-	public void setUsuarios(List<Usuario> usuarios) {
-		this.usuarios = usuarios;
+	public void setTiene(List<Tiene> tiene) {
+		this.tiene = tiene;
 	}
 
 	public Cliente getCliente() {
@@ -125,7 +124,7 @@ public class Maquina {
 	@Override
 	public String toString() {
 		return "Maquina [id=" + id + ", nombre=" + nombre + ", fechaVencimientoLicencia=" + fechaVencimientoLicencia
-				+ ", almacenada=" + almacenada + ", usuarios=" + usuarios + ", cliente=" + cliente + ", recaudaciones="
+				+ ", almacenada=" + almacenada + ", usuarios=" + tiene + ", cliente=" + cliente + ", recaudaciones="
 				+ recaudaciones + "]";
 	}
 }

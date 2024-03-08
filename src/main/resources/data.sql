@@ -1,6 +1,6 @@
-INSERT INTO usuario (nombre, email, contrasenia, tipo_usuario) VALUES('Usuario1', 'usuario1@email.com', 'usuario1', 0);
-INSERT INTO usuario (nombre, email, contrasenia, tipo_usuario) VALUES('Usuario2', 'usuario2@email.com', 'usuario2', 0);
-INSERT INTO usuario (nombre, email, contrasenia, tipo_usuario) VALUES('Usuario3', 'usuario3@email.com', 'usuario3', 0);
+INSERT INTO usuario (nombre, email, contrasenia) VALUES('Usuario1', 'usuario1@email.com', 'usuario1');
+INSERT INTO usuario (nombre, email, contrasenia) VALUES('Usuario2', 'usuario2@email.com', 'usuario2');
+INSERT INTO usuario (nombre, email, contrasenia) VALUES('Usuario3', 'usuario3@email.com', 'usuario3');
 
 INSERT INTO cliente (local, duenio, telefono, fecha_vencimiento_contrato) VALUES('Long island', 'dueño1', 000000000,'2024-12-31');
 INSERT INTO cliente (local, duenio, telefono, fecha_vencimiento_contrato) VALUES('Bar2', 'dueño2', 111111111,'2025-12-31');

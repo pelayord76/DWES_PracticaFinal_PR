@@ -13,15 +13,44 @@ import jakarta.persistence.MapsId;
 public class Tiene {
 
 	@EmbeddedId
-	TieneKey id;
+	private TieneKey id;
 
 	@ManyToOne
 	@MapsId("usuario_id")
 	@JoinColumn(name = "usuario_id")
-	Usuario usuario;
+	private Usuario usuario;
 
 	@ManyToOne
 	@MapsId("maquina_id")
 	@JoinColumn(name = "maquina_id")
-	Maquina maquina;
+	private Maquina maquina;
+
+	public TieneKey getId() {
+		return id;
+	}
+
+	public void setId(TieneKey id) {
+		this.id = id;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public Maquina getMaquina() {
+		return maquina;
+	}
+
+	public void setMaquina(Maquina maquina) {
+		this.maquina = maquina;
+	}
+
+	@Override
+	public String toString() {
+		return "Tiene [id=" + id + ", usuario=" + usuario + ", maquina=" + maquina + "]";
+	}
 }

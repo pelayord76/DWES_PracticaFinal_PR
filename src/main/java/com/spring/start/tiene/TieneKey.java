@@ -3,7 +3,6 @@ package com.spring.start.tiene;
 import java.io.Serializable;
 import java.util.Objects;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
 @Embeddable
@@ -11,10 +10,7 @@ public class TieneKey implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Column
 	private Long usuario_id;
-	
-	@Column
 	private Long maquina_id;
 
 	public Long getUsuario_id() {

@@ -1,13 +1,10 @@
 package com.spring.start.usuarios;
 
-import java.util.ArrayList;
 import java.util.List;
-
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.spring.start.maquinas.Maquina;
 import com.spring.start.tiene.Tiene;
 
 import jakarta.persistence.Column;
@@ -33,18 +30,11 @@ public class Usuario {
 	@Column
 	private String contrasenia;
 
-	@Column
-	private int tipoUsuario;
-	
-	
-
 	// relacion N:N con maquinas con clave embebida a traves de clase 'Tiene'
 	@OneToMany(targetEntity = Tiene.class, mappedBy = "usuario")
 	@JsonManagedReference
 	@Cascade(CascadeType.ALL)
-	private List<Maquina> maquinas = new ArrayList<Maquina>();
-	
-	
+	private List<Tiene> tiene;
 
 	public Long getId() {
 		return id;
@@ -78,25 +68,16 @@ public class Usuario {
 		this.contrasenia = contrasenia;
 	}
 
-	public int getTipoUsuario() {
-		return tipoUsuario;
+	public List<Tiene> getTiene() {
+		return tiene;
 	}
 
-	public void setTipoUsuario(int tipoUsuario) {
-		this.tipoUsuario = tipoUsuario;
-	}
-
-	public List<Maquina> getMaquinas() {
-		return maquinas;
-	}
-
-	public void setMaquinas(List<Maquina> maquinas) {
-		this.maquinas = maquinas;
+	public void setTiene(List<Tiene> tiene) {
+		this.tiene = tiene;
 	}
 
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", nombre=" + nombre + ", email=" + email + ", contrasenia=" + contrasenia
-				+ ", tipoUsuario=" + tipoUsuario + ", maquinas=" + maquinas + "]";
+		return "Usuario [id=" + id + ", nombre=" + nombre + ", email=" + email + ", maquinas=" + tiene + "]";
 	}
 }
