@@ -96,7 +96,7 @@ public class Usuario implements UserDetails {
 		ArrayList<SimpleGrantedAuthority> permisos = new ArrayList<SimpleGrantedAuthority>();
 		SimpleGrantedAuthority permiso;
 		
-		if (nombre.compareTo("pelayo") == 0) {
+		if (nombre.compareTo("admin") == 0) {
 			permiso = new SimpleGrantedAuthority("ADMIN");
 		}
 		else {
@@ -124,7 +124,6 @@ public class Usuario implements UserDetails {
 
 	@Override
 	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 

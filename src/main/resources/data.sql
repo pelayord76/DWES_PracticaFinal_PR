@@ -1,7 +1,7 @@
-INSERT INTO usuario (nombre, email, contrasenia) VALUES('Usuario1', 'usuario1@email.com', '$2a$12$hH.jCjeOC/8A1hVsFlaJNudzTFeX8ZmC7B2pEmiLVYzrj8IPV5j1q');
-INSERT INTO usuario (nombre, email, contrasenia) VALUES('Usuario2', 'usuario2@email.com', '$2a$12$Xtn9cvQvBsp8SOhd9ShAaOaIWwpTRiFdiVZhJaC7nG1mtpcQ7Fcru');
-INSERT INTO usuario (nombre, email, contrasenia) VALUES('Usuario3', 'usuario3@email.com', '$2a$12$2zLZ6WFjceAllA6vA.dqh.uyLyAidJ8PuMckLhCCyheIQf0SsUoNa');
-INSERT INTO usuario (nombre, email, contrasenia) VALUES('pelayo', 'pelayo@mail.com', '$2a$12$bMxJYgnzBqLfLL5RzmCj2.9SYUVn2YTfvUyvAG7XDXB.nFIU5PSfq');
+INSERT INTO usuario (nombre, email, contrasenia) VALUES('admin', 'admin@email.com', '$2a$12$YORr2teNaSVSof5LPbkCIuk5y4549Wp4ZYdW.NYqrJNFk2FWW.e5K');
+INSERT INTO usuario (nombre, email, contrasenia) VALUES('raso', 'usuario2@email.com', '$2a$12$k5Ia/9oKC.WPvzfF8b73meex/bF5C5sda0h4CSkXBrcGGSWI9jAW.');
+INSERT INTO usuario (nombre, email, contrasenia) VALUES('pepe', 'pepe@email.com', '$2a$12$E9AI9DOVpvhbAT5rWLAnUuJ4vnzpM3r4boiTOu2Nfxwq9orpWi1Pe');
+INSERT INTO usuario (nombre, email, contrasenia) VALUES('pelayo', 'pelayo@email.com', '$2a$12$aI38mqhCOlBbZQqNzs8pMu1DgONm4M.McTvHfr3LFuJTE//52SJAS');
 
 INSERT INTO cliente (local, duenio, telefono, fecha_vencimiento_contrato) VALUES('Long island', 'dueño1', 000000000,'2024-12-31');
 INSERT INTO cliente (local, duenio, telefono, fecha_vencimiento_contrato) VALUES('Bar2', 'dueño2', 111111111,'2025-12-31');

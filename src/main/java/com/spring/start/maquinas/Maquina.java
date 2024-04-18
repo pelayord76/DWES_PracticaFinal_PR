@@ -36,7 +36,7 @@ public class Maquina {
 	private String nombre;
 	
 	@Column
-	private Date fechaVencimientoLicencia;
+	private String fechaVencimientoLicencia;
 	
 	@Column
 	private boolean almacenada;
@@ -81,11 +81,11 @@ public class Maquina {
 		this.nombre = nombre;
 	}
 
-	public Date getFechaVencimientoLicencia() {
+	public String getFechaVencimientoLicencia() {
 		return fechaVencimientoLicencia;
 	}
 
-	public void setFechaVencimientoLicencia(Date fechaVencimientoLicencia) {
+	public void setFechaVencimientoLicencia(String fechaVencimientoLicencia) {
 		this.fechaVencimientoLicencia = fechaVencimientoLicencia;
 	}
 

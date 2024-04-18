@@ -11,36 +11,35 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-public class SecurityConfig  {
+public class SecurityConfig {
 
-	
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-			.requestMatchers("/").permitAll()	
-			.requestMatchers("/usuario", "/maquina", "/tiene").authenticated()
-			.requestMatchers("/usuario/delete/**", "/m/delete/**").hasAuthority("ADMIN")
-			.and()
-			.formLogin();
-	
+				.requestMatchers("/").permitAll()
+				.requestMatchers("/usuario", "/maquina", "/tiene").authenticated()
+				.requestMatchers("/usuario/delete/**", "/m/delete/**").hasAuthority("ADMIN")
+				.and()
+				.formLogin();
+
 		return http.build();
 	}
-	
+
 	@Bean
 	BCryptPasswordEncoder bCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();
-		}
-	
+	}
+
 	@Bean
 	AuthenticationManager authenticationManager(
 			HttpSecurity http,
 			BCryptPasswordEncoder bCryptPasswordEncoder,
 			UserDetailsService userDetailsService) throws Exception {
-		
+
 		return http.getSharedObject(AuthenticationManagerBuilder.class)
 				.userDetailsService(userDetailsService)
 				.passwordEncoder(bCryptPasswordEncoder)
 				.and()
 				.build();
-		}
 	}
+}
