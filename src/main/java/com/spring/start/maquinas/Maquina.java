@@ -1,7 +1,6 @@
 package com.spring.start.maquinas;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.hibernate.annotations.Cascade;

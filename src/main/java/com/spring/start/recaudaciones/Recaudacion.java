@@ -1,7 +1,5 @@
 package com.spring.start.recaudaciones;
 
-import java.util.Date;
-
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
@@ -29,7 +27,7 @@ public class Recaudacion {
 	@Column
 	private float porcentajeJuego;
 	@Column
-	private Date fecha;
+	private String fecha;
 
 	// relacion N:1 con maquina, una recaudacion pertenece unicamente a una maquina
 	@JoinColumn(name = "FK_MAQUINA")
@@ -62,11 +60,11 @@ public class Recaudacion {
 		this.porcentajeJuego = porcentajeJuego;
 	}
 
-	public Date getFecha() {
+	public String getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(Date fecha) {
+	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
 

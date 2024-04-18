@@ -1,7 +1,6 @@
 package com.spring.start.clientes;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.hibernate.annotations.Cascade;
@@ -32,7 +31,7 @@ public class Cliente {
 	@Column
 	private int telefono;
 	@Column
-	private Date fechaVencimientoContrato;
+	private String fechaVencimientoContrato;
 
 	// relacion 1:N con maquinas, cada local tiene una o varias maquinas, normalmente tienen entre 1 y 2.
 	@OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
@@ -73,11 +72,11 @@ public class Cliente {
 		this.telefono = telefono;
 	}
 
-	public Date getFechaVencimientoContrato() {
+	public String getFechaVencimientoContrato() {
 		return fechaVencimientoContrato;
 	}
 
-	public void setFechaVencimientoContrato(Date fechaVencimientoContrato) {
+	public void setFechaVencimientoContrato(String fechaVencimientoContrato) {
 		this.fechaVencimientoContrato = fechaVencimientoContrato;
 	}
 
