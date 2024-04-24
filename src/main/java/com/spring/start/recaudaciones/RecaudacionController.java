@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
@@ -28,7 +26,7 @@ public class RecaudacionController {
 		ModelAndView model = new ModelAndView();
 		model.setViewName("recaudaciones");
 
-		List<Recaudacion> usuarios = (List<Recaudacion>) recaudacionDAO.findAll();
+		List<Recaudacion> recaudaciones = (List<Recaudacion>) recaudacionDAO.findAll();
 		model.addObject("recaudaciones", recaudaciones);
 
 		return model;
@@ -100,5 +98,4 @@ public class RecaudacionController {
 
 		return model;
 	}
-	
 }
