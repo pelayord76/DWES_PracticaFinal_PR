@@ -9,11 +9,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
@@ -22,19 +20,19 @@ public class RecaudacionController {
 	@Autowired
 	RecaudacionDAO recaudacionDAO;
 
-	@GetMapping("/usuario")
+	@GetMapping("/recaudacion")
 	public ModelAndView getRcecaudaciones() {
 
 		ModelAndView model = new ModelAndView();
 		model.setViewName("recaudaciones");
 
-		List<Recaudacion> usuarios = (List<Recaudacion>) recaudacionDAO.findAll();
+		List<Recaudacion> recaudaciones = (List<Recaudacion>) recaudacionDAO.findAll();
 		model.addObject("recaudaciones", recaudaciones);
 
 		return model;
 	}
 
-	@GetMapping("/usuario/{id}")
+	@GetMapping("/recaudacion/{id}")
 	public ModelAndView getRecaudacion(@PathVariable long id) {
 		ModelAndView model = new ModelAndView();
 		model.setViewName("recaudacion");
