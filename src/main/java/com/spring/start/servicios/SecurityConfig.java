@@ -17,8 +17,8 @@ public class SecurityConfig {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 				.requestMatchers("/").permitAll()
-				.requestMatchers("/usuario", "/maquina", "/tiene").authenticated()
-				.requestMatchers("/usuario/delete/**", "/m/delete/**").hasAuthority("ADMIN")
+				.requestMatchers("/usuario", "/maquina", "/tiene", "/recaudacion", "/cliente").authenticated()
+				.requestMatchers("/usuario/del/**", "maquina/del/**", "tiene").hasAuthority("ADMIN")
 				.and()
 				.formLogin();
 
@@ -31,15 +31,10 @@ public class SecurityConfig {
 	}
 
 	@Bean
-	AuthenticationManager authenticationManager(
-			HttpSecurity http,
-			BCryptPasswordEncoder bCryptPasswordEncoder,
+	AuthenticationManager authenticationManager(HttpSecurity http, BCryptPasswordEncoder bCryptPasswordEncoder,
 			UserDetailsService userDetailsService) throws Exception {
 
-		return http.getSharedObject(AuthenticationManagerBuilder.class)
-				.userDetailsService(userDetailsService)
-				.passwordEncoder(bCryptPasswordEncoder)
-				.and()
-				.build();
+		return http.getSharedObject(AuthenticationManagerBuilder.class).userDetailsService(userDetailsService)
+				.passwordEncoder(bCryptPasswordEncoder).and().build();
 	}
 }

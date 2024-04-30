@@ -9,12 +9,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
 
 @RestController
 public class RecaudacionController {
@@ -22,7 +19,7 @@ public class RecaudacionController {
 	@Autowired
 	RecaudacionDAO recaudacionDAO;
 
-	@GetMapping("/usuario")
+	@GetMapping("/recaudacion")
 	public ModelAndView getRcecaudaciones() {
 
 		ModelAndView model = new ModelAndView();
@@ -34,7 +31,7 @@ public class RecaudacionController {
 		return model;
 	}
 
-	@GetMapping("/usuario/{id}")
+	@GetMapping("/recaudacion/{id}")
 	public ModelAndView getRecaudacion(@PathVariable long id) {
 		ModelAndView model = new ModelAndView();
 		model.setViewName("recaudacion");
@@ -64,7 +61,8 @@ public class RecaudacionController {
 			model.setViewName("formRecaudacion");
 		}
 
-		else model.setViewName("redirect:/recaudacion");
+		else
+			model.setViewName("redirect:/recaudacion");
 
 		return model;
 	}
@@ -78,23 +76,24 @@ public class RecaudacionController {
 		if (recaudacionDelete.isPresent()) {
 			recaudacionDAO.delete(recaudacionDelete.get());
 			model.setViewName("recaudaciones");
-		}
-		else model.setViewName("redirect:/recaudacion");
+		} else
+			model.setViewName("redirect:/recaudacion");
 
 		return model;
 	}
 
 	@PostMapping("/recaudacion/save")
-	public ModelAndView formRecaudacion(@ModelAttribute @Validated Recaudacion recaudacion, BindingResult bindingResult) {
+	public ModelAndView formRecaudacion(@ModelAttribute @Validated Recaudacion recaudacion,
+			BindingResult bindingResult) {
 		ModelAndView model = new ModelAndView();
 		if (bindingResult.hasErrors()) {
 
 			model.setViewName("formRecaudacion");
 			model.addObject("recaudacion", recaudacion);
-			
+
 			return model;
 		}
-		
+
 		recaudacionDAO.save(recaudacion);
 		model.setViewName("redirect:/recaudacion");
 
