@@ -1,4 +1,4 @@
-package com.spring.start.servicios;
+/*package com.spring.start.servicios;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -37,4 +37,4 @@ public class SecurityConfig {
 		return http.getSharedObject(AuthenticationManagerBuilder.class).userDetailsService(userDetailsService)
 				.passwordEncoder(bCryptPasswordEncoder).and().build();
 	}
-}
+}*/

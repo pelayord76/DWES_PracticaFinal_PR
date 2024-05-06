@@ -1,4 +1,4 @@
-package com.spring.start.servicios;
+/*package com.spring.start.servicios;
 
 import java.util.Optional;
 
@@ -29,4 +29,4 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		
 		throw new UsernameNotFoundException(nombre);
 	}
-}
+}*/

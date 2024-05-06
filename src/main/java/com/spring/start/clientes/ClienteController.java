@@ -12,16 +12,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.start.maquinas.Maquina;
-import com.spring.start.maquinas.MaquinaDAO;
 
 @RestController
 public class ClienteController {
 
 	@Autowired
 	ClienteDAO clienteDAO;
-	
-	@Autowired
-	MaquinaDAO maquinaDAO;
 	
 	
 	
@@ -52,17 +48,4 @@ public class ClienteController {
 
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 	}
-	
-//	@PostMapping("/maquina")
-//	public ResponseEntity<Maquina> postMaquina(@RequestBody Maquina maquina) {
-//		maquinaDAO.save(maquina);
-//
-//		List<Recaudacion> recaudaciones = maquina.getRecaudaciones();
-//		for (Recaudacion r : recaudaciones) {
-//
-//			recaudacionDAO.save(r);
-//		}
-//
-//		return ResponseEntity.status(HttpStatus.CREATED).body(maquina);
-//	}
-}
+} 

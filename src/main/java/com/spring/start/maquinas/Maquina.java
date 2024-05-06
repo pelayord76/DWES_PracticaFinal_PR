@@ -61,7 +61,7 @@ public class Maquina {
 	@JsonManagedReference
 	@Cascade(CascadeType.ALL)
 	private List<Recaudacion> recaudaciones = new ArrayList<Recaudacion>();
-
+	
 	
 	
 	public Long getId() {
