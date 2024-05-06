@@ -4,16 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
-
-import com.spring.start.maquinas.MaquinaDAO;
 
 @RestController
 public class UsuarioController {
@@ -21,85 +18,40 @@ public class UsuarioController {
 	@Autowired
 	UsuarioDAO usuarioDAO;
 
-	@Autowired
-	MaquinaDAO maquinaDAO;
-
 	@GetMapping("/usuario")
-	public ModelAndView getUsuarios() {
-
-		ModelAndView model = new ModelAndView();
-		model.setViewName("usuarios");
-
-		List<Usuario> usuarios = (List<Usuario>) usuarioDAO.findAll();
-		model.addObject("usuarios", usuarios);
-
-		return model;
-
+	public List<Usuario> getUsuarios() {
+		return (List<Usuario>) usuarioDAO.findAll();
 	}
 
 	@GetMapping("/usuario/{id}")
-	public ModelAndView getUsuario(@PathVariable Long id) {
-
-		ModelAndView model = new ModelAndView();
-		model.setViewName("usuario");
-
-		Usuario usuario = usuarioDAO.findById(id).get();
-		model.addObject("usuario", usuario);
-
-		return model;
-	}
-
-	@GetMapping("/usuario/add")
-	public ModelAndView addUsuario() {
-
-		ModelAndView model = new ModelAndView();
-		model.setViewName("formUsuario");
-		model.addObject("usuario", new Usuario());
- 
-		return model;
-	}
-
-	@GetMapping("/usuario/edit/{id}")
-	public ModelAndView editUsuario(@PathVariable long id) {
-
-		ModelAndView model = new ModelAndView();
-		Optional<Usuario> user = usuarioDAO.findById(id);
-
-		if (user.isPresent()) {
-
-			model.addObject("usuario", user.get());
-			
-			model.setViewName("formUsuario");
+	public Usuario getUsuario(@PathVariable Long id) {
+		Optional<Usuario> usuario = usuarioDAO.findById(id);
+		if (usuario.isPresent()) {
+			return usuario.get();
 		}
-		else model.setViewName("redirect:/usuario");
-		
-		return model;
+		return null;
 	}
 
-	@GetMapping("/usuario/del/{id}")
-	public ModelAndView deleteUsuario(@PathVariable long id) {
-
-		usuarioDAO.deleteById(id);
-		ModelAndView model = new ModelAndView();
-		model.setViewName("redirect:/usuario");
-		return model;
-	}
-
-	@PostMapping("/usuario/save")
-	public ModelAndView formUsuario(@ModelAttribute @Validated Usuario usuario, BindingResult bindingResult) {
-
-		ModelAndView model = new ModelAndView();
-		if (bindingResult.hasErrors()) {
-
-			model.setViewName("formUsuario");
-			model.addObject("usuario", usuario);
-			
-			return model;
-		}
-		
+	@PostMapping("/usuario/add")
+	public void addUsuario(@RequestBody Usuario usuario) {
 		usuarioDAO.save(usuario);
-		model.setViewName("redirect:/usuario");
+	}
 
-		return model;
+	@PutMapping("/usuario/edit/{id}")
+	public void editUsuario(@PathVariable long id, @RequestBody Usuario usuario) {
+		Optional<Usuario> usuarioUpdate = usuarioDAO.findById(id);
+		if (usuarioUpdate.isPresent()) {
+			Usuario usuarioNew = usuarioUpdate.get();
+			usuarioNew.setNombre(usuario.getNombre());
+			usuarioNew.setEmail(usuario.getEmail());
+			usuarioNew.setContrasenia(usuario.getContrasenia());
+			usuarioNew.setTiene(usuario.getTiene());
+			usuarioDAO.save(usuarioNew);
+		}
+	}
+
+	@DeleteMapping("/usuario/del/{id}")
+	public void deleteUsuario(@PathVariable long id) {
+		usuarioDAO.deleteById(id);
 	}
 }

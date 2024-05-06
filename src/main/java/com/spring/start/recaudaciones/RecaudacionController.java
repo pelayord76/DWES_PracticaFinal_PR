@@ -4,14 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 public class RecaudacionController {
@@ -20,83 +19,39 @@ public class RecaudacionController {
 	RecaudacionDAO recaudacionDAO;
 
 	@GetMapping("/recaudacion")
-	public ModelAndView getRcecaudaciones() {
-
-		ModelAndView model = new ModelAndView();
-		model.setViewName("recaudaciones");
-
-		List<Recaudacion> recaudaciones = (List<Recaudacion>) recaudacionDAO.findAll();
-		model.addObject("recaudaciones", recaudaciones);
-
-		return model;
+	public List<Recaudacion> getRcecaudaciones() {
+		return (List<Recaudacion>) recaudacionDAO.findAll();
 	}
 
 	@GetMapping("/recaudacion/{id}")
-	public ModelAndView getRecaudacion(@PathVariable long id) {
-		ModelAndView model = new ModelAndView();
-		model.setViewName("recaudacion");
-
-		Recaudacion recaudacion = recaudacionDAO.findById(id).get();
-		model.addObject("recaudacion", recaudacion);
-
-		return model;
-	}
-
-	@GetMapping("/recaudacion/add")
-	public ModelAndView addRecaudacion() {
-		ModelAndView model = new ModelAndView();
-		model.setViewName("formRecaudacion");
-		model.addObject("recaudacion", new Recaudacion());
-
-		return model;
-	}
-
-	@GetMapping("/recaudacion/edit/{id}")
-	public ModelAndView editRecaudacion(@PathVariable long id) {
-		ModelAndView model = new ModelAndView();
+	public Recaudacion getRecaudacion(@PathVariable long id) {
 		Optional<Recaudacion> recaudacion = recaudacionDAO.findById(id);
-
 		if (recaudacion.isPresent()) {
-			model.addObject("recaudacion", recaudacion.get());
-			model.setViewName("formRecaudacion");
+			return recaudacion.get();
 		}
-
-		else
-			model.setViewName("redirect:/recaudacion");
-
-		return model;
+		return null;
 	}
 
-	@GetMapping("/recaudacion/del/{id}")
-	public ModelAndView deleteRecaudacion(@PathVariable long id) {
-
-		ModelAndView model = new ModelAndView();
-		Optional<Recaudacion> recaudacionDelete = recaudacionDAO.findById(id);
-
-		if (recaudacionDelete.isPresent()) {
-			recaudacionDAO.delete(recaudacionDelete.get());
-			model.setViewName("recaudaciones");
-		} else
-			model.setViewName("redirect:/recaudacion");
-
-		return model;
-	}
-
-	@PostMapping("/recaudacion/save")
-	public ModelAndView formRecaudacion(@ModelAttribute @Validated Recaudacion recaudacion,
-			BindingResult bindingResult) {
-		ModelAndView model = new ModelAndView();
-		if (bindingResult.hasErrors()) {
-
-			model.setViewName("formRecaudacion");
-			model.addObject("recaudacion", recaudacion);
-
-			return model;
-		}
-
+	@PostMapping("/recaudacion/add")
+	public void addRecaudacion(@RequestBody Recaudacion recaudacion) {
 		recaudacionDAO.save(recaudacion);
-		model.setViewName("redirect:/recaudacion");
+	}
 
-		return model;
+	@PutMapping("/recaudacion/edit/{id}")
+	public void editRecaudacion(@PathVariable long id, @RequestBody Recaudacion recaudacion) {
+		Optional<Recaudacion> recaudacionUpdate = recaudacionDAO.findById(id);
+		if (recaudacionUpdate.isPresent()) {
+			Recaudacion recaudacionNew = recaudacionUpdate.get();
+			recaudacionNew.setCantidadRecaudada(recaudacion.getCantidadRecaudada());
+			recaudacionNew.setFecha(recaudacion.getFecha());
+			recaudacionNew.setMaquina(recaudacion.getMaquina());
+			recaudacionNew.setPorcentajeJuego(recaudacion.getPorcentajeJuego());
+			recaudacionDAO.save(recaudacionNew);
+		}
+	}
+
+	@DeleteMapping("/recaudacion/del/{id}")
+	public void deleteRecaudacion(@PathVariable long id) {
+		recaudacionDAO.deleteById(id);
 	}
 }

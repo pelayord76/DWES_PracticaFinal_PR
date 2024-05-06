@@ -4,48 +4,51 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.spring.start.maquinas.Maquina;
 
 @RestController
 public class ClienteController {
 
 	@Autowired
 	ClienteDAO clienteDAO;
-	
-	
-	
+
 	@GetMapping("/cliente")
 	public List<Cliente> getClientes() {
 		return (List<Cliente>) clienteDAO.findAll();
 	}
 
 	@GetMapping("/cliente/{id}")
-	public Optional<Cliente> getCLiente(@PathVariable Long id) {
-		return clienteDAO.findById(id);
+	public Cliente getCLiente(@PathVariable Long id) {
+		return clienteDAO.findById(id).get();
 	}
-
-	@GetMapping("/cliente/{id}/maquina")
-	public List<Maquina> getMaquinas(@PathVariable Long id) {
-		Cliente cliente = clienteDAO.findById(id).get();
-		return cliente.getMaquinas();
+	
+	@PostMapping("/cliente/add")
+	public void addCliente(@RequestBody Cliente cliente) {
+		clienteDAO.save(cliente);
 	}
-
-	@DeleteMapping("/cliente/{id}")
-	public ResponseEntity<Cliente> deleteCliente(@PathVariable Long id) {
-		Optional<Cliente> cliente = clienteDAO.findById(id);
-
-		if (cliente.isPresent()) {
-			clienteDAO.delete(cliente.get());
-			return ResponseEntity.status(HttpStatus.FOUND).body(cliente.get());
+	
+	@PutMapping("/cliente/edit/{id}")
+	public void editCliente(@PathVariable long id, @RequestBody Cliente cliente) {
+		Optional<Cliente> oldCliente = clienteDAO.findById(id);
+		if(oldCliente.isPresent()){
+			Cliente newCliente = oldCliente.get();
+			newCliente.setDuenio(cliente.getDuenio());
+			newCliente.setFechaVencimientoContrato(cliente.getFechaVencimientoContrato());
+			newCliente.setLocal(cliente.getLocal());
+			newCliente.setMaquinas(cliente.getMaquinas());
+			newCliente.setTelefono(cliente.getTelefono());
+			clienteDAO.save(newCliente);
 		}
-
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 	}
-} 
+	
+	@DeleteMapping("/cliente/del/{id}")
+	public void deleteCliente(@PathVariable Long id) {
+		clienteDAO.deleteById(id);
+	}
+}

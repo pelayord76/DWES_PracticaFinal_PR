@@ -1,6 +1,7 @@
 INSERT INTO usuario (nombre, email, contrasenia) VALUES('admin', 'admin@email.com', '$2a$12$YORr2teNaSVSof5LPbkCIuk5y4549Wp4ZYdW.NYqrJNFk2FWW.e5K');
 INSERT INTO usuario (nombre, email, contrasenia) VALUES('raso', 'raso@email.com', '$2a$12$k5Ia/9oKC.WPvzfF8b73meex/bF5C5sda0h4CSkXBrcGGSWI9jAW.');
 
+
 INSERT INTO cliente (local, duenio, telefono, fecha_vencimiento_contrato) VALUES('Long island', 'dueño1', 000000000,'2024-12-31');
 INSERT INTO cliente (local, duenio, telefono, fecha_vencimiento_contrato) VALUES('B12', 'dueño2', 111111111,'2025-12-31');
 INSERT INTO cliente (local, duenio, telefono, fecha_vencimiento_contrato) VALUES('La Espuela', 'dueño3', 222222222,'2023-12-31');
@@ -13,6 +14,7 @@ INSERT INTO maquina (nombre, fecha_vencimiento_licencia, almacenada, FK_CLIENTE)
 INSERT INTO maquina (nombre, fecha_vencimiento_licencia, almacenada, FK_CLIENTE) VALUES('BFsM', '2024-12-31', 0, 2);	
 INSERT INTO maquina (nombre, fecha_vencimiento_licencia, almacenada, FK_CLIENTE) VALUES('Flor de loto', '2024-10-01', 0, 3);
 INSERT INTO maquina (nombre, fecha_vencimiento_licencia, almacenada, FK_CLIENTE) VALUES('Angels', '2024-09-30', 0, 4);
+
 
 INSERT INTO tiene (usuario_id, maquina_id) VALUES(1, 1);
 INSERT INTO tiene (usuario_id, maquina_id) VALUES(1, 2);
@@ -27,3 +29,15 @@ INSERT INTO tiene (usuario_id, maquina_id) VALUES(2, 4);
 INSERT INTO recaudacion (cantidad_recaudada, porcentaje_juego, fecha, FK_MAQUINA) VALUES(1000.0, 0.35, '2023-12-06', 1);
 INSERT INTO recaudacion (cantidad_recaudada, porcentaje_juego, fecha, FK_MAQUINA) VALUES(1500.0, 0.77, '2023-12-06', 2);
 INSERT INTO recaudacion (cantidad_recaudada, porcentaje_juego, fecha, FK_MAQUINA) VALUES(800.0, 0.63, '2023-12-06', 3);
+
+
+INSERT INTO factura (iva, fecha_emision, FK_CLIENTE) VALUES (21, '2024-05-01', 1);
+INSERT INTO factura (iva, fecha_emision, FK_CLIENTE) VALUES (21, '2024-06-01', 1);
+INSERT INTO factura (iva, fecha_emision, FK_CLIENTE) VALUES (21, '2024-07-01', 1);
+INSERT INTO factura (iva, fecha_emision, FK_CLIENTE) VALUES (21, '2024-06-01', 2);
+INSERT INTO factura (iva, fecha_emision, FK_CLIENTE) VALUES (21, '2024-07-01', 2);
+INSERT INTO factura (iva, fecha_emision, FK_CLIENTE) VALUES (21, '2024-08-01', 2);
+INSERT INTO factura (iva, fecha_emision, FK_CLIENTE) VALUES (21, '2024-05-01', 3);
+INSERT INTO factura (iva, fecha_emision, FK_CLIENTE) VALUES (21, '2024-06-01', 3);
+INSERT INTO factura (iva, fecha_emision, FK_CLIENTE) VALUES (21, '2024-05-01', 4);
+INSERT INTO factura (iva, fecha_emision, FK_CLIENTE) VALUES (21, '2024-06-01', 4);

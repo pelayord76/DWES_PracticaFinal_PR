@@ -1,5 +1,6 @@
 package com.spring.start.tiene;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.spring.start.maquinas.Maquina;
 import com.spring.start.usuarios.Usuario;
 
@@ -16,11 +17,13 @@ public class Tiene {
 	private TieneKey id;
 
 	@ManyToOne
+	@JsonBackReference
 	@MapsId("usuario_id")
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
 
 	@ManyToOne
+	@JsonBackReference
 	@MapsId("maquina_id")
 	@JoinColumn(name = "maquina_id")
 	private Maquina maquina;

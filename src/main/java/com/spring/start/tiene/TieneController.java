@@ -1,12 +1,14 @@
 package com.spring.start.tiene;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.start.maquinas.MaquinaDAO;
 import com.spring.start.usuarios.UsuarioDAO;
@@ -24,57 +26,25 @@ public class TieneController {
 	MaquinaDAO maquinaDAO;
 
 	@GetMapping("/tiene")
-	public ModelAndView tiene() {
-
-		ModelAndView model = new ModelAndView();
-		model.addObject("tiene", tieneDAO.findAll());
-		model.setViewName("tiene");
-
-		return model;
+	public List<Tiene> getTiene() {
+		return (List<Tiene>) tieneDAO.findAll();
 	}
 
-	@GetMapping("/tiene/add")
-	public ModelAndView enmarcaAdd() {
-
-		ModelAndView model = new ModelAndView();
-		model.addObject("tiene", new Tiene());
-		model.addObject("usuarios", usuarioDAO.findAll());
-		model.addObject("maquinas", maquinaDAO.findAll());
-
-		model.setViewName("formTiene");
-
-		return model;
-	}
-
-	@PostMapping("/tiene/save")
-	public ModelAndView formTiene(@ModelAttribute Tiene tiene) {
+	@PostMapping("/tiene/add")
+	public void tieneAdd(@RequestBody Tiene tiene) {
 
 		TieneKey key = new TieneKey();
 		key.setUsuario_id(tiene.getUsuario().getId());
 		key.setMaquina_id(tiene.getMaquina().getId());
 		tiene.setId(key);
-
 		tieneDAO.save(tiene);
-
-		ModelAndView model = new ModelAndView();
-		model.setViewName("redirect:/tiene");
-
-		return model;
 	}
 
-	@GetMapping("/tiene/del/{idUsuario}/{idMaquina}")
-	public ModelAndView delPlan(@PathVariable long idUsuario, @PathVariable long idMaquina) {
-				
-		
+	@DeleteMapping("/tiene/del/{idUsuario}/{idMaquina}")
+	public void delTiene(@PathVariable long idUsuario, @PathVariable long idMaquina) {
 		TieneKey key = new TieneKey();
 		key.setUsuario_id(idUsuario);
 		key.setMaquina_id(idMaquina);
-
 		tieneDAO.deleteById(key);
-		
-		ModelAndView model = new ModelAndView();
-		model.setViewName("redirect:/tiene");
-		
-		return model;
-	}	
+	}
 }

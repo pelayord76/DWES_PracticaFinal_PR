@@ -38,9 +38,7 @@ public class Maquina {
 	private String fechaVencimientoLicencia;
 	
 	@Column
-	private boolean almacenada;
-
-	
+	private boolean almacenada;	
 	
 	// relacion N:N con maquinas con clave embebida a traves de clase 'Tiene'
 	@OneToMany(targetEntity = Tiene.class, mappedBy = "maquina")
