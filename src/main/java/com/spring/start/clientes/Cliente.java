@@ -40,7 +40,7 @@ public class Cliente {
 	// tienen entre 1 y 2.
 	@OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
 	@Fetch(value = FetchMode.SUBSELECT)
-	@JsonBackReference
+	@JsonManagedReference
 	@Cascade(CascadeType.ALL)
 	private List<Maquina> maquinas = new ArrayList<Maquina>();
 

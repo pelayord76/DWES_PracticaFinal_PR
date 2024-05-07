@@ -5,6 +5,7 @@ import java.util.Date;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.spring.start.clientes.Cliente;
 
 import jakarta.persistence.Column;
@@ -30,8 +31,8 @@ public class Factura {
 
 	// relacion N:1 con cliente, cada maquina esta en un solo local.
 	@JoinColumn(name = "FK_CLIENTE")
+	@JsonBackReference("factura-cliente")
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JsonBackOReference
 	@Cascade(CascadeType.ALL)
 	private Cliente cliente;
 

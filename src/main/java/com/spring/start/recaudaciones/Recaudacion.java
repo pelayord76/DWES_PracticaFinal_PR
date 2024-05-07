@@ -32,7 +32,7 @@ public class Recaudacion {
 	// relacion N:1 con maquina, una recaudacion pertenece unicamente a una maquina
 	@JoinColumn(name = "FK_MAQUINA")
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JsonBackReference
+	@JsonBackReference("recaudacion-maquina")
 	@Cascade(CascadeType.ALL)
 	private Maquina maquina;
 

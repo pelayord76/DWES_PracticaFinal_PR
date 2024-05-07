@@ -42,14 +42,14 @@ public class Maquina {
 	
 	// relacion N:N con maquinas con clave embebida a traves de clase 'Tiene'
 	@OneToMany(targetEntity = Tiene.class, mappedBy = "maquina")
-	@JsonBackReference
+	@JsonManagedReference
 	@Cascade(CascadeType.ALL)
 	private List<Tiene> tiene;
 
 	// relacion N:1 con cliente, cada maquina esta en un solo local.
 	@JoinColumn(name = "FK_CLIENTE")
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JsonManagedReference
+	@JsonBackReference("maquina-cliente")
 	@Cascade(CascadeType.ALL)
 	private Cliente cliente;
 
