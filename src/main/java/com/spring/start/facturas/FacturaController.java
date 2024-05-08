@@ -48,9 +48,9 @@ public class FacturaController {
 			facturaDAO.save(factura);
 		}
 	}
-	
+
 	@DeleteMapping("/factura/del/{id}")
-	public void deleteFactura(@PathVariable long id){
+	public void deleteFactura(@PathVariable long id) {
 		facturaDAO.deleteById(id);
 	}
 }

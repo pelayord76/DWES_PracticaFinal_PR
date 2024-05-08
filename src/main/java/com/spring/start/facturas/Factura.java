@@ -30,9 +30,9 @@ public class Factura {
 	private Date fechaEmision;
 
 	// relacion N:1 con cliente, cada maquina esta en un solo local.
-	@JoinColumn(name = "FK_CLIENTE")
-	@JsonBackReference("factura-cliente")
 	@ManyToOne(fetch = FetchType.EAGER)
+	@JsonBackReference("factura-cliente")
+	@JoinColumn(name = "FK_CLIENTE")
 	@Cascade(CascadeType.ALL)
 	private Cliente cliente;
 
