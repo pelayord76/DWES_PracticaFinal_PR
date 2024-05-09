@@ -10,30 +10,36 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/cliente")
 public class ClienteController {
 
 	@Autowired
 	ClienteDAO clienteDAO;
 
-	@GetMapping("/cliente")
+	@GetMapping
 	public List<Cliente> getClientes() {
 		return (List<Cliente>) clienteDAO.findAll();
 	}
 
-	@GetMapping("/cliente/{id}")
+	@GetMapping("/{id}")
 	public Cliente getCLiente(@PathVariable Long id) {
-		return clienteDAO.findById(id).get();
+		Optional<Cliente> cliente = clienteDAO.findById(id);
+		if(cliente.isPresent()) {
+			return cliente.get();
+		}
+		return null;
 	}
 	
-	@PostMapping("/cliente/add")
+	@PostMapping
 	public void addCliente(@RequestBody Cliente cliente) {
 		clienteDAO.save(cliente);
 	}
 	
-	@PutMapping("/cliente/edit/{id}")
+	@PutMapping("/{id}")
 	public void editCliente(@PathVariable long id, @RequestBody Cliente cliente) {
 		Optional<Cliente> oldCliente = clienteDAO.findById(id);
 		if(oldCliente.isPresent()){
@@ -47,7 +53,7 @@ public class ClienteController {
 		}
 	}
 	
-	@DeleteMapping("/cliente/del/{id}")
+	@DeleteMapping("/{id}")
 	public void deleteCliente(@PathVariable Long id) {
 		clienteDAO.deleteById(id);
 	}

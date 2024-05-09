@@ -1,5 +1,6 @@
 package com.spring.start.maquinas;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.spring.start.clientes.Cliente;
 import com.spring.start.recaudaciones.Recaudacion;
@@ -30,38 +32,37 @@ public class Maquina {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Column
 	private String nombre;
-	
+
 	@Column
-	private String fechaVencimientoLicencia;
-	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+	private LocalDate fechaVencimientoLicencia;
+
 	@Column
-	private boolean almacenada;	
-	
+	private Boolean almacenada;
+
 	// relacion N:N con maquinas con clave embebida a traves de clase 'Tiene'
 	@OneToMany(targetEntity = Tiene.class, mappedBy = "maquina")
-	@JsonManagedReference
+	@JsonManagedReference("tiene_maquina")
 	@Cascade(CascadeType.ALL)
 	private List<Tiene> tiene;
 
 	// relacion N:1 con cliente, cada maquina esta en un solo local.
 	@JoinColumn(name = "FK_CLIENTE")
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JsonBackReference("maquina-cliente")
+	@JsonBackReference("maquina_cliente")
 	@Cascade(CascadeType.ALL)
 	private Cliente cliente;
 
 	// relacion 1:N con recaudaciones, una maquina tiene varias recaudaciones
 	@OneToMany(mappedBy = "maquina", fetch = FetchType.EAGER)
 	@Fetch(value = FetchMode.SUBSELECT)
-	@JsonManagedReference
+	@JsonManagedReference("recaudacion_maquina")
 	@Cascade(CascadeType.ALL)
 	private List<Recaudacion> recaudaciones = new ArrayList<Recaudacion>();
-	
-	
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -78,19 +79,19 @@ public class Maquina {
 		this.nombre = nombre;
 	}
 
-	public String getFechaVencimientoLicencia() {
+	public LocalDate getFechaVencimientoLicencia() {
 		return fechaVencimientoLicencia;
 	}
 
-	public void setFechaVencimientoLicencia(String fechaVencimientoLicencia) {
+	public void setFechaVencimientoLicencia(LocalDate fechaVencimientoLicencia) {
 		this.fechaVencimientoLicencia = fechaVencimientoLicencia;
 	}
 
-	public boolean isAlmacenada() {
+	public Boolean isAlmacenada() {
 		return almacenada;
 	}
 
-	public void setAlmacenada(boolean almacenada) {
+	public void setAlmacenada(Boolean almacenada) {
 		this.almacenada = almacenada;
 	}
 
@@ -117,7 +118,7 @@ public class Maquina {
 	public void setRecaudaciones(List<Recaudacion> recaudaciones) {
 		this.recaudaciones = recaudaciones;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Maquina [id=" + id + ", nombre=" + nombre + ", fechaVencimientoLicencia=" + fechaVencimientoLicencia

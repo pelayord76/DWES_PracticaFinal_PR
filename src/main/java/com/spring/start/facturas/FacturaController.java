@@ -10,20 +10,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/factura")
 public class FacturaController {
 
 	@Autowired
 	FacturaDAO facturaDAO;
 
-	@GetMapping("/factura")
+	@GetMapping
 	public List<Factura> getFacturas() {
 		return (List<Factura>) facturaDAO.findAll();
 	}
 
-	@GetMapping("/factura/{id}")
+	@GetMapping("/{id}")
 	public Factura getFactura(@PathVariable long id) {
 		Optional<Factura> factura = facturaDAO.findById(id);
 		if (factura.isPresent()) {
@@ -32,12 +34,12 @@ public class FacturaController {
 		return null;
 	}
 
-	@PostMapping("/factura/add")
+	@PostMapping
 	public void addFactura(@RequestBody Factura factura) {
 		facturaDAO.save(factura);
 	}
 
-	@PutMapping("/factura/edit/{id}")
+	@PutMapping("/{id}")
 	public void editFactura(@PathVariable long id, @RequestBody Factura newFactura) {
 		Optional<Factura> oldFactura = facturaDAO.findById(id);
 		if (oldFactura.isPresent()) {
@@ -49,7 +51,7 @@ public class FacturaController {
 		}
 	}
 
-	@DeleteMapping("/factura/del/{id}")
+	@DeleteMapping("/{id}")
 	public void deleteFactura(@PathVariable long id) {
 		facturaDAO.deleteById(id);
 	}

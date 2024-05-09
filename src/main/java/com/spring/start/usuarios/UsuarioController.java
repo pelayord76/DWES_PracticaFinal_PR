@@ -10,20 +10,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/usuario")
 public class UsuarioController {
 
 	@Autowired
 	UsuarioDAO usuarioDAO;
 
-	@GetMapping("/usuario")
+	@GetMapping
 	public List<Usuario> getUsuarios() {
 		return (List<Usuario>) usuarioDAO.findAll();
 	}
 
-	@GetMapping("/usuario/{id}")
+	@GetMapping("/{id}")
 	public Usuario getUsuario(@PathVariable Long id) {
 		Optional<Usuario> usuario = usuarioDAO.findById(id);
 		if (usuario.isPresent()) {
@@ -32,12 +34,12 @@ public class UsuarioController {
 		return null;
 	}
 
-	@PostMapping("/usuario/add")
+	@PostMapping
 	public void addUsuario(@RequestBody Usuario usuario) {
 		usuarioDAO.save(usuario);
 	}
 
-	@PutMapping("/usuario/edit/{id}")
+	@PutMapping("/{id}")
 	public void editUsuario(@PathVariable long id, @RequestBody Usuario usuario) {
 		Optional<Usuario> usuarioUpdate = usuarioDAO.findById(id);
 		if (usuarioUpdate.isPresent()) {
@@ -50,7 +52,7 @@ public class UsuarioController {
 		}
 	}
 
-	@DeleteMapping("/usuario/del/{id}")
+	@DeleteMapping("/{id}")
 	public void deleteUsuario(@PathVariable long id) {
 		usuarioDAO.deleteById(id);
 	}

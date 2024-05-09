@@ -1,5 +1,6 @@
 package com.spring.start.clientes;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.spring.start.facturas.Factura;
 import com.spring.start.maquinas.Maquina;
@@ -31,15 +33,16 @@ public class Cliente {
 	@Column
 	private String duenio;
 	@Column
-	private int telefono;
+	private Integer telefono;
 	@Column
-	private String fechaVencimientoContrato;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+	private LocalDate fechaVencimientoContrato;
 
 	// relacion 1:N con maquinas, cada local tiene una o varias maquinas normalmente
 	// tienen entre 1 y 2.
 	@OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
 	@Fetch(value = FetchMode.SUBSELECT)
-	@JsonManagedReference
+	@JsonManagedReference("maquina_cliente")
 	@Cascade(CascadeType.ALL)
 	private List<Maquina> maquinas = new ArrayList<Maquina>();
 
@@ -47,7 +50,7 @@ public class Cliente {
 	// o trimestrales
 	@OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
 	@Fetch(value = FetchMode.SUBSELECT)
-	@JsonManagedReference
+	@JsonManagedReference("factura_cliente")
 	@Cascade(CascadeType.ALL)
 	private List<Factura> facturas = new ArrayList<Factura>();
 
@@ -75,19 +78,19 @@ public class Cliente {
 		this.duenio = duenio;
 	}
 
-	public int getTelefono() {
+	public Integer getTelefono() {
 		return telefono;
 	}
 
-	public void setTelefono(int telefono) {
+	public void setTelefono(Integer telefono) {
 		this.telefono = telefono;
 	}
 
-	public String getFechaVencimientoContrato() {
+	public LocalDate getFechaVencimientoContrato() {
 		return fechaVencimientoContrato;
 	}
 
-	public void setFechaVencimientoContrato(String fechaVencimientoContrato) {
+	public void setFechaVencimientoContrato(LocalDate fechaVencimientoContrato) {
 		this.fechaVencimientoContrato = fechaVencimientoContrato;
 	}
 

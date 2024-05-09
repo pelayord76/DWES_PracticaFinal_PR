@@ -10,20 +10,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/recaudacion")
 public class RecaudacionController {
 
 	@Autowired
 	RecaudacionDAO recaudacionDAO;
 
-	@GetMapping("/recaudacion")
+	@GetMapping
 	public List<Recaudacion> getRcecaudaciones() {
 		return (List<Recaudacion>) recaudacionDAO.findAll();
 	}
 
-	@GetMapping("/recaudacion/{id}")
+	@GetMapping("/{id}")
 	public Recaudacion getRecaudacion(@PathVariable long id) {
 		Optional<Recaudacion> recaudacion = recaudacionDAO.findById(id);
 		if (recaudacion.isPresent()) {
@@ -32,12 +34,12 @@ public class RecaudacionController {
 		return null;
 	}
 
-	@PostMapping("/recaudacion/add")
+	@PostMapping
 	public void addRecaudacion(@RequestBody Recaudacion recaudacion) {
 		recaudacionDAO.save(recaudacion);
 	}
 
-	@PutMapping("/recaudacion/edit/{id}")
+	@PutMapping("/{id}")
 	public void editRecaudacion(@PathVariable long id, @RequestBody Recaudacion recaudacion) {
 		Optional<Recaudacion> recaudacionUpdate = recaudacionDAO.findById(id);
 		if (recaudacionUpdate.isPresent()) {
@@ -50,7 +52,7 @@ public class RecaudacionController {
 		}
 	}
 
-	@DeleteMapping("/recaudacion/del/{id}")
+	@DeleteMapping("/{id}")
 	public void deleteRecaudacion(@PathVariable long id) {
 		recaudacionDAO.deleteById(id);
 	}

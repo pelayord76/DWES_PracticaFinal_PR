@@ -54,6 +54,6 @@ public class Tiene {
 
 	@Override
 	public String toString() {
-		return "Tiene [id=" + id + ", usuario=" + usuario + ", maquina=" + maquina + "]";
+		return "Tiene [id=" + id + "]";
 	}
 }

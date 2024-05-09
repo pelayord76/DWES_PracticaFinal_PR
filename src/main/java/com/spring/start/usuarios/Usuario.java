@@ -33,7 +33,7 @@ public class Usuario {
 
 	// relacion N:N con maquinas con clave embebida a traves de clase 'Tiene'
 	@OneToMany(targetEntity = Tiene.class, mappedBy = "usuario")
-	@JsonManagedReference
+	@JsonManagedReference("tiene_usuario")
 	@Cascade(CascadeType.ALL)
 	private List<Tiene> tiene;
 

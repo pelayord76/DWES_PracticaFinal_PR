@@ -1,11 +1,12 @@
 package com.spring.start.facturas;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.spring.start.clientes.Cliente;
 
 import jakarta.persistence.Column;
@@ -27,11 +28,12 @@ public class Factura {
 	@Column
 	private Double iva;
 	@Column
-	private Date fechaEmision;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+	private LocalDate fechaEmision;
 
 	// relacion N:1 con cliente, cada maquina esta en un solo local.
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JsonBackReference("factura-cliente")
+	@JsonBackReference("factura_cliente")
 	@JoinColumn(name = "FK_CLIENTE")
 	@Cascade(CascadeType.ALL)
 	private Cliente cliente;
@@ -52,11 +54,11 @@ public class Factura {
 		this.iva = iva;
 	}
 
-	public Date getFechaEmision() {
+	public LocalDate getFechaEmision() {
 		return fechaEmision;
 	}
 
-	public void setFechaEmision(Date fechaEmision) {
+	public void setFechaEmision(LocalDate fechaEmision) {
 		this.fechaEmision = fechaEmision;
 	}
 

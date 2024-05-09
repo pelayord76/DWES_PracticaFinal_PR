@@ -1,9 +1,12 @@
 package com.spring.start.recaudaciones;
 
+import java.time.LocalDate;
+
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.spring.start.maquinas.Maquina;
 
 import jakarta.persistence.Column;
@@ -23,16 +26,17 @@ public class Recaudacion {
 	private Long id;
 
 	@Column
-	private float cantidadRecaudada;
+	private Double cantidadRecaudada;
 	@Column
-	private float porcentajeJuego;
+	private Double porcentajeJuego;
 	@Column
-	private String fecha;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+	private LocalDate fecha;
 
 	// relacion N:1 con maquina, una recaudacion pertenece unicamente a una maquina
 	@JoinColumn(name = "FK_MAQUINA")
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JsonBackReference("recaudacion-maquina")
+	@JsonBackReference("recaudacion_maquina")
 	@Cascade(CascadeType.ALL)
 	private Maquina maquina;
 
@@ -44,27 +48,27 @@ public class Recaudacion {
 		this.id = id;
 	}
 
-	public float getCantidadRecaudada() {
+	public Double getCantidadRecaudada() {
 		return cantidadRecaudada;
 	}
 
-	public void setCantidadRecaudada(float cantidadRecaudada) {
+	public void setCantidadRecaudada(Double cantidadRecaudada) {
 		this.cantidadRecaudada = cantidadRecaudada;
 	}
 
-	public float getPorcentajeJuego() {
+	public Double getPorcentajeJuego() {
 		return porcentajeJuego;
 	}
 
-	public void setPorcentajeJuego(float porcentajeJuego) {
+	public void setPorcentajeJuego(Double porcentajeJuego) {
 		this.porcentajeJuego = porcentajeJuego;
 	}
 
-	public String getFecha() {
+	public LocalDate getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(String fecha) {
+	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
 

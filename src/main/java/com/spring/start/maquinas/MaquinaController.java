@@ -10,30 +10,36 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/maquina")
 public class MaquinaController {
 
 	@Autowired
 	MaquinaDAO maquinaDAO;
 
-	@GetMapping("/maquina")
+	@GetMapping
 	public List<Maquina> getMaquinas() {
 		return (List<Maquina>) maquinaDAO.findAll();
 	}
 
-	@GetMapping("/maquina/{id}")
+	@GetMapping("/{id}")
 	public Maquina getMaquina(@PathVariable Long id) {
-		return maquinaDAO.findById(id).get();
+		Optional<Maquina> maquina = maquinaDAO.findById(id);
+		if(maquina.isPresent()) {
+			return maquina.get();
+		}
+		return null;
 	}
 
-	@PostMapping("/maquina/add")
+	@PostMapping
 	public void addMaquina(@RequestBody Maquina maquina) {
 		maquinaDAO.save(maquina);
 	}
 
-	@PutMapping("/maquina/edit/{id}")
+	@PutMapping("/{id}")
 	public void editMaquina(@PathVariable long id, @RequestBody Maquina newMaquina) {
 		Optional<Maquina> oldMaquina = maquinaDAO.findById(id);
 		if (oldMaquina.isPresent()) {
@@ -46,7 +52,7 @@ public class MaquinaController {
 		}
 	}
 
-	@DeleteMapping("/maquina/del/{id}")
+	@DeleteMapping("/{id}")
 	public void deleteMaquina(@PathVariable long id) {
 		maquinaDAO.deleteById(id);
 	}
