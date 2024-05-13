@@ -28,7 +28,10 @@ INSERT INTO tiene (usuario_id, maquina_id) VALUES(2, 4);
 
 INSERT INTO recaudacion (cantidad_recaudada, porcentaje_juego, fecha, FK_MAQUINA) VALUES(1000.0, 0.35, '2023-12-06', 1);
 INSERT INTO recaudacion (cantidad_recaudada, porcentaje_juego, fecha, FK_MAQUINA) VALUES(1500.0, 0.77, '2023-12-06', 2);
-INSERT INTO recaudacion (cantidad_recaudada, porcentaje_juego, fecha, FK_MAQUINA) VALUES(800.0, 0.63, '2023-12-06', 3);
+INSERT INTO recaudacion (cantidad_recaudada, porcentaje_juego, fecha, FK_MAQUINA) VALUES(400.0, 0.33, '2023-12-06', 3);
+INSERT INTO recaudacion (cantidad_recaudada, porcentaje_juego, fecha, FK_MAQUINA) VALUES(658.0, 0.45, '2023-12-06', 4);
+INSERT INTO recaudacion (cantidad_recaudada, porcentaje_juego, fecha, FK_MAQUINA) VALUES(950.0, 0.50, '2023-12-06', 5);
+
 
 
 INSERT INTO factura (iva, fecha_emision, FK_CLIENTE) VALUES (21, '2024-05-01', 1);
