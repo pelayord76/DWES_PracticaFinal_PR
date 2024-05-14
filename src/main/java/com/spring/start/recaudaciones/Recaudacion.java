@@ -28,10 +28,19 @@ public class Recaudacion {
 	@Column
 	private Double cantidadRecaudada;
 	@Column
+	private Integer pasosEntrada;
+	@Column
+	private Integer pasosSalida;
+	@Column
 	private Double porcentajeJuego;
+	@Column
+	private Double tasaRecaudacion;
+	
 	@Column
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	private LocalDate fecha;
+	
+	
 
 	// relacion N:1 con maquina, una recaudacion pertenece unicamente a una maquina
 	@JoinColumn(name = "FK_MAQUINA")
