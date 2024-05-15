@@ -86,31 +86,4 @@ public class ClienteController {
 		}
 		return data;
 	}
-
-	@GetMapping("/data/juego")
-	public List<ClienteDataJuegoDTO> getDatosDeJuegoPorCliente() {
-		List<ClienteDataJuegoDTO> data = new ArrayList<>();
-		List<Cliente> clientes = (List<Cliente>) clienteDAO.findAll();
-
-		for (int i = 0; i < clientes.size(); i++) {
-			ClienteDataJuegoDTO dto = new ClienteDataJuegoDTO();
-			dto.setLocal(clientes.get(i).getLocal());
-			List<Maquina> maquinas = clientes.get(i).getMaquinas();
-			List<Recaudacion> recaudaciones = new ArrayList<>();
-
-			for (int j = 0; j < maquinas.size(); j++) {
-				recaudaciones.addAll(maquinas.get(j).getRecaudaciones());
-				double porcentaje = 0;
-				int contador = 0;
-				for (int k = 0; k < recaudaciones.size(); k++) {
-					porcentaje += recaudaciones.get(k).getPorcentajeJuego();
-					contador++;
-				}
-				porcentaje /= contador;
-				dto.setPorcentajeDeJuego(porcentaje);
-			}
-			data.add(dto);
-		}
-		return data;
-	}
 }
