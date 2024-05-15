@@ -49,7 +49,7 @@ public class MaquinaController {
 			Maquina maquina = oldMaquina.get();
 			maquina.setNombre(newMaquina.getNombre());
 			maquina.setFechaVencimientoLicencia(newMaquina.getFechaVencimientoLicencia());
-			maquina.setAlmacenada(newMaquina.isAlmacenada());
+			maquina.setAlmacenada(newMaquina.getAlmacenada());
 			maquina.setCliente(newMaquina.getCliente());
 			maquinaDAO.save(maquina);
 		}

@@ -25,8 +25,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import lombok.Data;
 
 @Entity
+@Data
 public class Maquina {
 
 	@Id
@@ -61,68 +63,5 @@ public class Maquina {
 	@Fetch(value = FetchMode.SUBSELECT)
 	@JsonManagedReference("recaudacion_maquina")
 	@Cascade(CascadeType.ALL)
-	private List<Recaudacion> recaudaciones = new ArrayList<Recaudacion>();
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public LocalDate getFechaVencimientoLicencia() {
-		return fechaVencimientoLicencia;
-	}
-
-	public void setFechaVencimientoLicencia(LocalDate fechaVencimientoLicencia) {
-		this.fechaVencimientoLicencia = fechaVencimientoLicencia;
-	}
-
-	public Boolean isAlmacenada() {
-		return almacenada;
-	}
-
-	public void setAlmacenada(Boolean almacenada) {
-		this.almacenada = almacenada;
-	}
-
-	public List<Tiene> getTiene() {
-		return tiene;
-	}
-
-	public void setTiene(List<Tiene> tiene) {
-		this.tiene = tiene;
-	}
-
-	public Cliente getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
-
-	public List<Recaudacion> getRecaudaciones() {
-		return recaudaciones;
-	}
-
-	public void setRecaudaciones(List<Recaudacion> recaudaciones) {
-		this.recaudaciones = recaudaciones;
-	}
-
-	@Override
-	public String toString() {
-		return "Maquina [id=" + id + ", nombre=" + nombre + ", fechaVencimientoLicencia=" + fechaVencimientoLicencia
-				+ ", almacenada=" + almacenada + ", usuarios=" + tiene + ", cliente=" + cliente + ", recaudaciones="
-				+ recaudaciones + "]";
-	}
+	private List<Recaudacion> recaudaciones = new ArrayList<>();
 }

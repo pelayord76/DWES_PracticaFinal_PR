@@ -17,8 +17,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import lombok.Data;
 
 @Entity
+@Data
 public class Factura {
 
 	@Id
@@ -37,41 +39,4 @@ public class Factura {
 	@JoinColumn(name = "FK_CLIENTE")
 	@Cascade(CascadeType.ALL)
 	private Cliente cliente;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Double getIva() {
-		return iva;
-	}
-
-	public void setIva(Double iva) {
-		this.iva = iva;
-	}
-
-	public LocalDate getFechaEmision() {
-		return fechaEmision;
-	}
-
-	public void setFechaEmision(LocalDate fechaEmision) {
-		this.fechaEmision = fechaEmision;
-	}
-
-	public Cliente getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
-
-	@Override
-	public String toString() {
-		return "Factura [id=" + id + ", iva=" + iva + ", fechaEmision=" + fechaEmision + ", cliente=" + cliente + "]";
-	}
 }

@@ -17,8 +17,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import lombok.Data;
 
 @Entity
+@Data
 public class Recaudacion {
 
 	@Id
@@ -27,20 +29,22 @@ public class Recaudacion {
 
 	@Column
 	private Double cantidadRecaudada;
+	
 	@Column
 	private Integer pasosEntrada;
+	
 	@Column
 	private Integer pasosSalida;
+	
 	@Column
 	private Double porcentajeJuego;
+	
 	@Column
 	private Double tasaRecaudacion;
-	
+
 	@Column
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	private LocalDate fecha;
-	
-	
 
 	// relacion N:1 con maquina, una recaudacion pertenece unicamente a una maquina
 	@JoinColumn(name = "FK_MAQUINA")
@@ -48,50 +52,4 @@ public class Recaudacion {
 	@JsonBackReference("recaudacion_maquina")
 	@Cascade(CascadeType.ALL)
 	private Maquina maquina;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Double getCantidadRecaudada() {
-		return cantidadRecaudada;
-	}
-
-	public void setCantidadRecaudada(Double cantidadRecaudada) {
-		this.cantidadRecaudada = cantidadRecaudada;
-	}
-
-	public Double getPorcentajeJuego() {
-		return porcentajeJuego;
-	}
-
-	public void setPorcentajeJuego(Double porcentajeJuego) {
-		this.porcentajeJuego = porcentajeJuego;
-	}
-
-	public LocalDate getFecha() {
-		return fecha;
-	}
-
-	public void setFecha(LocalDate fecha) {
-		this.fecha = fecha;
-	}
-
-	public Maquina getMaquina() {
-		return maquina;
-	}
-
-	public void setMaquina(Maquina maquina) {
-		this.maquina = maquina;
-	}
-
-	@Override
-	public String toString() {
-		return "Recaudacion [id=" + id + ", cantidadRecaudada=" + cantidadRecaudada + ", porcentajeJuego="
-				+ porcentajeJuego + ", fecha=" + fecha + ", maquina=" + maquina + "]";
-	}
 }

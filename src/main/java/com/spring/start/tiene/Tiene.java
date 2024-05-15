@@ -9,8 +9,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
+import lombok.Data;
 
 @Entity
+@Data
 public class Tiene {
 
 	@EmbeddedId
@@ -27,33 +29,4 @@ public class Tiene {
 	@MapsId("maquina_id")
 	@JoinColumn(name = "maquina_id")
 	private Maquina maquina;
-
-	public TieneKey getId() {
-		return id;
-	}
-
-	public void setId(TieneKey id) {
-		this.id = id;
-	}
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-
-	public Maquina getMaquina() {
-		return maquina;
-	}
-
-	public void setMaquina(Maquina maquina) {
-		this.maquina = maquina;
-	}
-
-	@Override
-	public String toString() {
-		return "Tiene [id=" + id + "]";
-	}
 }
