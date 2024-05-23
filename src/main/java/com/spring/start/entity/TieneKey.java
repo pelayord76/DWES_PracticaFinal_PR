@@ -5,6 +5,9 @@ import java.util.Objects;
 
 import jakarta.persistence.Embeddable;
 
+/**
+ * @author pelayord76
+ */
 @Embeddable
 public class TieneKey implements Serializable {
 

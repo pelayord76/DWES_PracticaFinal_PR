@@ -19,10 +19,19 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import lombok.Data;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
+/**
+ * @author pelayord76
+ */
 @Entity
-@Data
+@Getter
+@Setter
+@ToString
+@Table(name = "cliente")
 public class Cliente {
 
 	@Id
@@ -31,16 +40,16 @@ public class Cliente {
 
 	@Column(name = "local")
 	private String local;
-	
+
 	@Column(name = "duenio")
 	private String duenio;
-	
+
 	@Column(name = "telefono")
 	private Integer telefono;
 
 	@Column(name = "direccion")
 	private String direccion;
-	
+
 	@Column(name = "CIF")
 	private String cif;
 

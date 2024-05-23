@@ -16,10 +16,19 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import lombok.Data;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
+/**
+ * @author pelayord76
+ */
 @Entity
-@Data
+@Getter
+@Setter
+@ToString
+@Table(name = "recaudacion")
 public class Recaudacion {
 
 	@Id

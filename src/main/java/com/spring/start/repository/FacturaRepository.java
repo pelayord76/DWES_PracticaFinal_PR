@@ -1,9 +1,9 @@
 package com.spring.start.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.spring.start.entity.Factura;
 
-public interface FacturaRepository extends CrudRepository<Factura, Long> {
+public interface FacturaRepository extends JpaRepository<Factura, Long> {
 
 }

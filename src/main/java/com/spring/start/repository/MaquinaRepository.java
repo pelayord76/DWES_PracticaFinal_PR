@@ -2,11 +2,11 @@ package com.spring.start.repository;
 
 import java.util.List;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.spring.start.entity.Maquina;
 
-public interface MaquinaRepository extends CrudRepository<Maquina, Long> {
+public interface MaquinaRepository extends JpaRepository<Maquina, Long> {
 
 	/*
 	 * // query between fechas (no funciona)
@@ -30,6 +30,6 @@ public interface MaquinaRepository extends CrudRepository<Maquina, Long> {
 	 * 
 	 * // query ignoreCase List<Maquina> findByNombreIgnoreCase(String nombre);
 	 */
-	
+
 	List<Maquina> findByNombre(String nombre);
 }

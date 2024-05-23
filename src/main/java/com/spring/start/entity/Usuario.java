@@ -13,10 +13,19 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import lombok.Data;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
+/**
+ * @author pelayord76
+ */
 @Entity
-@Data
+@Getter
+@Setter
+@ToString
+@Table(name = "usuario")
 public class Usuario {
 
 	@Id

@@ -1,7 +1,6 @@
 package com.spring.start.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,50 +12,39 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.spring.start.entity.Usuario;
-import com.spring.start.repository.UsuarioRepository;
+import com.spring.start.dto.usuario.UsuarioRequestDto;
+import com.spring.start.dto.usuario.UsuarioResponseDto;
+import com.spring.start.service.UsuarioService;
 
 @RestController
 @RequestMapping("/usuario")
 public class UsuarioController {
 
 	@Autowired
-	UsuarioRepository usuarioDAO;
-
-	@GetMapping
-	public List<Usuario> getUsuarios() {
-		return (List<Usuario>) usuarioDAO.findAll();
-	}
+	UsuarioService usuarioService;
 
 	@GetMapping("/{id}")
-	public Usuario getUsuario(@PathVariable Long id) {
-		Optional<Usuario> usuario = usuarioDAO.findById(id);
-		if (usuario.isPresent()) {
-			return usuario.get();
-		}
-		return null;
+	public UsuarioResponseDto findById(@PathVariable Long id) {
+		return usuarioService.findById(id);
+	}
+
+	@GetMapping
+	public List<UsuarioResponseDto> findAll() {
+		return usuarioService.findAll();
 	}
 
 	@PostMapping
-	public void addUsuario(@RequestBody Usuario usuario) {
-		usuarioDAO.save(usuario);
+	public UsuarioResponseDto add(@RequestBody UsuarioRequestDto dto) {
+		return usuarioService.add(dto);
 	}
 
 	@PutMapping("/{id}")
-	public void editUsuario(@PathVariable long id, @RequestBody Usuario usuario) {
-		Optional<Usuario> usuarioUpdate = usuarioDAO.findById(id);
-		if (usuarioUpdate.isPresent()) {
-			Usuario usuarioNew = usuarioUpdate.get();
-			usuarioNew.setNombre(usuario.getNombre());
-			usuarioNew.setEmail(usuario.getEmail());
-			usuarioNew.setContrasenia(usuario.getContrasenia());
-			usuarioNew.setTiene(usuario.getTiene());
-			usuarioDAO.save(usuarioNew);
-		}
+	public UsuarioResponseDto update(@PathVariable Long id, @RequestBody UsuarioRequestDto dto) {
+		return usuarioService.update(id, dto);
 	}
 
 	@DeleteMapping("/{id}")
-	public void deleteUsuario(@PathVariable long id) {
-		usuarioDAO.deleteById(id);
+	public void delete(@PathVariable Long id) {
+		usuarioService.delete(id);
 	}
 }

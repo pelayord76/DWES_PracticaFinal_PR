@@ -1,7 +1,6 @@
 package com.spring.start.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,49 +12,39 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.spring.start.entity.Factura;
-import com.spring.start.repository.FacturaRepository;
+import com.spring.start.dto.factura.FacturaRequestDto;
+import com.spring.start.dto.factura.FacturaResponseDto;
+import com.spring.start.service.FacturaService;
 
 @RestController
 @RequestMapping("/factura")
 public class FacturaController {
 
 	@Autowired
-	FacturaRepository facturaDAO;
-
-	@GetMapping
-	public List<Factura> getFacturas() {
-		return (List<Factura>) facturaDAO.findAll();
-	}
+	FacturaService facturaService;
 
 	@GetMapping("/{id}")
-	public Factura getFactura(@PathVariable long id) {
-		Optional<Factura> factura = facturaDAO.findById(id);
-		if (factura.isPresent()) {
-			return factura.get();
-		}
-		return null;
+	public FacturaResponseDto getFactura(@PathVariable Long id) {
+		return facturaService.findById(id);
+	}
+
+	@GetMapping
+	public List<FacturaResponseDto> findAll() {
+		return facturaService.findAll();
 	}
 
 	@PostMapping
-	public void addFactura(@RequestBody Factura factura) {
-		facturaDAO.save(factura);
+	public FacturaResponseDto addFactura(@RequestBody FacturaRequestDto dto) {
+		return facturaService.add(dto);
 	}
 
 	@PutMapping("/{id}")
-	public void editFactura(@PathVariable long id, @RequestBody Factura newFactura) {
-		Optional<Factura> oldFactura = facturaDAO.findById(id);
-		if (oldFactura.isPresent()) {
-			Factura factura = oldFactura.get();
-			factura.setIva(newFactura.getIva());
-			factura.setFechaEmision(newFactura.getFechaEmision());
-			factura.setCliente(newFactura.getCliente());
-			facturaDAO.save(factura);
-		}
+	public FacturaResponseDto editFactura(@PathVariable Long id, @RequestBody FacturaRequestDto dto) {
+		return facturaService.update(id, dto);
 	}
 
 	@DeleteMapping("/{id}")
-	public void deleteFactura(@PathVariable long id) {
-		facturaDAO.deleteById(id);
+	public void deleteFactura(@PathVariable Long id) {
+		facturaService.delete(id);
 	}
 }

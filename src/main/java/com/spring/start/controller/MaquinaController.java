@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.spring.start.dto.MaquinaDataIngresosDTO;
+import com.spring.start.dto.maquina.MaquinaDataIngresosDTO;
 import com.spring.start.entity.Maquina;
 import com.spring.start.entity.Recaudacion;
 import com.spring.start.repository.MaquinaRepository;
