@@ -30,3 +30,5 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		throw new UsernameNotFoundException(nombre);
 	}
 }*/
+package com.spring.start.config;
+

@@ -1,4 +1,4 @@
-package com.spring.start.maquinas;
+package com.spring.start.entity;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -12,9 +12,7 @@ import org.hibernate.annotations.FetchMode;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.spring.start.clientes.Cliente;
-import com.spring.start.recaudaciones.Recaudacion;
-import com.spring.start.tiene.Tiene;
+import com.spring.start.enums.TipoMaquina;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

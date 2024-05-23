@@ -1,4 +1,4 @@
-package com.spring.start.clientes;
+package com.spring.start.dto;
 
 import lombok.Getter;
 import lombok.Setter;

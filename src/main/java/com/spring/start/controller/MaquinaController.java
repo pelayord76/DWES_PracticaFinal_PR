@@ -1,4 +1,4 @@
-package com.spring.start.maquinas;
+package com.spring.start.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,14 +14,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.spring.start.recaudaciones.Recaudacion;
+import com.spring.start.dto.MaquinaDataIngresosDTO;
+import com.spring.start.entity.Maquina;
+import com.spring.start.entity.Recaudacion;
+import com.spring.start.repository.MaquinaRepository;
 
 @RestController
 @RequestMapping("/maquina")
 public class MaquinaController {
 
 	@Autowired
-	MaquinaDAO maquinaDAO;
+	MaquinaRepository maquinaDAO;
 
 	@GetMapping
 	public List<Maquina> getMaquinas() {

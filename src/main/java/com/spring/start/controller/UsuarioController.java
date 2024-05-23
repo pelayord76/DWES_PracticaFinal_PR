@@ -1,4 +1,4 @@
-package com.spring.start.usuarios;
+package com.spring.start.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,12 +13,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spring.start.entity.Usuario;
+import com.spring.start.repository.UsuarioRepository;
+
 @RestController
 @RequestMapping("/usuario")
 public class UsuarioController {
 
 	@Autowired
-	UsuarioDAO usuarioDAO;
+	UsuarioRepository usuarioDAO;
 
 	@GetMapping
 	public List<Usuario> getUsuarios() {

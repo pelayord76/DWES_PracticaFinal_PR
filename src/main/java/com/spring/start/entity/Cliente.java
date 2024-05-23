@@ -1,4 +1,4 @@
-package com.spring.start.clientes;
+package com.spring.start.entity;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -11,8 +11,6 @@ import org.hibernate.annotations.FetchMode;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.spring.start.facturas.Factura;
-import com.spring.start.maquinas.Maquina;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

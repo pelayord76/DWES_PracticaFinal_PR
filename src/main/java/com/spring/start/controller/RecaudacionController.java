@@ -1,4 +1,4 @@
-package com.spring.start.recaudaciones;
+package com.spring.start.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,12 +13,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spring.start.entity.Recaudacion;
+import com.spring.start.repository.RecaudacionRepository;
+
 @RestController
 @RequestMapping("/recaudacion")
 public class RecaudacionController {
 
 	@Autowired
-	RecaudacionDAO recaudacionDAO;
+	RecaudacionRepository recaudacionDAO;
 
 	@GetMapping
 	public List<Recaudacion> getRcecaudaciones() {

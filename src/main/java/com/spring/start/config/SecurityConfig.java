@@ -38,3 +38,5 @@ public class SecurityConfig {
 				.passwordEncoder(bCryptPasswordEncoder).and().build();
 	}
 }*/
+package com.spring.start.config;
+

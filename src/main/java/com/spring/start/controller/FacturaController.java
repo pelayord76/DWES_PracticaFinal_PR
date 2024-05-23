@@ -1,4 +1,4 @@
-package com.spring.start.facturas;
+package com.spring.start.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,12 +13,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spring.start.entity.Factura;
+import com.spring.start.repository.FacturaRepository;
+
 @RestController
 @RequestMapping("/factura")
 public class FacturaController {
 
 	@Autowired
-	FacturaDAO facturaDAO;
+	FacturaRepository facturaDAO;
 
 	@GetMapping
 	public List<Factura> getFacturas() {

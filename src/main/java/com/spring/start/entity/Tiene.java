@@ -1,8 +1,6 @@
-package com.spring.start.tiene;
+package com.spring.start.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.spring.start.maquinas.Maquina;
-import com.spring.start.usuarios.Usuario;
 
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;

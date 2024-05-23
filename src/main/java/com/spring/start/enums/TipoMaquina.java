@@ -1,4 +1,4 @@
-package com.spring.start.maquinas;
+package com.spring.start.enums;
 
 public enum TipoMaquina {
 	MONEDAS, BILLETES

@@ -1,4 +1,4 @@
-package com.spring.start.tiene;
+package com.spring.start.entity;
 
 import java.io.Serializable;
 import java.util.Objects;

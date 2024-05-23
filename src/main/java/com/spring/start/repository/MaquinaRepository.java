@@ -1,10 +1,12 @@
-package com.spring.start.maquinas;
+package com.spring.start.repository;
 
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface MaquinaDAO extends CrudRepository<Maquina, Long> {
+import com.spring.start.entity.Maquina;
+
+public interface MaquinaRepository extends CrudRepository<Maquina, Long> {
 
 	/*
 	 * // query between fechas (no funciona)

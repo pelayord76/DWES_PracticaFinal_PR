@@ -1,4 +1,4 @@
-package com.spring.start.usuarios;
+package com.spring.start.entity;
 
 import java.util.List;
 
@@ -6,7 +6,6 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.spring.start.tiene.Tiene;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

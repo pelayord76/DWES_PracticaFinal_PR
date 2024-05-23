@@ -1,4 +1,4 @@
-package com.spring.start.clientes;
+package com.spring.start.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,15 +14,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.spring.start.maquinas.Maquina;
-import com.spring.start.recaudaciones.Recaudacion;
+import com.spring.start.dto.ClienteDataIngresosDTO;
+import com.spring.start.entity.Cliente;
+import com.spring.start.entity.Maquina;
+import com.spring.start.entity.Recaudacion;
+import com.spring.start.repository.ClienteRepository;
 
 @RestController
 @RequestMapping("/cliente")
 public class ClienteController {
 
 	@Autowired
-	ClienteDAO clienteDAO;
+	ClienteRepository clienteDAO;
 
 	@GetMapping
 	public List<Cliente> getClientes() {

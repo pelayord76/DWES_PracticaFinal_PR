@@ -1,4 +1,4 @@
-package com.spring.start.tiene;
+package com.spring.start.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,23 +12,26 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.spring.start.maquinas.Maquina;
-import com.spring.start.maquinas.MaquinaDAO;
-import com.spring.start.usuarios.Usuario;
-import com.spring.start.usuarios.UsuarioDAO;
+import com.spring.start.entity.Maquina;
+import com.spring.start.entity.Tiene;
+import com.spring.start.entity.TieneKey;
+import com.spring.start.entity.Usuario;
+import com.spring.start.repository.MaquinaRepository;
+import com.spring.start.repository.TieneRepository;
+import com.spring.start.repository.UsuarioRepository;
 
 @RestController
 @RequestMapping("/tiene")
 public class TieneController {
 
 	@Autowired
-	TieneDAO tieneDAO;
+	TieneRepository tieneDAO;
 
 	@Autowired
-	UsuarioDAO usuarioDAO;
+	UsuarioRepository usuarioDAO;
 
 	@Autowired
-	MaquinaDAO maquinaDAO;
+	MaquinaRepository maquinaDAO;
 
 	@GetMapping
 	public List<Tiene> getTiene() {
