@@ -31,19 +31,22 @@ public class Cliente {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column
+	@Column(name = "local")
 	private String local;
 	
-	@Column
+	@Column(name = "duenio")
 	private String duenio;
 	
-	@Column
+	@Column(name = "telefono")
 	private Integer telefono;
 
-	@Column
+	@Column(name = "direccion")
 	private String direccion;
+	
+	@Column(name = "CIF")
+	private String cif;
 
-	@Column
+	@Column(name = "fecha_vencimiento_contrato")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	private LocalDate fechaVencimientoContrato;
 

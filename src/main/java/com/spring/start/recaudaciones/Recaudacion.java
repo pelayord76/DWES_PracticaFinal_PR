@@ -27,22 +27,33 @@ public class Recaudacion {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column
+	@Column(name = "cantidad_recaudada")
 	private Double cantidadRecaudada;
-	
-	@Column
+
+	// los pasos de entrada y de salida son las jugadas que tiene la maquina, cada
+	// paso vale 0,20€
+	// sirven tanto como para validar la cantidad recaudada como
+	// para calcular el porcentaje de juego que tuvo la maquina desde la ultima
+	// recaudacion
+	// los de entrada son los que el usuario fisico de la maquina paga
+	@Column(name = "pasos_entrada")
 	private Integer pasosEntrada;
-	
-	@Column
+
+	// los pasos de salida son los que la maquina devuelve en premios al usuario
+	// fisico
+	@Column(name = "pasos_salida")
 	private Integer pasosSalida;
-	
-	@Column
+
+	@Column(name = "porcentaje_juego")
 	private Double porcentajeJuego;
-	
-	@Column
+
+	// la tasa de recaudacion es la cantidad que el usuario quiere destinar de la
+	// recaudacion al impuesto trimestral que la empresa debe pagar por cada maquina
+	// la tasa trimestral debe ser de un total de 890€
+	@Column(name = "tasa_recaudacion")
 	private Double tasaRecaudacion;
 
-	@Column
+	@Column(name = "fecha")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	private LocalDate fecha;
 

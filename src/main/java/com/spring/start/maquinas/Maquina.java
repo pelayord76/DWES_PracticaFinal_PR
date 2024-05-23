@@ -35,15 +35,22 @@ public class Maquina {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column
+	@Column(name = "nombre")
 	private String nombre;
 
-	@Column
+	@Column(name = "fecha_vencimiento_licencia")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	private LocalDate fechaVencimientoLicencia;
 
-	@Column
+	@Column(name = "almacenada")
 	private Boolean almacenada;
+
+	// para una funcionalidad de las recaudaciones se necesita añadir de qué tipo es
+	// cada máquina, ya que se pueden diferenciar en dos tipos dependiendo del % de
+	// juego legal, se usarán los términos 'monedas' y 'billetes' de forma
+	// provisional
+	@Column(name = "tipo_maquina")
+	private TipoMaquina tipoMaquina;
 
 	// relacion N:N con maquinas con clave embebida a traves de clase 'Tiene'
 	@OneToMany(targetEntity = Tiene.class, mappedBy = "maquina")

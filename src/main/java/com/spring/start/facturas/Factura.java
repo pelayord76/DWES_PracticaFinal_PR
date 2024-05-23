@@ -27,9 +27,10 @@ public class Factura {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column
+	@Column(name = "IVA")
 	private Double iva;
-	@Column
+	
+	@Column(name = "fecha_emision")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	private LocalDate fechaEmision;
 

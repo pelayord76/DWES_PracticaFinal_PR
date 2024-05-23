@@ -24,13 +24,13 @@ public class Usuario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column
+	@Column(name = "nombre")
 	private String nombre;
 
-	@Column
+	@Column(name = "email")
 	private String email;
 
-	@Column
+	@Column(name = "contrasenia")
 	private String contrasenia;
 
 	// relacion N:N con maquinas con clave embebida a traves de clase 'Tiene'
