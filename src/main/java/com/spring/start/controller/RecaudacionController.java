@@ -1,7 +1,6 @@
 package com.spring.start.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,50 +12,39 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.spring.start.entity.Recaudacion;
-import com.spring.start.repository.RecaudacionRepository;
+import com.spring.start.dto.recaudacion.RecaudacionRequestDto;
+import com.spring.start.dto.recaudacion.RecaudacionResponseDto;
+import com.spring.start.service.RecaudacionService;
 
 @RestController
 @RequestMapping("/recaudacion")
 public class RecaudacionController {
 
 	@Autowired
-	RecaudacionRepository recaudacionDAO;
+	RecaudacionService recaudacionService;
 
 	@GetMapping
-	public List<Recaudacion> getRcecaudaciones() {
-		return (List<Recaudacion>) recaudacionDAO.findAll();
+	public List<RecaudacionResponseDto> findAll() {
+		return recaudacionService.findAll();
 	}
 
 	@GetMapping("/{id}")
-	public Recaudacion getRecaudacion(@PathVariable long id) {
-		Optional<Recaudacion> recaudacion = recaudacionDAO.findById(id);
-		if (recaudacion.isPresent()) {
-			return recaudacion.get();
-		}
-		return null;
+	public RecaudacionResponseDto findById(@PathVariable Long id) {
+		return recaudacionService.findById(id);
 	}
 
 	@PostMapping
-	public void addRecaudacion(@RequestBody Recaudacion recaudacion) {
-		recaudacionDAO.save(recaudacion);
+	public RecaudacionResponseDto add(@RequestBody RecaudacionRequestDto dto) {
+		return recaudacionService.add(dto);
 	}
 
 	@PutMapping("/{id}")
-	public void editRecaudacion(@PathVariable long id, @RequestBody Recaudacion recaudacion) {
-		Optional<Recaudacion> recaudacionUpdate = recaudacionDAO.findById(id);
-		if (recaudacionUpdate.isPresent()) {
-			Recaudacion recaudacionNew = recaudacionUpdate.get();
-			recaudacionNew.setCantidadRecaudada(recaudacion.getCantidadRecaudada());
-			recaudacionNew.setFecha(recaudacion.getFecha());
-			recaudacionNew.setMaquina(recaudacion.getMaquina());
-			recaudacionNew.setPorcentajeJuego(recaudacion.getPorcentajeJuego());
-			recaudacionDAO.save(recaudacionNew);
-		}
+	public RecaudacionResponseDto update(@PathVariable Long id, @RequestBody RecaudacionRequestDto dto) {
+		return recaudacionService.update(id, dto);
 	}
 
 	@DeleteMapping("/{id}")
-	public void deleteRecaudacion(@PathVariable long id) {
-		recaudacionDAO.deleteById(id);
+	public void delete(@PathVariable Long id) {
+		recaudacionService.delete(id);
 	}
 }

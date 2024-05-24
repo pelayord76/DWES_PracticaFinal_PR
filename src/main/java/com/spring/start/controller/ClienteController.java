@@ -50,7 +50,7 @@ public class ClienteController {
 	}
 
 	@GetMapping("/data/ingresos")
-	public List<ClienteDataIngresosDTO> getDatosDeIngresosPorClientes() {
+	public List<ClienteDataIngresosDTO> findByIngresos() {
 		return clienteService.findByIngresos();
 		/*
 		 * List<ClienteDataIngresosDTO> data = new ArrayList<>(); List<Cliente> clientes

@@ -16,20 +16,12 @@ import lombok.ToString;
 public class ClienteResponseDto {
 
 	private Long id;
-
 	private String local;
-
 	private String duenio;
-
 	private Integer telefono;
-
 	private String direccion;
-
 	private String cif;
-
 	private LocalDate fechaVencimientoContrato;
-
 	private List<Maquina> maquinas;
-
 	private List<Factura> facturas;
 }

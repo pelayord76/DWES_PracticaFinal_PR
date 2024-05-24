@@ -1,7 +1,6 @@
 package com.spring.start.dto.maquina;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.spring.start.entity.Cliente;
@@ -25,5 +24,5 @@ public class MaquinaResponseDto {
 	private TipoMaquina tipoMaquina;
 	private List<Tiene> tiene;
 	private Cliente cliente;
-	private List<Recaudacion> recaudaciones = new ArrayList<>();
+	private List<Recaudacion> recaudaciones;
 }
