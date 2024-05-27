@@ -13,7 +13,6 @@ import lombok.ToString;
 @ToString
 public class RecaudacionResponseDto {
 
-	private Long id;
 	private Double cantidadRecaudada;
 	private Integer pasosEntrada;
 	private Integer pasosSalida;

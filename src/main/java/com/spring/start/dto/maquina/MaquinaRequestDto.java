@@ -2,7 +2,7 @@ package com.spring.start.dto.maquina;
 
 import java.time.LocalDate;
 
-import com.spring.start.entity.Cliente;
+import com.spring.start.dto.cliente.ClienteResponseDto;
 import com.spring.start.enums.TipoMaquina;
 
 import lombok.Getter;
@@ -18,5 +18,5 @@ public class MaquinaRequestDto {
 	private LocalDate fechaVencimientoLicencia;
 	private Boolean almacenada;
 	private TipoMaquina tipoMaquina;
-	private Cliente cliente;
+	private ClienteResponseDto cliente;
 }

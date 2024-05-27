@@ -9,6 +9,5 @@ import lombok.ToString;
 @ToString
 public class MaquinaFacturaResponseDto {
 
-	private Long id;
 	private String nombre;
 }
