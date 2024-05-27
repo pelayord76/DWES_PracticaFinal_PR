@@ -1,7 +1,7 @@
 package com.spring.start.entity;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.hibernate.annotations.Cascade;
@@ -45,7 +45,7 @@ public class Maquina {
 	private String nombre;
 
 	@Column(name = "fecha_vencimiento_licencia")
-	private LocalDate fechaVencimientoLicencia;
+	private LocalDateTime fechaVencimientoLicencia;
 
 	@Column(name = "almacenada")
 	private Boolean almacenada;
@@ -79,7 +79,7 @@ public class Maquina {
 	@Fetch(value = FetchMode.SUBSELECT)
 	@JsonManagedReference("recaudacion_maquina")
 	@Cascade(CascadeType.ALL)
-	private List<Recaudacion> recaudaciones = new ArrayList<>();
+	private List<Recaudacion> recaudaciones;
 
 	// cuando la maquina pase a estar almacenada se empezará a tener en cuenta y
 	// comprobar cuanto tiempo lleva en este estado

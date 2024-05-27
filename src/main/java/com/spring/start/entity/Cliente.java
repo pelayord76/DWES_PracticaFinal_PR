@@ -1,7 +1,6 @@
 package com.spring.start.entity;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.annotations.Cascade;
@@ -63,7 +62,7 @@ public class Cliente {
 	@Fetch(value = FetchMode.SUBSELECT)
 	@JsonManagedReference("maquina_cliente")
 	@Cascade(CascadeType.ALL)
-	private List<Maquina> maquinas = new ArrayList<>();
+	private List<Maquina> maquinas;
 
 	// relacion 1:N con recaudaciones, un cliente tendrá varias facturas, mensuales
 	// o trimestrales
@@ -71,5 +70,5 @@ public class Cliente {
 	@Fetch(value = FetchMode.SUBSELECT)
 	@JsonManagedReference("factura_cliente")
 	@Cascade(CascadeType.ALL)
-	private List<Factura> facturas = new ArrayList<>();
+	private List<Factura> facturas;
 }

@@ -2,12 +2,17 @@ package com.spring.start.service;
 
 import java.util.List;
 
+import org.springframework.validation.annotation.Validated;
+
 import com.spring.start.dto.usuario.UsuarioRequestDto;
 import com.spring.start.dto.usuario.UsuarioResponseDto;
+
+import jakarta.validation.Valid;
 
 /**
  * @author pelayord76
  */
+@Validated
 public interface UsuarioService {
 
 	/**
@@ -28,7 +33,7 @@ public interface UsuarioService {
 	 * @param dto: datos del usuario que se quiere introducir
 	 * @return dto del usuario creado
 	 */
-	UsuarioResponseDto add(UsuarioRequestDto dto);
+	UsuarioResponseDto add(@Valid UsuarioRequestDto dto);
 
 	/**
 	 * 
@@ -36,7 +41,7 @@ public interface UsuarioService {
 	 * @param dto: campos nuevos que se le quieren dar al usuario
 	 * @return dto del usuario modificado
 	 */
-	UsuarioResponseDto update(Long id, UsuarioRequestDto dto);
+	UsuarioResponseDto update(Long id, @Valid UsuarioRequestDto dto);
 
 	/**
 	 * 

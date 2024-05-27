@@ -17,9 +17,9 @@ import lombok.ToString;
 public class FacturaResponseDto {
 
 	private Double iva;
-	
+
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-	@JsonFormat(pattern = "dd/MM/yyyy HH:mm", timezone = "Europe/Madrid")
+	@JsonFormat(pattern = "dd/MM/yyyy", timezone = "Europe/Madrid")
 	private LocalDate fechaEmision;
 	private ClienteResponseDto cliente;
 }
