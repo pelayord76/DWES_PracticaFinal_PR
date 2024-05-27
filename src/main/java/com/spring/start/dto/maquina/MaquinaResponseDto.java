@@ -3,6 +3,9 @@ package com.spring.start.dto.maquina;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.spring.start.dto.cliente.ClienteResponseDto;
 import com.spring.start.dto.recaudacion.RecaudacionResponseDto;
 import com.spring.start.dto.tiene.TieneResponseDto;
@@ -18,6 +21,9 @@ import lombok.ToString;
 public class MaquinaResponseDto {
 
 	private String nombre;
+	
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm", timezone = "Europe/Madrid")
 	private LocalDate fechaVencimientoLicencia;
 	private Boolean almacenada;
 	private TipoMaquina tipoMaquina;

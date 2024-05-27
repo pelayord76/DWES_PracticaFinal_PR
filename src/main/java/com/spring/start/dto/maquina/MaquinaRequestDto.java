@@ -2,9 +2,11 @@ package com.spring.start.dto.maquina;
 
 import java.time.LocalDate;
 
-import com.spring.start.dto.cliente.ClienteResponseDto;
 import com.spring.start.enums.TipoMaquina;
 
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -14,9 +16,19 @@ import lombok.ToString;
 @ToString
 public class MaquinaRequestDto {
 
+	@NotNull
+	@Size(min = 3, max = 100, message = "El nombre de la maquina no puede superar los 100 caracteres")
 	private String nombre;
+
+	@NotNull(message = "La fecha de vencimiento de la licencia no puede ser nula")
+	@Future(message = "La fecha de vencimiento de la licencia debe ser una fecha futura")
 	private LocalDate fechaVencimientoLicencia;
+
+	@NotNull(message = "Se debe indicar si la ")
 	private Boolean almacenada;
+
+	@NotNull
 	private TipoMaquina tipoMaquina;
-	private ClienteResponseDto cliente;
+
+	private Long idCliente;
 }
