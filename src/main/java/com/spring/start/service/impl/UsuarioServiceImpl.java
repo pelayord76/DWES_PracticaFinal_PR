@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import com.spring.start.dto.usuario.UsuarioRequestDto;
 import com.spring.start.dto.usuario.UsuarioResponseDto;
@@ -13,7 +14,10 @@ import com.spring.start.mapper.UsuarioMapper;
 import com.spring.start.repository.UsuarioRepository;
 import com.spring.start.service.UsuarioService;
 
+import jakarta.validation.Valid;
+
 @Service
+@Validated
 public class UsuarioServiceImpl implements UsuarioService {
 
 	@Autowired
@@ -38,7 +42,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
-	public UsuarioResponseDto add(UsuarioRequestDto dto) {
+	public UsuarioResponseDto add(@Valid UsuarioRequestDto dto) {
 		usuarioRepository.save(usuarioMapper.mapUsuarioRequestToUsuario(dto));
 		return usuarioMapper.mapUsuarioRequestToUsuarioResponse(dto);
 	}
