@@ -23,12 +23,18 @@ public class SwaggerConfig {
 		Contact contact = new Contact();
 		contact.setEmail("pelayord76@educastur.es");
 		contact.setName("Pelayo Rodríguez Díaz");
-		contact.setUrl("https://linkedin.com/pelayord");
+		contact.setUrl("https://linktr.ee/pelayord");
 
-		License mitLicense = new License().name("MIT License").url("licencia");
+		License mitLicense = new License()
+				.name("MIT License")
+				.url("https://opensource.org/licenses/MIT");
 
-		Info info = new Info().title("Documentacion api rest").version("1.0").contact(contact)
-				.description("Apis descripcion").license(mitLicense);
+		Info info = new Info()
+				.title("Documentacion API REST")
+				.version("1.0")
+				.contact(contact)
+				.description("Esta API REST proporciona funcionalidades para gestionar la base de datos de negocios de máquinas recreativas.")
+				.license(mitLicense);
 
 		Server devServer = new Server();
 		devServer.setUrl(urldev);
