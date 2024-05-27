@@ -2,8 +2,8 @@ package com.spring.start.dto.factura;
 
 import java.time.LocalDate;
 
-import com.spring.start.entity.Cliente;
-
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -13,7 +13,13 @@ import lombok.ToString;
 @ToString
 public class FacturaRequestDto {
 
+	@NotNull
+	@Digits(integer = 2, fraction = 2)
 	private Double iva;
+
+	@NotNull(message = "La fecha de emision de la factura no puede ser nula")
 	private LocalDate fechaEmision;
-	private Cliente cliente;
+
+	@NotNull
+	private Long idCliente;
 }

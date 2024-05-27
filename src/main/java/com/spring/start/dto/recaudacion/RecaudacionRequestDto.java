@@ -1,7 +1,7 @@
 package com.spring.start.dto.recaudacion;
 
-import com.spring.start.dto.maquina.MaquinaRecaudacionDto;
-
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -11,8 +11,16 @@ import lombok.ToString;
 @ToString
 public class RecaudacionRequestDto {
 
+	@NotNull
+	@Digits(integer = 4, fraction = 2)
 	private Double cantidadRecaudada;
+
+	@NotNull
 	private Integer pasosEntrada;
+
+	@NotNull
 	private Integer pasosSalida;
-	private MaquinaRecaudacionDto maquina;
+
+	@NotNull
+	private Long idMaquina;
 }

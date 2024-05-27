@@ -16,22 +16,21 @@ INSERT INTO maquina (nombre, fecha_vencimiento_licencia, almacenada, tipo_maquin
 INSERT INTO maquina (nombre, fecha_vencimiento_licencia, almacenada, tipo_maquina, FK_CLIENTE) VALUES('maquina5', '2024-09-30', 0, 1, 4);
 
 
-INSERT INTO tiene (usuario_id, maquina_id) VALUES(1, 1);
-INSERT INTO tiene (usuario_id, maquina_id) VALUES(1, 2);
-INSERT INTO tiene (usuario_id, maquina_id) VALUES(1, 3);
-INSERT INTO tiene (usuario_id, maquina_id) VALUES(1, 4);
-INSERT INTO tiene (usuario_id, maquina_id) VALUES(2, 1);
-INSERT INTO tiene (usuario_id, maquina_id) VALUES(2, 2);
-INSERT INTO tiene (usuario_id, maquina_id) VALUES(2, 3);
-INSERT INTO tiene (usuario_id, maquina_id) VALUES(2, 4);
+--INSERT INTO tiene (usuario_id, maquina_id) VALUES(1, 1);
+--INSERT INTO tiene (usuario_id, maquina_id) VALUES(1, 2);
+--INSERT INTO tiene (usuario_id, maquina_id) VALUES(1, 3);
+--INSERT INTO tiene (usuario_id, maquina_id) VALUES(1, 4);
+--INSERT INTO tiene (usuario_id, maquina_id) VALUES(2, 1);
+--INSERT INTO tiene (usuario_id, maquina_id) VALUES(2, 2);
+--INSERT INTO tiene (usuario_id, maquina_id) VALUES(2, 3);
+--INSERT INTO tiene (usuario_id, maquina_id) VALUES(2, 4);
 
 
-INSERT INTO recaudacion (cantidad_recaudada, pasos_entrada, pasos_salida, porcentaje_juego, fecha, FK_MAQUINA) VALUES(1000.0, 4120, 3890, '2023-12-06', 1);
-INSERT INTO recaudacion (cantidad_recaudada, pasos_entrada, pasos_salida, porcentaje_juego, fecha, FK_MAQUINA) VALUES(1500.0, 2500, 2300, '2023-12-06', 2);
-INSERT INTO recaudacion (cantidad_recaudada, pasos_entrada, pasos_salida, porcentaje_juego, fecha, FK_MAQUINA) VALUES(400.0, 5130, 4900, '2023-12-06', 3);
-INSERT INTO recaudacion (cantidad_recaudada, pasos_entrada, pasos_salida, porcentaje_juego, fecha, FK_MAQUINA) VALUES(658.0, 800, 670, '2023-12-06', 4);
-INSERT INTO recaudacion (cantidad_recaudada, pasos_entrada, pasos_salida, porcentaje_juego, fecha, FK_MAQUINA) VALUES(950.0, 1900, 1350, '2023-12-06', 5);
-
+INSERT INTO recaudacion (cantidad_recaudada, pasos_entrada, pasos_salida, porcentaje_juego, tasa_recaudacion, fecha, FK_MAQUINA) VALUES(1000.0, 4120, 3890, 60.0, 200, '2023-12-06', 1);
+INSERT INTO recaudacion (cantidad_recaudada, pasos_entrada, pasos_salida, porcentaje_juego, tasa_recaudacion, fecha, FK_MAQUINA) VALUES(1500.0, 2500, 2300, 60.0, 200, '2023-12-06', 2);
+INSERT INTO recaudacion (cantidad_recaudada, pasos_entrada, pasos_salida, porcentaje_juego, tasa_recaudacion, fecha, FK_MAQUINA) VALUES(400.0, 5130, 4900, 60.0, 200, '2023-12-06', 3);
+INSERT INTO recaudacion (cantidad_recaudada, pasos_entrada, pasos_salida, porcentaje_juego, tasa_recaudacion, fecha, FK_MAQUINA) VALUES(658.0, 800, 670, 60.0, 200, '2023-12-06', 4);
+INSERT INTO recaudacion (cantidad_recaudada, pasos_entrada, pasos_salida, porcentaje_juego, tasa_recaudacion, fecha, FK_MAQUINA) VALUES(950.0, 1900, 1350, 60.0, 200, '2023-12-06', 5);
 
 
 INSERT INTO factura (iva, fecha_emision, FK_CLIENTE) VALUES (21, '2024-05-01', 1);
