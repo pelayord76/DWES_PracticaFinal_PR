@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.spring.start.dto.maquina.MaquinaDataIngresosDTO;
 import com.spring.start.dto.maquina.MaquinaRequestDto;
@@ -13,6 +14,7 @@ import com.spring.start.mapper.MaquinaMapper;
 import com.spring.start.repository.MaquinaRepository;
 import com.spring.start.service.MaquinaService;
 
+@Service
 public class MaquinaServiceImpl implements MaquinaService {
 
 	@Autowired

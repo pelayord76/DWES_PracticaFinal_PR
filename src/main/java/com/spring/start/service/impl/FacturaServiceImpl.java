@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.spring.start.dto.factura.FacturaRequestDto;
 import com.spring.start.dto.factura.FacturaResponseDto;
@@ -12,6 +13,7 @@ import com.spring.start.mapper.FacturaMapper;
 import com.spring.start.repository.FacturaRepository;
 import com.spring.start.service.FacturaService;
 
+@Service
 public class FacturaServiceImpl implements FacturaService {
 
 	@Autowired

@@ -2,10 +2,13 @@ package com.spring.start.service.impl;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.spring.start.dto.tiene.TieneKeyRequestDto;
 import com.spring.start.dto.tiene.TieneResponseDto;
 import com.spring.start.service.TieneService;
 
+@Service
 public class TieneServiceImpl implements TieneService {
 
 	@Override

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.spring.start.dto.cliente.ClienteDataIngresosDTO;
 import com.spring.start.dto.cliente.ClienteRequestDto;
@@ -13,6 +14,7 @@ import com.spring.start.mapper.ClienteMapper;
 import com.spring.start.repository.ClienteRepository;
 import com.spring.start.service.ClienteService;
 
+@Service
 public class ClienteServiceImpl implements ClienteService {
 
 	@Autowired
