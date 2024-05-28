@@ -12,7 +12,7 @@ public interface TieneService {
 
 	/**
 	 * 
-	 * @return lista de dtos con todas las relaciones del sistema
+	 * @return lista de todas las relaciones del sistema
 	 */
 	List<Tiene> findAll();
 
@@ -20,13 +20,14 @@ public interface TieneService {
 	 * 
 	 * @param dto: datos de la relacion que se quiere introducir, serán el id de una
 	 *             maquina y el de un usuario
-	 * @return dto de la relacion tiene creada
+	 * @return la relacion creada
 	 */
 	Tiene add(TieneKey key);
 
 	/**
 	 * 
-	 * @param id de la relacion que se quiere eliminar de la base de datos
+	 * @param id de las entidades que forman la relacion que se quiere eliminar de
+	 *           la base de datos
 	 */
 	void delete(long idUsuario, long idMaquina);
 }

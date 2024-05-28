@@ -27,13 +27,13 @@ public class Tiene {
 
 	@ManyToOne
 	@JsonBackReference("tiene_usuario")
-	@MapsId("usuario_id")
+	@MapsId("usuarioId")
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
 
 	@ManyToOne
 	@JsonBackReference("tiene_maquina")
-	@MapsId("maquina_id")
+	@MapsId("maquinaId")
 	@JoinColumn(name = "maquina_id")
 	private Maquina maquina;
 }

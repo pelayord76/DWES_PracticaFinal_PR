@@ -35,8 +35,8 @@ public class TieneServiceImpl implements TieneService {
 	@Override
 	public Tiene add(TieneKey key) {
 
-		Optional<Usuario> usuarioOptional = usuarioRepository.findById(key.getIdUsuario());
-		Optional<Maquina> maquinaOptional = maquinaRepository.findById(key.getIdMaquina());
+		Optional<Usuario> usuarioOptional = usuarioRepository.findById(key.getUsuarioId());
+		Optional<Maquina> maquinaOptional = maquinaRepository.findById(key.getMaquinaId());
 
 		if (usuarioOptional.isEmpty() || maquinaOptional.isEmpty()) {
 			throw new IllegalArgumentException("El usuario y la maquina deben existir");
@@ -53,8 +53,8 @@ public class TieneServiceImpl implements TieneService {
 	@Override
 	public void delete(long idUsuario, long idMaquina) {
 		TieneKey key = new TieneKey();
-		key.setIdUsuario(idUsuario);
-		key.setIdMaquina(idMaquina);
+		key.setUsuarioId(idUsuario);
+		key.setMaquinaId(idMaquina);
 		if (tieneRepository.findById(key).isEmpty()) {
 			throw new IllegalArgumentException("No existe ninguna relación con esos campos");
 		}

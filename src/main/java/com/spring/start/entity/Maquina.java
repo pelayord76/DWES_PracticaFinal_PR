@@ -54,7 +54,7 @@ public class Maquina {
 	private Boolean almacenada;
 
 	// fecha en la que la maquina paso a estar en estado de almacenada
-	@Column(name = "fecha_almacenada")
+	@Column(name = "fecha_almacenamiento")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	private LocalDate fechaAlmacenada;
 

@@ -16,20 +16,22 @@ INSERT INTO cliente (local, duenio, telefono, direccion, cif, fecha_vencimiento_
 ('bar10', 'dueño10', 999999999, 'direccion10', 'cif10', '2027-12-31');
 
 
-INSERT INTO maquina (nombre, fecha_vencimiento_licencia, almacenada, tipo_maquina, FK_CLIENTE) VALUES 
-('maquina1', '2024-12-31', 0, PAGA_BILLETES, 1),
-('maquina2', '2024-11-15', 0, NO_PAGA_BILLETES, 2),
-('maquina3', '2024-12-31', 0, PAGA_BILLETES, 2),
-('maquina4', '2024-10-01', 0, NO_PAGA_BILLETES, 3),
-('maquina5', '2024-09-30', 0, PAGA_BILLETES, 4),
-('maquina6', '2025-12-31', 0, PAGA_BILLETES, 6),
-('maquina7', '2025-11-15', 0, NO_PAGA_BILLETES, 7),
-('maquina8', '2025-12-31', 0, PAGA_BILLETES, 7),
-('maquina9', '2025-10-01', 0, NO_PAGA_BILLETES, 8),
-('maquina10', '2025-09-30', 0, PAGA_BILLETES, 9);
+INSERT INTO maquina (nombre, fecha_vencimiento_licencia, almacenada, fecha_almacenamiento, tipo_maquina, FK_CLIENTE) VALUES 
+('maquina1', '2024-12-31', 0, null, 'BILLETES', 1),
+('maquina2', '2024-11-15', 0, null, 'MONEDAS', 2),
+('maquina3', '2024-12-31', 0, null, 'BILLETES', 2),
+('maquina4', '2024-10-01', 0, null, 'MONEDAS', 3),
+('maquina5', '2024-09-30', 0, null, 'BILLETES', 4),
+('maquina6', '2025-12-31', 0, null, 'BILLETES', 6),
+('maquina7', '2025-11-15', 0, null, 'MONEDAS', 7),
+('maquina8', '2025-12-31', 0, null, 'BILLETES', 7),
+('maquina9', '2025-10-01', 0, null, 'MONEDAS', 8),
+('maquina10', '2025-09-30', 0, null, 'BILLETES', 9);
 
 
-INSERT INTO tiene (usuario_id, maquina_id) VALUES (1, 1);
+INSERT INTO tiene (usuario_id, maquina_id) VALUES
+(1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (1, 6), (1, 7), (1, 8), (1, 9), (1, 10),
+(2, 1), (2, 2), (2, 3), (2, 4), (2, 5), (2, 6), (2, 7), (2, 8), (2, 9), (2, 10);
 
 
 INSERT INTO recaudacion (cantidad_recaudada, pasos_entrada, pasos_salida, porcentaje_juego, tasa_recaudacion, fecha, FK_MAQUINA) VALUES 

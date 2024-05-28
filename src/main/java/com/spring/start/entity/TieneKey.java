@@ -18,6 +18,6 @@ public class TieneKey implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Long idUsuario;
-	private Long idMaquina;
+	private Long usuarioId;
+	private Long maquinaId;
 }

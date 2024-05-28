@@ -23,6 +23,9 @@ public class MaquinaResponseDto {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	private LocalDate fechaVencimientoLicencia;
 	private Boolean almacenada;
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+	private LocalDate fechaAlmacenamiento;
 	private TipoMaquina tipoMaquina;
 	private ClienteResponseDto cliente;
 }
