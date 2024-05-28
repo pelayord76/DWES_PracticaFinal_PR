@@ -30,4 +30,21 @@ public interface TieneService {
 	 *           la base de datos
 	 */
 	void delete(long idUsuario, long idMaquina);
+
+	/**
+	 * devuelve todas las relaciones con maquinas de un usuario especificado
+	 * 
+	 * @param idUsuario del que se quiere saber las relaciones
+	 * @return lista de relaciones del usuario
+	 */
+	List<Tiene> findByUsuarioId(long idUsuario);
+
+	/**
+	 * devuelve todas las relaciones con usuarios de una maquina especificada
+	 * 
+	 * @param idMaquina de la que se quiere saber las relaciones
+	 * @return lista de relaciones de la maquina
+	 */
+	List<Tiene> findByMaquinaId(long idMaquina);
+
 }

@@ -60,4 +60,14 @@ public class TieneServiceImpl implements TieneService {
 		}
 		tieneRepository.deleteById(key);
 	}
+
+	@Override
+	public List<Tiene> findByUsuarioId(long idUsuario) {
+		return tieneRepository.findByUsuarioId(idUsuario);
+	}
+
+	@Override
+	public List<Tiene> findByMaquinaId(long idMaquina) {
+		return tieneRepository.findByMaquinaId(idMaquina);
+	}
 }

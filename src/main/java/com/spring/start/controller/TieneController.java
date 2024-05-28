@@ -43,4 +43,16 @@ public class TieneController {
 	public void delete(@PathVariable long idUsuario, @PathVariable long idMaquina) {
 		tieneService.delete(idUsuario, idMaquina);
 	}
+	
+	@Operation(summary = "Buscar por usuario", description = "Buscar todas las relaciones del usuario especificado que haya de la base de datos.", tags = { "usuario_maquina", "get" })
+	@GetMapping("/usuario/{idUsuario}")
+	public List<Tiene> findByUsuarioId(@PathVariable long idUsuario) {
+		return tieneService.findByUsuarioId(idUsuario);
+	}
+	
+	@Operation(summary = "Buscar por maquna", description = "Buscar todas las relaciones de la maquina especificada que haya de la base de datos.", tags = { "usuario_maquina", "get" })
+	@GetMapping("/maquina/{idMaquina}")
+	public List<Tiene> findByMaquinaId(@PathVariable long idMaquina) {
+		return tieneService.findByMaquinaId(idMaquina);
+	}
 }
