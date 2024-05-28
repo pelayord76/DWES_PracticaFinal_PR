@@ -65,8 +65,7 @@ public class MaquinaServiceImpl implements MaquinaService {
 
 	@Override
 	public List<MaquinaDataIngresosDTO> findByIngresos() {
-		// TODO Auto-generated method stub
-		return null;
+		return maquinaRepository.findByNombreGroupByIngresos();
 	}
 
 }

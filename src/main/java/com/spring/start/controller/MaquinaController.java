@@ -62,23 +62,5 @@ public class MaquinaController {
 	@GetMapping("/data/ingresos")
 	public List<MaquinaDataIngresosDTO> getDatosDeIngresosPorMaquina() {
 		return maquinaService.findByIngresos();
-//		List<MaquinaDataIngresosDTO> data = new ArrayList<>();
-//		List<Maquina> maquinas = (List<Maquina>) maquinaDAO.findAll();
-//
-//		for (int i = 0; i < maquinas.size(); i++) {
-//			List<Maquina> maquinasDevolver = maquinaDAO.findByNombre(maquinas.get(i).getNombre());
-//			MaquinaDataIngresosDTO dto = new MaquinaDataIngresosDTO();
-//			dto.setNombre(maquinas.get(i).getNombre());
-//			double cantidadRecaudada = 0;
-//			for (int j = 0; j < maquinasDevolver.size(); j++) {
-//				List<Recaudacion> recaudaciones = maquinasDevolver.get(j).getRecaudaciones();
-//				for (int k = 0; k < recaudaciones.size(); k++) {
-//					cantidadRecaudada += recaudaciones.get(k).getCantidadRecaudada();
-//				}
-//			}
-//			dto.setCantidadRecaudada(cantidadRecaudada);
-//		}
-//
-//		return data;
 	}
 }
