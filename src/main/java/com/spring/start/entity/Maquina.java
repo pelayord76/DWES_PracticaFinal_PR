@@ -16,6 +16,8 @@ import com.spring.start.enums.TipoMaquina;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -61,6 +63,7 @@ public class Maquina {
 	// juego legal, se usarán los términos 'monedas' y 'billetes' de forma
 	// provisional
 	@Column(name = "tipo_maquina")
+	@Enumerated(EnumType.STRING)
 	private TipoMaquina tipoMaquina;
 
 	// relacion N:N con maquinas con clave embebida a traves de clase 'Tiene'

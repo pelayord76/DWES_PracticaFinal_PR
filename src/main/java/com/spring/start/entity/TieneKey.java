@@ -16,7 +16,7 @@ import lombok.Setter;
 @EqualsAndHashCode
 public class TieneKey implements Serializable {
 
-	private static final long serialVersionUID = -5387434216767856483L;
+	private static final long serialVersionUID = 1L;
 
 	private Long idUsuario;
 	private Long idMaquina;

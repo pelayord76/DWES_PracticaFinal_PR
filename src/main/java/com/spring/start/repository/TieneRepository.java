@@ -10,9 +10,9 @@ import com.spring.start.entity.TieneKey;
 
 public interface TieneRepository extends JpaRepository<Tiene, TieneKey> {
 
-	List<Tiene> findByUsuarioId(Long id);
+	List<Tiene> findByUsuarioId(long id);
 
-	List<Tiene> findByMaquinaId(Long id);
+	List<Tiene> findByMaquinaId(long id);
 
-	Optional<Tiene> findByUsuario_IdAndMaquina_Id(Long idUsuario, Long idMaquina);
+	Optional<Tiene> findByUsuario_IdAndMaquina_Id(long idUsuario, long idMaquina);
 }
