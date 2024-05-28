@@ -10,6 +10,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.spring.start.enums.TipoMaquina;
 
@@ -52,6 +53,7 @@ public class Maquina {
 
 	// fecha en la que la maquina paso a estar en estado de almacenada
 	@Column(name = "fecha_almacenada")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	private LocalDate fechaAlmacenada;
 
 	// para una funcionalidad de las recaudaciones se necesita añadir de qué tipo es

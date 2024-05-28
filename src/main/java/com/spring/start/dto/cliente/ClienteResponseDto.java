@@ -22,6 +22,6 @@ public class ClienteResponseDto {
 	private String cif;
 
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-	@JsonFormat(pattern = "dd/mm/yyyy", timezone = "Europe/Madrid")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	private LocalDate fechaVencimientoContrato;
 }

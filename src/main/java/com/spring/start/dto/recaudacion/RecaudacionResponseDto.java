@@ -23,7 +23,7 @@ public class RecaudacionResponseDto {
 	private Double tasaRecaudacion;
 
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-	@JsonFormat(pattern = "dd/MM/yyyy", timezone = "Europe/Madrid")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	private LocalDate fecha;
 	private MaquinaFacturaResponseDto maquina;
 }

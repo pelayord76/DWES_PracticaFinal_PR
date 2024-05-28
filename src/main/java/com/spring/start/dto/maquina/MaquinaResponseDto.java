@@ -20,7 +20,7 @@ public class MaquinaResponseDto {
 	private String nombre;
 
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-	@JsonFormat(pattern = "dd/MM/yyyy", timezone = "Europe/Madrid")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	private LocalDate fechaVencimientoLicencia;
 	private Boolean almacenada;
 	private TipoMaquina tipoMaquina;

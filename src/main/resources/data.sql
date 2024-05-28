@@ -30,6 +30,7 @@ INSERT INTO recaudacion (cantidad_recaudada, pasos_entrada, pasos_salida, porcen
 INSERT INTO recaudacion (cantidad_recaudada, pasos_entrada, pasos_salida, porcentaje_juego, tasa_recaudacion, fecha, FK_MAQUINA) VALUES(1500.0, 2500, 2300, 60.0, 200, '2023-12-06', 2);
 INSERT INTO recaudacion (cantidad_recaudada, pasos_entrada, pasos_salida, porcentaje_juego, tasa_recaudacion, fecha, FK_MAQUINA) VALUES(400.0, 5130, 4900, 60.0, 200, '2023-12-06', 3);
 INSERT INTO recaudacion (cantidad_recaudada, pasos_entrada, pasos_salida, porcentaje_juego, tasa_recaudacion, fecha, FK_MAQUINA) VALUES(658.0, 800, 670, 60.0, 200, '2023-12-06', 4);
+INSERT INTO recaudacion (cantidad_recaudada, pasos_entrada, pasos_salida, porcentaje_juego, tasa_recaudacion, fecha, FK_MAQUINA) VALUES(300.0, 400, 250, 45.0, 50, '2023-12-14', 4);
 INSERT INTO recaudacion (cantidad_recaudada, pasos_entrada, pasos_salida, porcentaje_juego, tasa_recaudacion, fecha, FK_MAQUINA) VALUES(950.0, 1900, 1350, 60.0, 200, '2023-12-06', 5);
 
 
