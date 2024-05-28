@@ -17,16 +17,16 @@ INSERT INTO cliente (local, duenio, telefono, direccion, cif, fecha_vencimiento_
 
 
 INSERT INTO maquina (nombre, fecha_vencimiento_licencia, almacenada, tipo_maquina, FK_CLIENTE) VALUES 
-('maquina1', '2024-12-31', 0, BILLETES, 1),
-('maquina2', '2024-11-15', 0, MONEDAS, 2),
-('maquina3', '2024-12-31', 0, BILLETES, 2),
-('maquina4', '2024-10-01', 0, MONEDAS, 3),
-('maquina5', '2024-09-30', 0, BILLETES, 4),
-('maquina6', '2025-12-31', 0, BILLETES, 6),
-('maquina7', '2025-11-15', 0, MONEDAS, 7),
-('maquina8', '2025-12-31', 0, BILLETES, 7),
-('maquina9', '2025-10-01', 0, MONEDAS, 8),
-('maquina10', '2025-09-30', 0, BILLETES, 9);
+('maquina1', '2024-12-31', 0, PAGA_BILLETES, 1),
+('maquina2', '2024-11-15', 0, NO_PAGA_BILLETES, 2),
+('maquina3', '2024-12-31', 0, PAGA_BILLETES, 2),
+('maquina4', '2024-10-01', 0, NO_PAGA_BILLETES, 3),
+('maquina5', '2024-09-30', 0, PAGA_BILLETES, 4),
+('maquina6', '2025-12-31', 0, PAGA_BILLETES, 6),
+('maquina7', '2025-11-15', 0, NO_PAGA_BILLETES, 7),
+('maquina8', '2025-12-31', 0, PAGA_BILLETES, 7),
+('maquina9', '2025-10-01', 0, NO_PAGA_BILLETES, 8),
+('maquina10', '2025-09-30', 0, PAGA_BILLETES, 9);
 
 
 INSERT INTO tiene (usuario_id, maquina_id) VALUES (1, 1);

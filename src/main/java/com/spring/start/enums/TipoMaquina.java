@@ -4,5 +4,5 @@ import lombok.Getter;
 
 @Getter
 public enum TipoMaquina {
-	MONEDAS, BILLETES
+	NO_PAGA_BILLETES, PAGA_BILLETES
 }
