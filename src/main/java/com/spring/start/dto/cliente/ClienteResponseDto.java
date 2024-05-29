@@ -15,6 +15,8 @@ import lombok.ToString;
 @ToString
 public class ClienteResponseDto {
 
+	private Long id;
+	
 	private String local;
 	private String duenio;
 	private Integer telefono;

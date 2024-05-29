@@ -16,6 +16,8 @@ import lombok.ToString;
 @Setter
 @ToString
 public class MaquinaResponseDto {
+	
+	private Long id;
 
 	private String nombre;
 

@@ -16,6 +16,7 @@ import lombok.ToString;
 @ToString
 public class FacturaResponseDto {
 
+	private Long id;
 	private Double iva;
 
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
