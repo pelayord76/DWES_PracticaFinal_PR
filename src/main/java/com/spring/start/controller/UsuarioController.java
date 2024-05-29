@@ -3,7 +3,7 @@ package com.spring.start.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,38 +23,43 @@ import jakarta.validation.Valid;
 
 @Tag(name = "Usuarios", description = "API de la entidad usuario")
 @RestController
-@Validated
+@CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/usuario")
 public class UsuarioController {
 
 	@Autowired
 	UsuarioService usuarioService;
 
-	@Operation(summary = "Buscar individualmente", description = "Buscar un usuario por id.", tags = { "usuario", "get" })
+	@Operation(summary = "Buscar individualmente", description = "Buscar un usuario por id.", tags = { "usuario",
+			"get" })
 	@GetMapping("/{id}")
 	public UsuarioResponseDto findById(@PathVariable Long id) {
 		return usuarioService.findById(id);
 	}
 
-	@Operation(summary = "Buscar todo", description = "Buscar todos los usuarios de la base de datos.", tags = { "usuario", "get" })
+	@Operation(summary = "Buscar todo", description = "Buscar todos los usuarios de la base de datos.", tags = {
+			"usuario", "get" })
 	@GetMapping
 	public List<UsuarioResponseDto> findAll() {
 		return usuarioService.findAll();
 	}
 
-	@Operation(summary = "Crear", description = "Crear un usuario e introducirlo en la base de datos.", tags = { "usuario", "post" })
+	@Operation(summary = "Crear", description = "Crear un usuario e introducirlo en la base de datos.", tags = {
+			"usuario", "post" })
 	@PostMapping
 	public UsuarioResponseDto add(@Valid @RequestBody UsuarioRequestDto dto) {
 		return usuarioService.add(dto);
 	}
 
-	@Operation(summary = "Modificar", description = "Buscar un usuario por id y añadirle nuevos campos.", tags = { "usuario", "put" })
+	@Operation(summary = "Modificar", description = "Buscar un usuario por id y añadirle nuevos campos.", tags = {
+			"usuario", "put" })
 	@PutMapping("/{id}")
 	public UsuarioResponseDto update(@PathVariable Long id, @Valid @RequestBody UsuarioRequestDto dto) {
 		return usuarioService.update(id, dto);
 	}
 
-	@Operation(summary = "Borrar", description = "Borrar un usuario de la base de datos por su id.", tags = { "usuario", "delete" })
+	@Operation(summary = "Borrar", description = "Borrar un usuario de la base de datos por su id.", tags = { "usuario",
+			"delete" })
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
 		usuarioService.delete(id);

@@ -3,6 +3,7 @@ package com.spring.start.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,37 +22,43 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Tag(name = "Facturas", description = "API de la entidad factura")
 @RestController
+@CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/factura")
 public class FacturaController {
 
 	@Autowired
 	FacturaService facturaService;
 
-	@Operation(summary = "Buscar individualmente", description = "Buscar una factura por id.", tags = { "factura", "get" })
+	@Operation(summary = "Buscar individualmente", description = "Buscar una factura por id.", tags = { "factura",
+			"get" })
 	@GetMapping("/{id}")
 	public FacturaResponseDto getFactura(@PathVariable Long id) {
 		return facturaService.findById(id);
 	}
 
-	@Operation(summary = "Buscar todo", description = "Buscar todas las facturas de la base de datos.", tags = { "factura", "get" })
+	@Operation(summary = "Buscar todo", description = "Buscar todas las facturas de la base de datos.", tags = {
+			"factura", "get" })
 	@GetMapping
 	public List<FacturaResponseDto> findAll() {
 		return facturaService.findAll();
 	}
 
-	@Operation(summary = "Crear", description = "Crear una factura e introducirla en la base de datos.", tags = { "factura", "post" })
+	@Operation(summary = "Crear", description = "Crear una factura e introducirla en la base de datos.", tags = {
+			"factura", "post" })
 	@PostMapping
 	public FacturaResponseDto addFactura(@RequestBody FacturaRequestDto dto) {
 		return facturaService.add(dto);
 	}
 
-	@Operation(summary = "Modificar", description = "Buscar una factura por id y añadirle nuevos campos.", tags = { "factura", "put" })
+	@Operation(summary = "Modificar", description = "Buscar una factura por id y añadirle nuevos campos.", tags = {
+			"factura", "put" })
 	@PutMapping("/{id}")
 	public FacturaResponseDto editFactura(@PathVariable Long id, @RequestBody FacturaRequestDto dto) {
 		return facturaService.update(id, dto);
 	}
 
-	@Operation(summary = "Borrar", description = "Borrar una factura de la base ded datos por su id.", tags = { "factura", "delete" })
+	@Operation(summary = "Borrar", description = "Borrar una factura de la base ded datos por su id.", tags = {
+			"factura", "delete" })
 	@DeleteMapping("/{id}")
 	public void deleteFactura(@PathVariable Long id) {
 		facturaService.delete(id);

@@ -20,11 +20,10 @@ public class MaquinaRequestDto {
 	@Size(min = 3, max = 100, message = "El nombre de la maquina no puede superar los 100 caracteres")
 	private String nombre;
 
-	@NotNull(message = "La fecha de vencimiento de la licencia no puede ser nula")
 	@Future(message = "La fecha de vencimiento de la licencia debe ser una fecha futura")
 	private LocalDate fechaVencimientoLicencia;
 
-	@NotNull(message = "Se debe indicar si la ")
+	@NotNull(message = "Se debe indicar si la maquina está almacenada")
 	private Boolean almacenada;
 
 	@NotNull
