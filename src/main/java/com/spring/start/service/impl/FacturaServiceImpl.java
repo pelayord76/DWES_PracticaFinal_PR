@@ -56,7 +56,7 @@ public class FacturaServiceImpl implements FacturaService {
 
 	@Override
 	public void delete(Long id) {
-		if (!facturaRepository.findById(id).isPresent()) {
+		if (!facturaRepository.existsById(id)){
 			throw new IllegalArgumentException("No existe esa factura");
 		}
 		facturaRepository.deleteById(id);

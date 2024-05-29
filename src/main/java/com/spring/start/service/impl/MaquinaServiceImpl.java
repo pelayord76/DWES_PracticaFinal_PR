@@ -57,7 +57,7 @@ public class MaquinaServiceImpl implements MaquinaService {
 
 	@Override
 	public void delete(Long id) {
-		if (!maquinaRepository.findById(id).isEmpty()) {
+		if (!maquinaRepository.existsById(id)) {
 			throw new IllegalArgumentException("No existe esa maquina");
 		}
 		maquinaRepository.deleteById(id);

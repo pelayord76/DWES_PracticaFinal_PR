@@ -55,7 +55,7 @@ public class TieneServiceImpl implements TieneService {
 		TieneKey key = new TieneKey();
 		key.setUsuarioId(idUsuario);
 		key.setMaquinaId(idMaquina);
-		if (tieneRepository.findById(key).isEmpty()) {
+		if (tieneRepository.existsById(key)) {
 			throw new IllegalArgumentException("No existe ninguna relación con esos campos");
 		}
 		tieneRepository.deleteById(key);

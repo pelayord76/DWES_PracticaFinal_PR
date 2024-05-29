@@ -56,7 +56,7 @@ public class RecaudacionServiceImpl implements RecaudacionService {
 
 	@Override
 	public void delete(Long id) {
-		if (!recaudacionRepository.findById(id).isPresent()) {
+		if (!recaudacionRepository.existsById(id)) {
 			throw new IllegalArgumentException("No existe esa recaudacion");
 		}
 		recaudacionRepository.deleteById(id);

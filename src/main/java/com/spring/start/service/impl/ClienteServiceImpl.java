@@ -59,7 +59,7 @@ public class ClienteServiceImpl implements ClienteService {
 
 	@Override
 	public void delete(Long id) {
-		if (!clienteRepository.findById(id).isPresent()) {
+		if (!clienteRepository.existsById(id)) {
 			throw new IllegalArgumentException("No existe ese cliente");
 		}
 		clienteRepository.deleteById(id);
