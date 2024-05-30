@@ -29,7 +29,7 @@ public class MaquinaResponseDto {
 	
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-	private LocalDate fechaAlmacenamiento;
+	private LocalDate fechaAlmacenada;
 	
 	private TipoMaquina tipoMaquina;
 	private ClienteResponseDto cliente;

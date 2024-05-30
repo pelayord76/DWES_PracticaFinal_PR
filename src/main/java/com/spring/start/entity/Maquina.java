@@ -1,6 +1,5 @@
 package com.spring.start.entity;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -54,7 +53,7 @@ public class Maquina {
 
 	// fecha en la que la maquina paso a estar en estado de almacenada
 	@Column(name = "fecha_almacenamiento")
-	private LocalDate fechaAlmacenada;
+	private LocalDateTime fechaAlmacenada;
 
 	// para una funcionalidad de las recaudaciones se necesita añadir de qué tipo es
 	// cada máquina, ya que se pueden diferenciar en dos tipos dependiendo del % de
@@ -89,7 +88,7 @@ public class Maquina {
 	public void setAlmacenada(Boolean almacenada) {
 		this.almacenada = almacenada;
 		if (almacenada) {
-			this.fechaAlmacenada = LocalDate.now();
+			this.fechaAlmacenada = LocalDateTime.now();
 			this.cliente = null;
 		} else {
 			this.fechaAlmacenada = null;
