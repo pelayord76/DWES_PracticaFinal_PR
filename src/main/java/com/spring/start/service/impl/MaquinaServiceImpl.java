@@ -60,8 +60,7 @@ public class MaquinaServiceImpl implements MaquinaService {
 		if (!maquinaRepository.existsById(id)) {
 			throw new IllegalArgumentException("No existe esa maquina");
 		}
-		Maquina maquina = maquinaRepository.findById(id).get();
-		maquina.setCliente(null);
+		desvincularCliente(id);
 		maquinaRepository.deleteById(id);
 	}
 
@@ -77,12 +76,14 @@ public class MaquinaServiceImpl implements MaquinaService {
 			throw new IllegalArgumentException("Esa maquina no existe");
 		}
 		Maquina maquina = maquinaOptional.get();
-		List<Maquina> maquinas = maquina.getCliente().getMaquinas();
+		if (maquina.getCliente() != null) {
+			List<Maquina> maquinas = maquina.getCliente().getMaquinas();
 
-		maquinas.remove(maquina);
-		maquina.setCliente(null);
+			maquinas.remove(maquina);
+			maquina.setCliente(null);
 
-		maquinaRepository.save(maquina);
+			maquinaRepository.save(maquina);
+		}
 	}
 
 	@Override
