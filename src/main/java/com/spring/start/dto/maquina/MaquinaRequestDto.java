@@ -25,6 +25,8 @@ public class MaquinaRequestDto {
 
 	@NotNull(message = "Se debe indicar si la maquina está almacenada")
 	private Boolean almacenada;
+	
+	private LocalDate fechaAlmacenada;
 
 	@NotNull
 	private TipoMaquina tipoMaquina;
