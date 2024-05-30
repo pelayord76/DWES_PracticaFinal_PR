@@ -53,7 +53,7 @@ public class MaquinaController {
 	public MaquinaResponseDto update(@PathVariable Long id, @RequestBody MaquinaRequestDto dto) {
 		return maquinaService.update(id, dto);
 	}
-	
+
 	@Operation(summary = "Desvincular entidades", description = "Buscar una maquina por id y la desvincula de su cliente.", tags = { "maquina", "put" })
 	@PutMapping("/cliente/{id}")
 	public void desvincularCliente(@PathVariable Long id) {
@@ -70,5 +70,11 @@ public class MaquinaController {
 	@GetMapping("/data/ingresos")
 	public List<MaquinaDataIngresosDTO> getDatosDeIngresosPorMaquina() {
 		return maquinaService.findByIngresos();
+	}
+
+	@Operation(summary = "Almacenar maquina", description = "Buscar una maquina por id y almacenarla.", tags = { "maquina", "put" })
+	@PutMapping("/almacenada/{id}")
+	public void almacenarMaquina(@PathVariable Long id) {
+		maquinaService.almacenarMaquina(id);
 	}
 }

@@ -57,4 +57,11 @@ public interface MaquinaService {
 	 * @param id
 	 */
 	void desvincularCliente(long id);
+	
+	/**
+	 * metodo para almacenar una maquina y empezar la cuenta de tiempo en almacén
+	 * 
+	 * @param id
+	 */
+	void almacenarMaquina(long id);
 }
