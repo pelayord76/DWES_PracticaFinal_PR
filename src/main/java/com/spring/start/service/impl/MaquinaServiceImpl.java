@@ -68,4 +68,18 @@ public class MaquinaServiceImpl implements MaquinaService {
 		return maquinaRepository.findByNombreGroupByIngresos();
 	}
 
+	@Override
+	public void desvincularCliente(long id) {
+		Optional<Maquina> maquinaOptional = maquinaRepository.findById(id);
+		if (maquinaOptional.isEmpty()) {
+			throw new IllegalArgumentException("Esa maquina no existe");
+		}
+		Maquina maquina = maquinaOptional.get();		
+		List<Maquina> maquinas =  maquina.getCliente().getMaquinas();
+		
+		maquinas.remove(maquina);
+		maquina.setCliente(null);
+		
+		maquinaRepository.save(maquina);
+	}
 }

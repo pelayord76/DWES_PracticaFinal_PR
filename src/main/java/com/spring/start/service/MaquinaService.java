@@ -50,4 +50,11 @@ public interface MaquinaService {
 	 * @return lista de cada maquina, agrupadas por nombre con los ingresos totales de cada una.
 	 */
 	List<MaquinaDataIngresosDTO> findByIngresos();
+	
+	/**
+	 * settea el cliente de una máquina a null
+	 * 
+	 * @param id
+	 */
+	void desvincularCliente(long id);
 }

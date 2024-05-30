@@ -53,6 +53,12 @@ public class MaquinaController {
 	public MaquinaResponseDto update(@PathVariable Long id, @RequestBody MaquinaRequestDto dto) {
 		return maquinaService.update(id, dto);
 	}
+	
+	@Operation(summary = "Desvincular entidades", description = "Buscar una maquina por id y la desvincula de su cliente.", tags = { "maquina", "put" })
+	@PutMapping("/cliente/{id}")
+	public void desvincularCliente(@PathVariable Long id) {
+		maquinaService.desvincularCliente(id);
+	}
 
 	@Operation(summary = "Borrar", description = "Borrar una maquina de la base ded datos por su id.", tags = { "maquina", "delete" })
 	@DeleteMapping("/{id}")
