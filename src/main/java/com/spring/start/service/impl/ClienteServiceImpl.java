@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.start.dto.cliente.ClienteDataIngresosDTO;
+import com.spring.start.dto.cliente.ClienteDto;
 import com.spring.start.dto.cliente.ClienteRequestDto;
 import com.spring.start.dto.cliente.ClienteResponseDto;
 import com.spring.start.entity.Cliente;
@@ -36,8 +37,7 @@ public class ClienteServiceImpl implements ClienteService {
 
 	@Override
 	public List<ClienteResponseDto> findAll() {
-		List<Cliente> clientes = clienteRepository.findAll();
-		return clienteMapper.mapToClienteResponseDto(clientes);
+		return clienteMapper.mapToClienteResponseDto(clienteRepository.findAll());
 	}
 
 	@Override
@@ -68,5 +68,10 @@ public class ClienteServiceImpl implements ClienteService {
 	@Override
 	public List<ClienteDataIngresosDTO> findByIngresos() {
 		return clienteRepository.findAllByIngresos();
+	}
+
+	@Override
+	public List<ClienteDto> getLocalesEIds() {
+		return clienteMapper.mapToClienteDto(clienteRepository.findAll());
 	}
 }

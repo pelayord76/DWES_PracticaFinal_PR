@@ -3,6 +3,7 @@ package com.spring.start.service;
 import java.util.List;
 
 import com.spring.start.dto.cliente.ClienteDataIngresosDTO;
+import com.spring.start.dto.cliente.ClienteDto;
 import com.spring.start.dto.cliente.ClienteRequestDto;
 import com.spring.start.dto.cliente.ClienteResponseDto;
 
@@ -52,4 +53,10 @@ public interface ClienteService {
 	 *         totales
 	 */
 	List<ClienteDataIngresosDTO> findByIngresos();
+	
+	/**
+	 * 
+	 * @return lista de locales con sus ids para settearlos en el front
+	 */
+	List<ClienteDto> getLocalesEIds();
 }

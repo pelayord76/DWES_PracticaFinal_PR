@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.start.dto.cliente.ClienteDataIngresosDTO;
+import com.spring.start.dto.cliente.ClienteDto;
 import com.spring.start.dto.cliente.ClienteRequestDto;
 import com.spring.start.dto.cliente.ClienteResponseDto;
 import com.spring.start.service.ClienteService;
@@ -42,6 +43,13 @@ public class ClienteController {
 	@GetMapping
 	public List<ClienteResponseDto> findAll() {
 		return clienteService.findAll();
+	}
+
+	@Operation(summary = "Sacar clientes con sus ides", description = "Buscar todos los clientes de la base de datos con id y nombre del local para settearselos a una maquina desde el front.", tags = {
+			"cliente", "get" })
+	@GetMapping("/clientes")
+	public List<ClienteDto> getLocalesEIds() {
+		return clienteService.getLocalesEIds();
 	}
 
 	@Operation(summary = "Crear", description = "Crear un cliente e introducirlo en la base de datos.", tags = {
