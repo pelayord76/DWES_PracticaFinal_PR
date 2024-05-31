@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.mapstruct.Mapper;
 
+import com.spring.start.dto.cliente.ClienteDto;
 import com.spring.start.dto.cliente.ClienteRequestDto;
 import com.spring.start.dto.cliente.ClienteResponseDto;
 import com.spring.start.dto.factura.FacturaResponseDto;
@@ -18,6 +19,8 @@ public interface ClienteMapper {
 	public ClienteResponseDto mapToClienteResponseDto(Cliente cliente);
 	
 	public List<ClienteResponseDto> mapToClienteResponseDto(List<Cliente> clientes);
+	
+	public List<ClienteDto> mapToClienteDto(List<Cliente> clientes);
 
 	public Cliente mapClienteRequestToCliente(ClienteRequestDto dto);
 

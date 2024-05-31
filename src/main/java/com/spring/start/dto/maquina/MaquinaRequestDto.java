@@ -2,6 +2,8 @@ package com.spring.start.dto.maquina;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.spring.start.enums.TipoMaquina;
 
 import jakarta.validation.constraints.Future;
@@ -21,11 +23,13 @@ public class MaquinaRequestDto {
 	private String nombre;
 
 	@Future(message = "La fecha de vencimiento de la licencia debe ser una fecha futura")
+	@JsonDeserialize(using = LocalDateDeserializer.class)
 	private LocalDate fechaVencimientoLicencia;
 
 	@NotNull(message = "Se debe indicar si la maquina está almacenada")
 	private Boolean almacenada;
 	
+	@JsonDeserialize(using = LocalDateDeserializer.class)
 	private LocalDate fechaAlmacenada;
 
 	@NotNull
