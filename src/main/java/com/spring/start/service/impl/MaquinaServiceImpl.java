@@ -11,6 +11,7 @@ import com.spring.start.dto.maquina.MaquinaRequestDto;
 import com.spring.start.dto.maquina.MaquinaResponseDto;
 import com.spring.start.entity.Maquina;
 import com.spring.start.mapper.MaquinaMapper;
+import com.spring.start.repository.ClienteRepository;
 import com.spring.start.repository.MaquinaRepository;
 import com.spring.start.service.MaquinaService;
 
@@ -22,6 +23,9 @@ public class MaquinaServiceImpl implements MaquinaService {
 
 	@Autowired
 	private MaquinaMapper maquinaMapper;
+	
+	@Autowired
+	private ClienteRepository clienteRepository;
 
 	@Override
 	public MaquinaResponseDto findById(Long id) {
@@ -51,6 +55,13 @@ public class MaquinaServiceImpl implements MaquinaService {
 			throw new IllegalArgumentException("Esa maquina no existe");
 		}
 		Maquina maquina = maquinaMapper.mapMaquinaRequestToMaquina(id, dto);
+		
+		if(!clienteRepository.existsById(dto.getIdCliente())) {
+			throw new IllegalArgumentException("Ese cliente no existe");
+		}
+		
+		maquina.setCliente(clienteRepository.findById(dto.getIdCliente()).get());
+		
 		maquinaRepository.save(maquina);
 		return maquinaMapper.mapMaquinaRequestToMaquinaResponse(dto);
 	}

@@ -59,4 +59,10 @@ public interface ClienteService {
 	 * @return lista de locales con sus ids para settearlos en el front
 	 */
 	List<ClienteDto> getLocalesEIds();
+	
+	/**
+	 * 
+	 * @return lista de todos los clientes con sus ides
+	 */
+	List<ClienteDto> getClientesEIds();
 }

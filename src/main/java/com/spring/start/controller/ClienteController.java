@@ -44,6 +44,13 @@ public class ClienteController {
 	public List<ClienteResponseDto> findAll() {
 		return clienteService.findAll();
 	}
+	
+	@Operation(summary = "Buscar todo", description = "Buscar todos los clientes de la base de datos.", tags = {
+			"cliente", "get" })
+	@GetMapping("/clientes")
+	public List<ClienteDto> getClientesEIds(){
+		return clienteService.getClientesEIds();
+	}
 
 	@Operation(summary = "Sacar clientes con sus ides", description = "Buscar todos los clientes de la base de datos con id y nombre del local para settearselos a una maquina desde el front.", tags = {
 			"cliente", "get" })

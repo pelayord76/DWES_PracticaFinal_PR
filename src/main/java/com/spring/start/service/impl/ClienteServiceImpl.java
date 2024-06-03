@@ -37,7 +37,8 @@ public class ClienteServiceImpl implements ClienteService {
 
 	@Override
 	public List<ClienteResponseDto> findAll() {
-		return clienteMapper.mapToClienteResponseDto(clienteRepository.findAll());
+		List<Cliente> clientes = clienteRepository.findAll();
+		return clienteMapper.mapToClienteResponseDto(clientes);
 	}
 
 	@Override
@@ -72,6 +73,11 @@ public class ClienteServiceImpl implements ClienteService {
 
 	@Override
 	public List<ClienteDto> getLocalesEIds() {
+		return clienteMapper.mapToClienteDto(clienteRepository.findAll());
+	}
+	
+	@Override
+	public List<ClienteDto> getClientesEIds() {
 		return clienteMapper.mapToClienteDto(clienteRepository.findAll());
 	}
 }
