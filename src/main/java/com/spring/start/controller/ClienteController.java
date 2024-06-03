@@ -54,7 +54,7 @@ public class ClienteController {
 
 	@Operation(summary = "Sacar clientes con sus ides", description = "Buscar todos los clientes de la base de datos con id y nombre del local para settearselos a una maquina desde el front.", tags = {
 			"cliente", "get" })
-	@GetMapping("/clientes")
+	@GetMapping("/locales")
 	public List<ClienteDto> getLocalesEIds() {
 		return clienteService.getLocalesEIds();
 	}

@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.start.dto.cliente.ClienteLocalResponseDto;
 import com.spring.start.dto.recaudacion.RecaudacionRequestDto;
 import com.spring.start.dto.recaudacion.RecaudacionResponseDto;
 import com.spring.start.entity.Recaudacion;
@@ -60,5 +61,10 @@ public class RecaudacionServiceImpl implements RecaudacionService {
 			throw new IllegalArgumentException("No existe esa recaudacion");
 		}
 		recaudacionRepository.deleteById(id);
+	}
+
+	@Override
+	public ClienteLocalResponseDto getLocal(Long id) {
+		return recaudacionRepository.getLocal(id);
 	}
 }

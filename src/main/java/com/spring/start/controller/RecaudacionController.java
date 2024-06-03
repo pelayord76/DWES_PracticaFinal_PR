@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spring.start.dto.cliente.ClienteLocalResponseDto;
 import com.spring.start.dto.recaudacion.RecaudacionRequestDto;
 import com.spring.start.dto.recaudacion.RecaudacionResponseDto;
 import com.spring.start.service.RecaudacionService;
@@ -62,5 +63,12 @@ public class RecaudacionController {
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
 		recaudacionService.delete(id);
+	}
+
+	@Operation(summary = "Buscar individualmente", description = "Buscar una factura por id.", tags = { "factura",
+			"get" })
+	@GetMapping("/{id}/local")
+	public ClienteLocalResponseDto getLocal(@PathVariable Long id) {
+		return recaudacionService.getLocal(id);
 	}
 }

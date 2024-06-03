@@ -7,7 +7,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class MaquinaFacturaResponseDto {
+public class MaquinaNombreResponseDto {
 
 	private String nombre;
 }

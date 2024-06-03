@@ -2,6 +2,7 @@ package com.spring.start.service;
 
 import java.util.List;
 
+import com.spring.start.dto.cliente.ClienteLocalResponseDto;
 import com.spring.start.dto.recaudacion.RecaudacionRequestDto;
 import com.spring.start.dto.recaudacion.RecaudacionResponseDto;
 
@@ -43,4 +44,11 @@ public interface RecaudacionService {
 	 * @param id de la recaudacion que se quiere eliminar de la base de datos
 	 */
 	void delete(Long id);
+	
+	/**
+	 * 
+	 * @param id
+	 * @return local en el que se realizó la recaudacion
+	 */
+	ClienteLocalResponseDto getLocal(Long id);
 }
