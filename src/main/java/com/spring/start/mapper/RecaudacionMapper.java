@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.mapstruct.Mapper;
 
-import com.spring.start.dto.maquina.MaquinaNombreResponseDto;
+import com.spring.start.dto.recaudacion.MaquinaRecaudacionResponseDto;
 import com.spring.start.dto.recaudacion.RecaudacionRequestDto;
 import com.spring.start.dto.recaudacion.RecaudacionResponseDto;
 import com.spring.start.entity.Maquina;
@@ -23,7 +23,5 @@ public interface RecaudacionMapper {
 
 	public RecaudacionResponseDto mapRecaudacionRequestToRecaudacionResponse(RecaudacionRequestDto dto);
 
-	
-	
-	public MaquinaNombreResponseDto mapMaquinaToMaquinaFacturaResponseDto(Maquina maquina);
+	public MaquinaRecaudacionResponseDto mapMaquinaToMaquinaFacturaResponseDto(Maquina maquina);
 }
