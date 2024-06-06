@@ -71,7 +71,7 @@ public class Maquina {
 
 	// relacion N:1 con cliente, cada maquina esta en un solo local.
 	@JoinColumn(name = "FK_CLIENTE")
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonBackReference("maquina_cliente")
 	@Cascade(CascadeType.ALL)
 	private Cliente cliente;
@@ -85,7 +85,7 @@ public class Maquina {
 
 	// cuando la maquina pase a estar almacenada se empezará a tener en cuenta y
 	// comprobar cuanto tiempo lleva en este estado
-	public void setAlmacenada(Boolean almacenada) {
+	public void setAlmacenada(boolean almacenada) {
 		this.almacenada = almacenada;
 		if (almacenada) {
 			this.fechaAlmacenada = LocalDateTime.now();

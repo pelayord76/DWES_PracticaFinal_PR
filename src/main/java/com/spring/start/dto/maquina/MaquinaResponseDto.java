@@ -32,5 +32,6 @@ public class MaquinaResponseDto {
 	private LocalDate fechaAlmacenada;
 	
 	private TipoMaquina tipoMaquina;
+	
 	private ClienteResponseDto cliente;
 }

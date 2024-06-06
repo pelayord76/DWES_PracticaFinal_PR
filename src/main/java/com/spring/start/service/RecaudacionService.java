@@ -32,7 +32,7 @@ public interface RecaudacionService {
 
 	/**
 	 * 
-	 * @param id de la recaudacion que se quiere modificar
+	 * @param id   de la recaudacion que se quiere modificar
 	 * @param dto: campos nuevos que se le quieren dar a la Recaudacion
 	 * @return dto de la recaudacion modificado
 	 */
@@ -43,4 +43,12 @@ public interface RecaudacionService {
 	 * @param id de la recaudacion que se quiere eliminar de la base de datos
 	 */
 	void delete(Long id);
+
+	/**
+	 * metodo para desvincular las relaciones de la entidad antes de borrar para
+	 * evitar la cascada
+	 * 
+	 * @param id
+	 */
+	void desvincularMaquina(long id);
 }

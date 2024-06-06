@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.start.dto.maquina.MaquinaDataIngresosDTO;
+import com.spring.start.dto.maquina.MaquinaDto;
 import com.spring.start.dto.maquina.MaquinaRequestDto;
 import com.spring.start.dto.maquina.MaquinaResponseDto;
 import com.spring.start.dto.recaudacion.MaquinaRecaudacionResponseDto;
@@ -92,5 +93,12 @@ public class MaquinaController {
 	@GetMapping("/{id}/recaudacion")
 	public List<MaquinaRecaudacionResponseDto> getRecaudacionesByMaquina(@PathVariable Long id) {
 		return maquinaService.getRecaudacionesByMaquina(id);
+	}
+
+	@Operation(summary = "Buscar las maquinas de un solo local", description = "Recibe un local y devuelve todas las maquinas que estén en el mismo", tags = {
+			"maquina", "get" })
+	@GetMapping("/cliente/{id}")
+	public List<MaquinaDto> getMaquinasByLocal(@PathVariable Long id) {
+		return maquinaService.getMaquinasByLocal(id);
 	}
 }

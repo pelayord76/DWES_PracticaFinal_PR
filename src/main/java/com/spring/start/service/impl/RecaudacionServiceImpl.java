@@ -59,6 +59,24 @@ public class RecaudacionServiceImpl implements RecaudacionService {
 		if (!recaudacionRepository.existsById(id)) {
 			throw new IllegalArgumentException("No existe esa recaudacion");
 		}
+		desvincularMaquina(id);
 		recaudacionRepository.deleteById(id);
+	}
+
+	@Override
+	public void desvincularMaquina(long id) {
+		Optional<Recaudacion> recaudacionOptional = recaudacionRepository.findById(id);
+		if (recaudacionOptional.isEmpty()) {
+			throw new IllegalArgumentException("No existe esa recaudación");
+		}
+		Recaudacion recaudacion = recaudacionOptional.get();
+		if (recaudacion.getMaquina() != null) {
+			List<Recaudacion> recaudaciones = recaudacion.getMaquina().getRecaudaciones();
+
+			recaudaciones.remove(recaudacion);
+			recaudacion.setMaquina(null);
+
+			recaudacionRepository.save(recaudacion);
+		}
 	}
 }

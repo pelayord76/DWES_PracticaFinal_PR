@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.start.dto.maquina.MaquinaDataIngresosDTO;
+import com.spring.start.dto.maquina.MaquinaDto;
 import com.spring.start.dto.maquina.MaquinaRequestDto;
 import com.spring.start.dto.maquina.MaquinaResponseDto;
 import com.spring.start.dto.recaudacion.MaquinaRecaudacionResponseDto;
@@ -27,12 +28,14 @@ public class MaquinaServiceImpl implements MaquinaService {
 
 	@Autowired
 	private ClienteRepository clienteRepository;
+	
+	private String mensajeError = "Esa máquina no existe";
 
 	@Override
 	public MaquinaResponseDto findById(Long id) {
 		Optional<Maquina> maquinaOptional = maquinaRepository.findById(id);
 		if (maquinaOptional.isEmpty()) {
-			throw new IllegalArgumentException("Esa maquina no existe");
+			throw new IllegalArgumentException(mensajeError);
 		}
 		return maquinaMapper.mapToMaquinaResponseDto(maquinaOptional.get());
 	}
@@ -45,15 +48,17 @@ public class MaquinaServiceImpl implements MaquinaService {
 
 	@Override
 	public MaquinaResponseDto add(MaquinaRequestDto dto) {
-		maquinaRepository.save(maquinaMapper.mapMaquinaRequestToMaquina(dto));
-		return maquinaMapper.mapMaquinaRequestToMaquinaResponse(dto);
+		Maquina maquina = maquinaMapper.mapMaquinaRequestToMaquina(dto);
+		maquina.setCliente(clienteRepository.findById(dto.getIdCliente()).get());
+		maquinaRepository.save(maquina);
+		return maquinaMapper.mapToMaquinaResponseDto(maquina);
 	}
 
 	@Override
 	public MaquinaResponseDto update(Long id, MaquinaRequestDto dto) {
 		Optional<Maquina> maquinaOptional = maquinaRepository.findById(id);
 		if (maquinaOptional.isEmpty()) {
-			throw new IllegalArgumentException("Esa maquina no existe");
+			throw new IllegalArgumentException(mensajeError);
 		}
 		Maquina maquina = maquinaMapper.mapMaquinaRequestToMaquina(id, dto);
 
@@ -64,13 +69,13 @@ public class MaquinaServiceImpl implements MaquinaService {
 		maquina.setCliente(clienteRepository.findById(dto.getIdCliente()).get());
 
 		maquinaRepository.save(maquina);
-		return maquinaMapper.mapMaquinaRequestToMaquinaResponse(dto);
+		return maquinaMapper.mapToMaquinaResponseDto(maquina);
 	}
 
 	@Override
 	public void delete(Long id) {
 		if (!maquinaRepository.existsById(id)) {
-			throw new IllegalArgumentException("No existe esa maquina");
+			throw new IllegalArgumentException(mensajeError);
 		}
 		desvincularCliente(id);
 		maquinaRepository.deleteById(id);
@@ -85,7 +90,7 @@ public class MaquinaServiceImpl implements MaquinaService {
 	public void desvincularCliente(long id) {
 		Optional<Maquina> maquinaOptional = maquinaRepository.findById(id);
 		if (maquinaOptional.isEmpty()) {
-			throw new IllegalArgumentException("Esa maquina no existe");
+			throw new IllegalArgumentException(mensajeError);
 		}
 		Maquina maquina = maquinaOptional.get();
 		if (maquina.getCliente() != null) {
@@ -102,7 +107,7 @@ public class MaquinaServiceImpl implements MaquinaService {
 	public void almacenarMaquina(long id) {
 		Optional<Maquina> maquinaOptional = maquinaRepository.findById(id);
 		if (maquinaOptional.isEmpty()) {
-			throw new IllegalArgumentException("Esa maquina no existe");
+			throw new IllegalArgumentException(mensajeError);
 		}
 		Maquina maquina = maquinaOptional.get();
 		maquina.setAlmacenada(!maquina.getAlmacenada());
@@ -112,5 +117,10 @@ public class MaquinaServiceImpl implements MaquinaService {
 	@Override
 	public List<MaquinaRecaudacionResponseDto> getRecaudacionesByMaquina(long id) {
 		return maquinaRepository.getRecaudacionesByMaquina(id);
+	}
+
+	@Override
+	public List<MaquinaDto> getMaquinasByLocal(long id) {
+		return maquinaRepository.findMaquinasByLocal(id);
 	}
 }

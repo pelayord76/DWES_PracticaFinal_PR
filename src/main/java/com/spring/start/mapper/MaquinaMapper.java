@@ -25,8 +25,6 @@ public interface MaquinaMapper {
 
 	public MaquinaResponseDto mapMaquinaRequestToMaquinaResponse(MaquinaRequestDto dto);
 
-	
-	
 	public List<RecaudacionResponseDto> mapToRecaudacionResponseDto(List<Recaudacion> recaudaciones);
 
 	public ClienteResponseDto mapToClienteResponseDto(Cliente cliente);
