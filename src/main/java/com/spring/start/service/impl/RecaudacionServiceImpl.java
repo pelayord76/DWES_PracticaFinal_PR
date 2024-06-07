@@ -55,7 +55,9 @@ public class RecaudacionServiceImpl implements RecaudacionService {
 		if (recaudacionOptional.isEmpty()) {
 			throw new IllegalArgumentException("Esa recaudacion no existe");
 		}
+
 		Recaudacion recaudacion = recaudacionMapper.mapRecaudacionRequestToRecaudacion(id, dto);
+		recaudacion.setMaquina(maquinaRepository.findById(dto.getMaquina().getId()).get());
 		recaudacionRepository.save(recaudacion);
 		return recaudacionMapper.mapRecaudacionRequestToRecaudacionResponse(dto);
 	}

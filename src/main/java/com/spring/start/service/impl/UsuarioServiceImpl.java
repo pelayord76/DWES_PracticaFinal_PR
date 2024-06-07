@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.start.dto.maquina.MaquinaUsuarioResponseDto;
 import com.spring.start.dto.usuario.UsuarioRequestDto;
 import com.spring.start.dto.usuario.UsuarioResponseDto;
 import com.spring.start.entity.Usuario;
@@ -60,6 +61,11 @@ public class UsuarioServiceImpl implements UsuarioService {
 			throw new IllegalArgumentException("No existe ese usuario");
 		}
 		usuarioRepository.deleteById(id);
+	}
+
+	@Override
+	public List<MaquinaUsuarioResponseDto> findMaquinasByUsuario(Long id) {
+		return usuarioRepository.findMaquinasByUsuario(id);
 	}
 
 }

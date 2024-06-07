@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spring.start.dto.maquina.MaquinaUsuarioResponseDto;
 import com.spring.start.dto.usuario.UsuarioRequestDto;
 import com.spring.start.dto.usuario.UsuarioResponseDto;
 import com.spring.start.service.UsuarioService;
@@ -63,5 +64,13 @@ public class UsuarioController {
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
 		usuarioService.delete(id);
+	}
+
+	@Operation(summary = "Buscar maquinas", description = "Buscar todas las maquinas relacionadas con el usuario especificado.", tags = {
+			"usuario", "get" })
+	@GetMapping("/{id}/maquina")
+	public List<MaquinaUsuarioResponseDto> findMaquinasByUsuario(@PathVariable Long id) {
+		return usuarioService.findMaquinasByUsuario(id);
+
 	}
 }

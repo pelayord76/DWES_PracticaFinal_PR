@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.validation.annotation.Validated;
 
+import com.spring.start.dto.maquina.MaquinaUsuarioResponseDto;
 import com.spring.start.dto.usuario.UsuarioRequestDto;
 import com.spring.start.dto.usuario.UsuarioResponseDto;
 
@@ -37,7 +38,7 @@ public interface UsuarioService {
 
 	/**
 	 * 
-	 * @param id del usuario que se quiere modificar
+	 * @param id   del usuario que se quiere modificar
 	 * @param dto: campos nuevos que se le quieren dar al usuario
 	 * @return dto del usuario modificado
 	 */
@@ -48,4 +49,11 @@ public interface UsuarioService {
 	 * @param id del usuario que se quiere eliminar de la base de datos
 	 */
 	void delete(Long id);
+
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
+	List<MaquinaUsuarioResponseDto> findMaquinasByUsuario(Long id);
 }
