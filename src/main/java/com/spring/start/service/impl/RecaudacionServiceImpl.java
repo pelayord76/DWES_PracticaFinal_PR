@@ -10,6 +10,7 @@ import com.spring.start.dto.recaudacion.RecaudacionRequestDto;
 import com.spring.start.dto.recaudacion.RecaudacionResponseDto;
 import com.spring.start.entity.Recaudacion;
 import com.spring.start.mapper.RecaudacionMapper;
+import com.spring.start.repository.MaquinaRepository;
 import com.spring.start.repository.RecaudacionRepository;
 import com.spring.start.service.RecaudacionService;
 
@@ -21,6 +22,9 @@ public class RecaudacionServiceImpl implements RecaudacionService {
 
 	@Autowired
 	private RecaudacionMapper recaudacionMapper;
+
+	@Autowired
+	private MaquinaRepository maquinaRepository;
 
 	@Override
 	public RecaudacionResponseDto findById(Long id) {
@@ -39,8 +43,10 @@ public class RecaudacionServiceImpl implements RecaudacionService {
 
 	@Override
 	public RecaudacionResponseDto add(RecaudacionRequestDto dto) {
-		recaudacionRepository.save(recaudacionMapper.mapRecaudacionRequestToRecaudacion(dto));
-		return recaudacionMapper.mapRecaudacionRequestToRecaudacionResponse(dto);
+		Recaudacion recaudacion = recaudacionMapper.mapRecaudacionRequestToRecaudacion(dto);
+		recaudacion.setMaquina(maquinaRepository.findById(dto.getMaquina().getId()).get());
+		recaudacionRepository.save(recaudacion);
+		return recaudacionMapper.mapToRecaudacionResponseDto(recaudacion);
 	}
 
 	@Override
