@@ -11,5 +11,7 @@ public class UsuarioResponseDto {
 
 	private Long id;
 	private String nombre;
+	private String username;
 	private String email;
+	private String password;
 }

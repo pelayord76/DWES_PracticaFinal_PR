@@ -32,6 +32,7 @@ public class TieneServiceImpl implements TieneService {
 
 	@Override
 	public List<Tiene> findAll() {
+		log.info("Mostrando todas las relaciones");
 		return tieneRepository.findAll();
 	}
 
@@ -51,6 +52,8 @@ public class TieneServiceImpl implements TieneService {
 		tieneAdd.setUsuario(usuarioOptional.get());
 		tieneAdd.setMaquina(maquinaOptional.get());
 
+		log.info("Añadiendo relacion");
+
 		return tieneRepository.save(tieneAdd);
 	}
 
@@ -59,11 +62,12 @@ public class TieneServiceImpl implements TieneService {
 		TieneKey key = new TieneKey();
 		key.setUsuarioId(idUsuario);
 		key.setMaquinaId(idMaquina);
-		if (tieneRepository.existsById(key)) {
+		if (!tieneRepository.existsById(key)) {
 			throw new IllegalArgumentException("No existe una relacion entre esas entidades: usuario[" + idUsuario
 					+ "], maquina[" + idMaquina + "]");
 		}
 		tieneRepository.deleteById(key);
+		log.info("Relacion eliminada");
 	}
 
 	@Override
@@ -72,6 +76,7 @@ public class TieneServiceImpl implements TieneService {
 			log.error("No se encuentra el usuario solicitado, id: " + idUsuario);
 			throw new IllegalArgumentException("No se encuentra el usuario solicitado, id: " + idUsuario);
 		}
+		log.info("Mostrando las relaciones del usuario");
 		return tieneRepository.findByUsuarioId(idUsuario);
 	}
 
@@ -81,6 +86,7 @@ public class TieneServiceImpl implements TieneService {
 			log.error("No se encuentra la maquina solicitada, id: " + idMaquina);
 			throw new IllegalArgumentException("No se encuentra la maquina solicitada, id: " + idMaquina);
 		}
+		log.info("Mostrando las relaciones de la maquina");
 		return tieneRepository.findByMaquinaId(idMaquina);
 	}
 }

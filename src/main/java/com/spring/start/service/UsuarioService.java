@@ -5,8 +5,9 @@ import java.util.List;
 import org.springframework.validation.annotation.Validated;
 
 import com.spring.start.dto.maquina.MaquinaUsuarioResponseDto;
-import com.spring.start.dto.usuario.UsuarioRequestDto;
+import com.spring.start.dto.usuario.UsuarioCreateRequestDto;
 import com.spring.start.dto.usuario.UsuarioResponseDto;
+import com.spring.start.dto.usuario.UsuarioUpdateRequestDto;
 
 import jakarta.validation.Valid;
 
@@ -34,7 +35,7 @@ public interface UsuarioService {
 	 * @param dto: datos del usuario que se quiere introducir
 	 * @return dto del usuario creado
 	 */
-	UsuarioResponseDto add(@Valid UsuarioRequestDto dto);
+	UsuarioResponseDto add(@Valid UsuarioCreateRequestDto dto);
 
 	/**
 	 * 
@@ -42,7 +43,7 @@ public interface UsuarioService {
 	 * @param dto: campos nuevos que se le quieren dar al usuario
 	 * @return dto del usuario modificado
 	 */
-	UsuarioResponseDto update(Long id, @Valid UsuarioRequestDto dto);
+	UsuarioResponseDto update(Long id, @Valid UsuarioUpdateRequestDto dto);
 
 	/**
 	 * 
@@ -55,5 +56,12 @@ public interface UsuarioService {
 	 * @param id
 	 * @return
 	 */
-	List<MaquinaUsuarioResponseDto> findMaquinasByUsuario(Long id);
+	List<MaquinaUsuarioResponseDto> findMaquinasByUsuario(long id);
+	
+//	/**
+//	 * 
+//	 * @param idUsuario
+//	 * @return
+//	 */
+//	List<MaquinaUsuarioResponseDto> findMaquinasNotRelatedToUsuario(long idUsuario);
 }

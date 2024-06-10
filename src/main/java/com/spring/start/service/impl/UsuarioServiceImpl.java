@@ -7,8 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.start.dto.maquina.MaquinaUsuarioResponseDto;
-import com.spring.start.dto.usuario.UsuarioRequestDto;
+import com.spring.start.dto.usuario.UsuarioCreateRequestDto;
 import com.spring.start.dto.usuario.UsuarioResponseDto;
+import com.spring.start.dto.usuario.UsuarioUpdateRequestDto;
 import com.spring.start.entity.Usuario;
 import com.spring.start.mapper.UsuarioMapper;
 import com.spring.start.repository.UsuarioRepository;
@@ -45,21 +46,21 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
-	public UsuarioResponseDto add(UsuarioRequestDto dto) {
-		usuarioRepository.save(usuarioMapper.mapUsuarioRequestToUsuario(dto));
-		return usuarioMapper.mapUsuarioRequestToUsuarioResponse(dto);
+	public UsuarioResponseDto add(UsuarioCreateRequestDto dto) {
+		usuarioRepository.save(usuarioMapper.mapUsuarioCreateRequestToUsuario(dto));
+		return usuarioMapper.mapUsuarioCreateRequestToUsuarioResponse(dto);
 	}
 
 	@Override
-	public UsuarioResponseDto update(Long id, UsuarioRequestDto dto) {
+	public UsuarioResponseDto update(Long id, UsuarioUpdateRequestDto dto) {
 		Optional<Usuario> usuarioOptional = usuarioRepository.findById(id);
 		if (usuarioOptional.isEmpty()) {
 			log.error(errorMsg + id);
 			throw new IllegalArgumentException(errorMsg + id);
 		}
-		Usuario usuario = usuarioMapper.mapUsuarioRequestToUsuario(id, dto);
+		Usuario usuario = usuarioMapper.mapUsuarioUpdateRequestToUsuario(id, dto);
 		usuarioRepository.save(usuario);
-		return usuarioMapper.mapUsuarioRequestToUsuarioResponse(dto);
+		return usuarioMapper.mapUsuarioUpdateRequestToUsuarioResponse(dto);
 	}
 
 	@Override
@@ -72,8 +73,13 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
-	public List<MaquinaUsuarioResponseDto> findMaquinasByUsuario(Long id) {
+	public List<MaquinaUsuarioResponseDto> findMaquinasByUsuario(long id) {
 		return usuarioRepository.findMaquinasByUsuario(id);
 	}
+
+//	@Override
+//	public List<MaquinaUsuarioResponseDto> findMaquinasNotRelatedToUsuario(long idUsuario) {
+//		return usuarioRepository.findMaquinasNotRelatedToUsuario(idUsuario);
+//	}
 
 }

@@ -34,12 +34,15 @@ public class Usuario {
 
 	@Column(name = "nombre")
 	private String nombre;
+	
+	@Column(name = "username")
+	private String username;
 
 	@Column(name = "email")
 	private String email;
 
-	@Column(name = "contrasenia")
-	private String contrasenia;
+	@Column(name = "password")
+	private String password;
 
 	// relacion N:N con maquinas con clave embebida a traves de clase 'Tiene'
 	@OneToMany(targetEntity = Tiene.class, mappedBy = "usuario")

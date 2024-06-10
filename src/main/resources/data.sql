@@ -1,6 +1,6 @@
-INSERT INTO usuario (nombre, email, contrasenia) VALUES 
-('admin', 'admin@email.com', '$2a$12$YORr2teNaSVSof5LPbkCIuk5y4549Wp4ZYdW.NYqrJNFk2FWW.e5K'),
-('raso', 'raso@email.com', '$2a$12$k5Ia/9oKC.WPvzfF8b73meex/bF5C5sda0h4CSkXBrcGGSWI9jAW.');
+INSERT INTO usuario (nombre, username, email, password) VALUES 
+('admin', 'admin',  'admin@email.com', '$2a$12$YORr2teNaSVSof5LPbkCIuk5y4549Wp4ZYdW.NYqrJNFk2FWW.e5K'),
+('raso', 'raso', 'raso@email.com', '$2a$12$k5Ia/9oKC.WPvzfF8b73meex/bF5C5sda0h4CSkXBrcGGSWI9jAW.');
 
 
 INSERT INTO cliente (local, duenio, telefono, direccion, cif, fecha_vencimiento_contrato) VALUES 
