@@ -19,11 +19,13 @@ import com.spring.start.service.FacturaService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
 
 @Tag(name = "Facturas", description = "API de la entidad factura")
 @RestController
 @CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/factura")
+@Slf4j
 public class FacturaController {
 
 	@Autowired
@@ -33,6 +35,7 @@ public class FacturaController {
 			"get" })
 	@GetMapping("/{id}")
 	public FacturaResponseDto getFactura(@PathVariable Long id) {
+		log.info("Peticion para mostrar la factura con id " + id);
 		return facturaService.findById(id);
 	}
 
@@ -40,6 +43,7 @@ public class FacturaController {
 			"factura", "get" })
 	@GetMapping
 	public List<FacturaResponseDto> findAll() {
+		log.info("Peticion para mostrar todas las facturas");
 		return facturaService.findAll();
 	}
 
@@ -47,6 +51,7 @@ public class FacturaController {
 			"factura", "post" })
 	@PostMapping
 	public FacturaResponseDto addFactura(@RequestBody FacturaRequestDto dto) {
+		log.info("Peticion para añadir una factura");
 		return facturaService.add(dto);
 	}
 
@@ -54,6 +59,7 @@ public class FacturaController {
 			"factura", "put" })
 	@PutMapping("/{id}")
 	public FacturaResponseDto editFactura(@PathVariable Long id, @RequestBody FacturaRequestDto dto) {
+		log.info("Peticion para actualizar la factura con id " + id);
 		return facturaService.update(id, dto);
 	}
 
@@ -61,6 +67,7 @@ public class FacturaController {
 			"factura", "delete" })
 	@DeleteMapping("/{id}")
 	public void deleteFactura(@PathVariable Long id) {
+		log.info("Peticion para borrar la factura con id " + id);
 		facturaService.delete(id);
 	}
 }

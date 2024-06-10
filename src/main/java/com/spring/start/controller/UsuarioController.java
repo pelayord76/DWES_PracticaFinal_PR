@@ -21,11 +21,13 @@ import com.spring.start.service.UsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 
 @Tag(name = "Usuarios", description = "API de la entidad usuario")
 @RestController
 @CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/usuario")
+@Slf4j
 public class UsuarioController {
 
 	@Autowired
@@ -35,6 +37,7 @@ public class UsuarioController {
 			"get" })
 	@GetMapping("/{id}")
 	public UsuarioResponseDto findById(@PathVariable Long id) {
+		log.info("Peticion para mostrar el usuario con id " + id);
 		return usuarioService.findById(id);
 	}
 
@@ -42,6 +45,7 @@ public class UsuarioController {
 			"usuario", "get" })
 	@GetMapping
 	public List<UsuarioResponseDto> findAll() {
+		log.info("Peticion para mostrar todos los usuarios");
 		return usuarioService.findAll();
 	}
 
@@ -49,6 +53,7 @@ public class UsuarioController {
 			"usuario", "post" })
 	@PostMapping
 	public UsuarioResponseDto add(@Valid @RequestBody UsuarioRequestDto dto) {
+		log.info("Peticion para añadir un usuario");
 		return usuarioService.add(dto);
 	}
 
@@ -56,6 +61,7 @@ public class UsuarioController {
 			"usuario", "put" })
 	@PutMapping("/{id}")
 	public UsuarioResponseDto update(@PathVariable Long id, @Valid @RequestBody UsuarioRequestDto dto) {
+		log.info("Peticion para actualizar el usuario con id " + id);
 		return usuarioService.update(id, dto);
 	}
 
@@ -63,6 +69,7 @@ public class UsuarioController {
 			"delete" })
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
+		log.info("Peticion para borrar el usuario con id " + id);
 		usuarioService.delete(id);
 	}
 
@@ -70,6 +77,7 @@ public class UsuarioController {
 			"usuario", "get" })
 	@GetMapping("/{id}/maquina")
 	public List<MaquinaUsuarioResponseDto> findMaquinasByUsuario(@PathVariable Long id) {
+		log.info("Peticion para mostrar todas las maquinas del usuario con id " + id);
 		return usuarioService.findMaquinasByUsuario(id);
 
 	}

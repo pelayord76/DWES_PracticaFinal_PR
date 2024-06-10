@@ -15,7 +15,10 @@ import com.spring.start.mapper.ClienteMapper;
 import com.spring.start.repository.ClienteRepository;
 import com.spring.start.service.ClienteService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class ClienteServiceImpl implements ClienteService {
 
 	@Autowired
@@ -24,12 +27,15 @@ public class ClienteServiceImpl implements ClienteService {
 	@Autowired
 	ClienteMapper clienteMapper;
 
+	private String errorMsg = "No se encuentra el cliente solicitado, id: ";
+
 	@Override
 	public ClienteResponseDto findById(Long id) {
 		Optional<Cliente> clienteOptional = clienteRepository.findById(id);
 
 		if (clienteOptional.isEmpty()) {
-			throw new IllegalArgumentException("No existe ese cliente");
+			log.error(errorMsg + id);
+			throw new IllegalArgumentException(errorMsg + id);
 		}
 
 		return clienteMapper.mapToClienteResponseDto(clienteOptional.get());
@@ -51,7 +57,8 @@ public class ClienteServiceImpl implements ClienteService {
 	public ClienteResponseDto update(Long id, ClienteRequestDto dto) {
 		Optional<Cliente> clienteOptional = clienteRepository.findById(id);
 		if (clienteOptional.isEmpty()) {
-			throw new IllegalArgumentException("No existe ese cliente");
+			log.error(errorMsg + id);
+			throw new IllegalArgumentException(errorMsg + id);
 		}
 		Cliente cliente = clienteMapper.mapClienteRequestToCliente(id, dto);
 		clienteRepository.save(cliente);
@@ -61,7 +68,8 @@ public class ClienteServiceImpl implements ClienteService {
 	@Override
 	public void delete(Long id) {
 		if (!clienteRepository.existsById(id)) {
-			throw new IllegalArgumentException("No existe ese cliente");
+			log.error(errorMsg + id);
+			throw new IllegalArgumentException(errorMsg + id);
 		}
 		clienteRepository.deleteById(id);
 	}
@@ -75,7 +83,7 @@ public class ClienteServiceImpl implements ClienteService {
 	public List<ClienteDto> getLocalesEIds() {
 		return clienteMapper.mapToClienteDto(clienteRepository.findAll());
 	}
-	
+
 	@Override
 	public List<ClienteDto> getClientesEIds() {
 		return clienteMapper.mapToClienteDto(clienteRepository.findAll());

@@ -14,7 +14,10 @@ import com.spring.start.repository.MaquinaRepository;
 import com.spring.start.repository.RecaudacionRepository;
 import com.spring.start.service.RecaudacionService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class RecaudacionServiceImpl implements RecaudacionService {
 
 	@Autowired
@@ -26,11 +29,14 @@ public class RecaudacionServiceImpl implements RecaudacionService {
 	@Autowired
 	private MaquinaRepository maquinaRepository;
 
+	private String errorMsg = "No se encuentra la recaudacion solicitada, id: ";
+
 	@Override
 	public RecaudacionResponseDto findById(Long id) {
 		Optional<Recaudacion> recaudacionOptional = recaudacionRepository.findById(id);
 		if (recaudacionOptional.isEmpty()) {
-			throw new IllegalArgumentException("Esa recaudacion no existe");
+			log.error(errorMsg + id);
+			throw new IllegalArgumentException(errorMsg + id);
 		}
 		return recaudacionMapper.mapToRecaudacionResponseDto(recaudacionOptional.get());
 	}
@@ -53,7 +59,8 @@ public class RecaudacionServiceImpl implements RecaudacionService {
 	public RecaudacionResponseDto update(Long id, RecaudacionRequestDto dto) {
 		Optional<Recaudacion> recaudacionOptional = recaudacionRepository.findById(id);
 		if (recaudacionOptional.isEmpty()) {
-			throw new IllegalArgumentException("Esa recaudacion no existe");
+			log.error(errorMsg + id);
+			throw new IllegalArgumentException(errorMsg + id);
 		}
 
 		Recaudacion recaudacion = recaudacionMapper.mapRecaudacionRequestToRecaudacion(id, dto);
@@ -65,7 +72,8 @@ public class RecaudacionServiceImpl implements RecaudacionService {
 	@Override
 	public void delete(Long id) {
 		if (!recaudacionRepository.existsById(id)) {
-			throw new IllegalArgumentException("No existe esa recaudacion");
+			log.error(errorMsg + id);
+			throw new IllegalArgumentException(errorMsg + id);
 		}
 		desvincularMaquina(id);
 		recaudacionRepository.deleteById(id);
@@ -75,7 +83,8 @@ public class RecaudacionServiceImpl implements RecaudacionService {
 	public void desvincularMaquina(long id) {
 		Optional<Recaudacion> recaudacionOptional = recaudacionRepository.findById(id);
 		if (recaudacionOptional.isEmpty()) {
-			throw new IllegalArgumentException("No existe esa recaudación");
+			log.error(errorMsg + id);
+			throw new IllegalArgumentException(errorMsg + id);
 		}
 		Recaudacion recaudacion = recaudacionOptional.get();
 		if (recaudacion.getMaquina() != null) {

@@ -15,7 +15,10 @@ import com.spring.start.repository.TieneRepository;
 import com.spring.start.repository.UsuarioRepository;
 import com.spring.start.service.TieneService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class TieneServiceImpl implements TieneService {
 
 	@Autowired
@@ -39,7 +42,8 @@ public class TieneServiceImpl implements TieneService {
 		Optional<Maquina> maquinaOptional = maquinaRepository.findById(key.getMaquinaId());
 
 		if (usuarioOptional.isEmpty() || maquinaOptional.isEmpty()) {
-			throw new IllegalArgumentException("El usuario y la maquina deben existir");
+			log.error("El usuario o la maquina no existen");
+			throw new IllegalArgumentException("El usuario o la maquina no existen");
 		}
 
 		Tiene tieneAdd = new Tiene();
@@ -56,18 +60,27 @@ public class TieneServiceImpl implements TieneService {
 		key.setUsuarioId(idUsuario);
 		key.setMaquinaId(idMaquina);
 		if (tieneRepository.existsById(key)) {
-			throw new IllegalArgumentException("No existe ninguna relación con esos campos");
+			throw new IllegalArgumentException("No existe una relacion entre esas entidades: usuario[" + idUsuario
+					+ "], maquina[" + idMaquina + "]");
 		}
 		tieneRepository.deleteById(key);
 	}
 
 	@Override
 	public List<Tiene> findByUsuarioId(long idUsuario) {
+		if (!usuarioRepository.existsById(idUsuario)) {
+			log.error("No se encuentra el usuario solicitado, id: " + idUsuario);
+			throw new IllegalArgumentException("No se encuentra el usuario solicitado, id: " + idUsuario);
+		}
 		return tieneRepository.findByUsuarioId(idUsuario);
 	}
 
 	@Override
 	public List<Tiene> findByMaquinaId(long idMaquina) {
+		if (!maquinaRepository.existsById(idMaquina)) {
+			log.error("No se encuentra la maquina solicitada, id: " + idMaquina);
+			throw new IllegalArgumentException("No se encuentra la maquina solicitada, id: " + idMaquina);
+		}
 		return tieneRepository.findByMaquinaId(idMaquina);
 	}
 }

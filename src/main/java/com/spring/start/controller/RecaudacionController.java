@@ -19,11 +19,13 @@ import com.spring.start.service.RecaudacionService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
 
 @Tag(name = "Recaudaciones", description = "API de la entidad recaudacion")
 @RestController
 @CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/recaudacion")
+@Slf4j
 public class RecaudacionController {
 
 	@Autowired
@@ -33,6 +35,7 @@ public class RecaudacionController {
 			"recaudacion", "get" })
 	@GetMapping
 	public List<RecaudacionResponseDto> findAll() {
+		log.info("Peticion para mostrar todas las recaudaciones");
 		return recaudacionService.findAll();
 	}
 
@@ -40,6 +43,7 @@ public class RecaudacionController {
 			"recaudacion", "get" })
 	@GetMapping("/{id}")
 	public RecaudacionResponseDto findById(@PathVariable Long id) {
+		log.info("Peticion para mostrar la recaudacion con id " + id);
 		return recaudacionService.findById(id);
 	}
 
@@ -47,6 +51,7 @@ public class RecaudacionController {
 			"recaudacion", "post" })
 	@PostMapping
 	public RecaudacionResponseDto add(@RequestBody RecaudacionRequestDto dto) {
+		log.info("Peticion para añadir una recaudacion");
 		return recaudacionService.add(dto);
 	}
 
@@ -54,6 +59,7 @@ public class RecaudacionController {
 			"recaudacion", "put" })
 	@PutMapping("/{id}")
 	public RecaudacionResponseDto update(@PathVariable Long id, @RequestBody RecaudacionRequestDto dto) {
+		log.info("Peticion para actualizar la recaudacion con id " + id);
 		return recaudacionService.update(id, dto);
 	}
 
@@ -61,6 +67,7 @@ public class RecaudacionController {
 			"recaudacion", "delete" })
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
+		log.info("Peticion para borrar la recaudacion con id " + id);
 		recaudacionService.delete(id);
 	}
 }

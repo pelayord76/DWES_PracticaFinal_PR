@@ -22,11 +22,13 @@ import com.spring.start.service.MaquinaService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
 
 @Tag(name = "Maquinas", description = "API de la entidad maquina")
 @RestController
 @CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/maquina")
+@Slf4j
 public class MaquinaController {
 
 	@Autowired
@@ -36,6 +38,7 @@ public class MaquinaController {
 			"get" })
 	@GetMapping("/{id}")
 	public MaquinaResponseDto findById(@PathVariable Long id) {
+		log.info("Peticion para mostrar la maquina con id " + id);
 		return maquinaService.findById(id);
 	}
 
@@ -43,6 +46,7 @@ public class MaquinaController {
 			"maquina", "get" })
 	@GetMapping
 	public List<MaquinaResponseDto> findAll() {
+		log.info("Peticion para mostrar todas las maquinas");
 		return maquinaService.findAll();
 	}
 
@@ -50,6 +54,7 @@ public class MaquinaController {
 			"maquina", "post" })
 	@PostMapping
 	public MaquinaResponseDto add(@RequestBody MaquinaRequestDto dto) {
+		log.info("Peticion para añadir una maquina");
 		return maquinaService.add(dto);
 	}
 
@@ -57,6 +62,7 @@ public class MaquinaController {
 			"maquina", "put" })
 	@PutMapping("/{id}")
 	public MaquinaResponseDto update(@PathVariable Long id, @RequestBody MaquinaRequestDto dto) {
+		log.info("Peticion para actualizar la maquina con id " + id);
 		return maquinaService.update(id, dto);
 	}
 
@@ -64,6 +70,7 @@ public class MaquinaController {
 			"maquina", "put" })
 	@PutMapping("/cliente/{id}")
 	public void desvincularCliente(@PathVariable Long id) {
+		log.info("Peticion para desvincular la maquina con id " + id + " de su cliente");
 		maquinaService.desvincularCliente(id);
 	}
 
@@ -71,6 +78,7 @@ public class MaquinaController {
 			"maquina", "delete" })
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
+		log.info("Peticion para borrar la maquina con id " + id);
 		maquinaService.delete(id);
 	}
 
@@ -78,6 +86,7 @@ public class MaquinaController {
 			"maquina", "get" })
 	@GetMapping("/data/ingresos")
 	public List<MaquinaDataIngresosDTO> getDatosDeIngresosPorMaquina() {
+		log.info("Peticion para mostrar todas las maquinas con sus ingresos");
 		return maquinaService.findByIngresos();
 	}
 
@@ -85,6 +94,7 @@ public class MaquinaController {
 			"maquina", "put" })
 	@PutMapping("/almacenada/{id}")
 	public void almacenarMaquina(@PathVariable Long id) {
+		log.info("Peticion para almacenar la maquina con id " + id);
 		maquinaService.almacenarMaquina(id);
 	}
 
@@ -92,6 +102,7 @@ public class MaquinaController {
 			"maquina", "get" })
 	@GetMapping("/{id}/recaudacion")
 	public List<MaquinaRecaudacionResponseDto> getRecaudacionesByMaquina(@PathVariable Long id) {
+		log.info("Peticion para mostrar las recaudaciones de la maquina con id " + id);
 		return maquinaService.getRecaudacionesByMaquina(id);
 	}
 
@@ -99,6 +110,7 @@ public class MaquinaController {
 			"maquina", "get" })
 	@GetMapping("/cliente/{id}")
 	public List<MaquinaDto> getMaquinasByLocal(@PathVariable Long id) {
+		log.info("Peticion para mostrar las maquinas del cliente con id " + id);
 		return maquinaService.getMaquinasByLocal(id);
 	}
 }

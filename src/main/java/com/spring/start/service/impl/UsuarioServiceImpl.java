@@ -14,7 +14,10 @@ import com.spring.start.mapper.UsuarioMapper;
 import com.spring.start.repository.UsuarioRepository;
 import com.spring.start.service.UsuarioService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class UsuarioServiceImpl implements UsuarioService {
 
 	@Autowired
@@ -23,11 +26,14 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Autowired
 	UsuarioMapper usuarioMapper;
 
+	private String errorMsg = "No se encuentra el usuario solicitado, id: ";
+
 	@Override
 	public UsuarioResponseDto findById(Long id) {
 		Optional<Usuario> usuarioOptional = usuarioRepository.findById(id);
 		if (usuarioOptional.isEmpty()) {
-			throw new IllegalArgumentException("No existe ese usuario");
+			log.error(errorMsg + id);
+			throw new IllegalArgumentException(errorMsg + id);
 		}
 		return usuarioMapper.mapToUsuarioResponseDto(usuarioOptional.get());
 	}
@@ -48,7 +54,8 @@ public class UsuarioServiceImpl implements UsuarioService {
 	public UsuarioResponseDto update(Long id, UsuarioRequestDto dto) {
 		Optional<Usuario> usuarioOptional = usuarioRepository.findById(id);
 		if (usuarioOptional.isEmpty()) {
-			throw new IllegalArgumentException("No existe ese usuario");
+			log.error(errorMsg + id);
+			throw new IllegalArgumentException(errorMsg + id);
 		}
 		Usuario usuario = usuarioMapper.mapUsuarioRequestToUsuario(id, dto);
 		usuarioRepository.save(usuario);
@@ -58,7 +65,8 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Override
 	public void delete(Long id) {
 		if (!usuarioRepository.existsById(id)) {
-			throw new IllegalArgumentException("No existe ese usuario");
+			log.error(errorMsg + id);
+			throw new IllegalArgumentException(errorMsg + id);
 		}
 		usuarioRepository.deleteById(id);
 	}

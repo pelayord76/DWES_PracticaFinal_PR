@@ -21,11 +21,13 @@ import com.spring.start.service.ClienteService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
 
 @Tag(name = "Clientes", description = "API de la entidad cliente")
 @RestController
 @CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/cliente")
+@Slf4j
 public class ClienteController {
 
 	@Autowired
@@ -35,6 +37,7 @@ public class ClienteController {
 			"get" })
 	@GetMapping("/{id}")
 	public ClienteResponseDto findById(@PathVariable Long id) {
+		log.info("Peticion para mostrar el cliente con id " + id);
 		return clienteService.findById(id);
 	}
 
@@ -42,6 +45,7 @@ public class ClienteController {
 			"cliente", "get" })
 	@GetMapping
 	public List<ClienteResponseDto> findAll() {
+		log.info("Peticion para mostrar todos los clientes");
 		return clienteService.findAll();
 	}
 	
@@ -49,6 +53,7 @@ public class ClienteController {
 			"cliente", "get" })
 	@GetMapping("/clientes")
 	public List<ClienteDto> getClientesEIds(){
+		log.info("Peticion para encontrar todos los clientes con sus ides");
 		return clienteService.getClientesEIds();
 	}
 
@@ -56,6 +61,7 @@ public class ClienteController {
 			"cliente", "get" })
 	@GetMapping("/locales")
 	public List<ClienteDto> getLocalesEIds() {
+		log.info("Peticion para encontrar todos los nombres de los locales con los ides de los clientes");
 		return clienteService.getLocalesEIds();
 	}
 
@@ -63,6 +69,7 @@ public class ClienteController {
 			"cliente", "post" })
 	@PostMapping
 	public ClienteResponseDto add(@RequestBody ClienteRequestDto dto) {
+		log.info("Peticion para añadir un cliente");
 		return clienteService.add(dto);
 	}
 
@@ -70,6 +77,7 @@ public class ClienteController {
 			"cliente", "put" })
 	@PutMapping("/{id}")
 	public ClienteResponseDto update(@PathVariable Long id, @RequestBody ClienteRequestDto dto) {
+		log.info("Peticion para actualizar el cliente con id " + id);
 		return clienteService.update(id, dto);
 	}
 
@@ -77,6 +85,7 @@ public class ClienteController {
 			"delete" })
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
+		log.info("Peticion para borrar el cliente con id " + id);
 		clienteService.delete(id);
 	}
 
@@ -84,6 +93,7 @@ public class ClienteController {
 			"cliente", "get" })
 	@GetMapping("/data/ingresos")
 	public List<ClienteDataIngresosDTO> findByIngresos() {
+		log.info("Peticion para encontrar todos los clientes con sus ingresos totales");
 		return clienteService.findByIngresos();
 	}
 }

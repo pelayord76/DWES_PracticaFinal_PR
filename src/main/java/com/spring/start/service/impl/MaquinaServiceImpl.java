@@ -17,7 +17,10 @@ import com.spring.start.repository.ClienteRepository;
 import com.spring.start.repository.MaquinaRepository;
 import com.spring.start.service.MaquinaService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class MaquinaServiceImpl implements MaquinaService {
 
 	@Autowired
@@ -28,14 +31,15 @@ public class MaquinaServiceImpl implements MaquinaService {
 
 	@Autowired
 	private ClienteRepository clienteRepository;
-	
-	private String mensajeError = "Esa máquina no existe";
+
+	private String errorMsg = "No se encuentra la maquina solicitada, id: ";
 
 	@Override
 	public MaquinaResponseDto findById(Long id) {
 		Optional<Maquina> maquinaOptional = maquinaRepository.findById(id);
 		if (maquinaOptional.isEmpty()) {
-			throw new IllegalArgumentException(mensajeError);
+			log.error(errorMsg + id);
+			throw new IllegalArgumentException(errorMsg + id);
 		}
 		return maquinaMapper.mapToMaquinaResponseDto(maquinaOptional.get());
 	}
@@ -58,12 +62,13 @@ public class MaquinaServiceImpl implements MaquinaService {
 	public MaquinaResponseDto update(Long id, MaquinaRequestDto dto) {
 		Optional<Maquina> maquinaOptional = maquinaRepository.findById(id);
 		if (maquinaOptional.isEmpty()) {
-			throw new IllegalArgumentException(mensajeError);
+			log.error(errorMsg + id);
+			throw new IllegalArgumentException(errorMsg + id);
 		}
 		Maquina maquina = maquinaMapper.mapMaquinaRequestToMaquina(id, dto);
 
 		if (!clienteRepository.existsById(dto.getIdCliente())) {
-			throw new IllegalArgumentException("Ese cliente no existe");
+			throw new IllegalArgumentException("No existe el cliente solicitado, id: " + dto.getIdCliente());
 		}
 
 		maquina.setCliente(clienteRepository.findById(dto.getIdCliente()).get());
@@ -75,7 +80,8 @@ public class MaquinaServiceImpl implements MaquinaService {
 	@Override
 	public void delete(Long id) {
 		if (!maquinaRepository.existsById(id)) {
-			throw new IllegalArgumentException(mensajeError);
+			log.error(errorMsg + id);
+			throw new IllegalArgumentException(errorMsg + id);
 		}
 		desvincularCliente(id);
 		maquinaRepository.deleteById(id);
@@ -90,7 +96,8 @@ public class MaquinaServiceImpl implements MaquinaService {
 	public void desvincularCliente(long id) {
 		Optional<Maquina> maquinaOptional = maquinaRepository.findById(id);
 		if (maquinaOptional.isEmpty()) {
-			throw new IllegalArgumentException(mensajeError);
+			log.error(errorMsg + id);
+			throw new IllegalArgumentException(errorMsg + id);
 		}
 		Maquina maquina = maquinaOptional.get();
 		if (maquina.getCliente() != null) {
@@ -107,7 +114,8 @@ public class MaquinaServiceImpl implements MaquinaService {
 	public void almacenarMaquina(long id) {
 		Optional<Maquina> maquinaOptional = maquinaRepository.findById(id);
 		if (maquinaOptional.isEmpty()) {
-			throw new IllegalArgumentException(mensajeError);
+			log.error(errorMsg + id);
+			throw new IllegalArgumentException(errorMsg + id);
 		}
 		Maquina maquina = maquinaOptional.get();
 		maquina.setAlmacenada(!maquina.getAlmacenada());

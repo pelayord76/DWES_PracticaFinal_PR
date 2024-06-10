@@ -18,11 +18,13 @@ import com.spring.start.service.TieneService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
 
 @Tag(name = "Usuario_maquina", description = "API de la entidad intermedia entre usuario y maquina")
 @RestController
 @CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/tiene")
+@Slf4j
 public class TieneController {
 
 	@Autowired
@@ -32,6 +34,7 @@ public class TieneController {
 			"usuario_maquina", "get" })
 	@GetMapping
 	public List<Tiene> findAll() {
+		log.info("Peticion para mostrar todas las relaciones usuario-maquina");
 		return tieneService.findAll();
 	}
 
@@ -39,6 +42,7 @@ public class TieneController {
 			"usuario_maquina", "post" })
 	@PostMapping
 	public Tiene add(@RequestBody TieneKey key) {
+		log.info("Peticion para añadir una relacion usuario-maquina");
 		return tieneService.add(key);
 	}
 
@@ -46,6 +50,8 @@ public class TieneController {
 			"cliente", "delete" })
 	@DeleteMapping("/{idUsuario}/{idMaquina}")
 	public void delete(@PathVariable long idUsuario, @PathVariable long idMaquina) {
+		log.info("Peticion para borrar la relacion usuario-maquina con los ides: usuario[" + idUsuario + "], maquina["
+				+ idMaquina + "]");
 		tieneService.delete(idUsuario, idMaquina);
 	}
 
@@ -53,6 +59,7 @@ public class TieneController {
 			"usuario_maquina", "get" })
 	@GetMapping("/usuario/{idUsuario}")
 	public List<Tiene> findByUsuarioId(@PathVariable long idUsuario) {
+		log.info("Peticion para mostrar todas las relaciones usuario-maquina del usuario con id: " + idUsuario);
 		return tieneService.findByUsuarioId(idUsuario);
 	}
 
@@ -60,6 +67,7 @@ public class TieneController {
 			"usuario_maquina", "get" })
 	@GetMapping("/maquina/{idMaquina}")
 	public List<Tiene> findByMaquinaId(@PathVariable long idMaquina) {
+		log.info("Peticion para mostrar todas las relaciones usuario-maquina de la maquina con id: " + idMaquina);
 		return tieneService.findByMaquinaId(idMaquina);
 	}
 }
