@@ -18,16 +18,16 @@ public interface TieneService {
 
 	/**
 	 * 
-	 * @param dto: datos de la relacion que se quiere introducir, serán el id de una
-	 *             maquina y el de un usuario
-	 * @return la relacion creada
+	 * @param key clave compuesta por el id del usuario y el de la maquina que
+	 *            forman la relacion
+	 * @return la realcion creada
 	 */
 	Tiene add(TieneKey key);
 
 	/**
 	 * 
-	 * @param id de las entidades que forman la relacion que se quiere eliminar de
-	 *           la base de datos
+	 * @param idUsuario usuario de la relacion
+	 * @param idMaquina maquina de la relacion
 	 */
 	void delete(long idUsuario, long idMaquina);
 

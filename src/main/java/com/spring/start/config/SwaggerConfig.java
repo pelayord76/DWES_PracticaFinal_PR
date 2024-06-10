@@ -12,6 +12,13 @@ import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
 import io.swagger.v3.oas.models.servers.Server;
 
+/**
+ * clase de configuracion del swagger
+ * 
+ * 
+ * @author pelayord
+ */
+
 @Configuration
 public class SwaggerConfig {
 
@@ -25,15 +32,10 @@ public class SwaggerConfig {
 		contact.setName("Pelayo Rodríguez Díaz");
 		contact.setUrl("https://linktr.ee/pelayord");
 
-		License mitLicense = new License()
-				.name("MIT License")
-				.url("https://opensource.org/licenses/MIT");
+		License mitLicense = new License().name("MIT License").url("https://opensource.org/licenses/MIT");
 
-		Info info = new Info()
-				.title("Documentacion API REST")
-				.version("1.0")
-				.contact(contact)
-				.description("Esta API REST proporciona funcionalidades para gestionar la base de datos de negocios de máquinas recreativas.")
+		Info info = new Info().title("Documentacion API REST").version("1.0").contact(contact).description(
+				"Esta API REST proporciona funcionalidades para gestionar la base de datos de negocios de máquinas recreativas.")
 				.license(mitLicense);
 
 		Server devServer = new Server();
