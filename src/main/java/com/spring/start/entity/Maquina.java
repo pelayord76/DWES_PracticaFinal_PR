@@ -49,7 +49,7 @@ public class Maquina {
 	private LocalDateTime fechaVencimientoLicencia;
 
 	@Column(name = "almacenada")
-	private Boolean almacenada;
+	private boolean almacenada;
 
 	// fecha en la que la maquina paso a estar en estado de almacenada
 	@Column(name = "fecha_almacenamiento")

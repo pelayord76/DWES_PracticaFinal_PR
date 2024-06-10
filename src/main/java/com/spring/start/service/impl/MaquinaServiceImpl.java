@@ -118,7 +118,7 @@ public class MaquinaServiceImpl implements MaquinaService {
 			throw new IllegalArgumentException(errorMsg + id);
 		}
 		Maquina maquina = maquinaOptional.get();
-		maquina.setAlmacenada(!maquina.getAlmacenada());
+		maquina.setAlmacenada(!maquina.isAlmacenada());
 		maquinaRepository.save(maquina);
 	}
 
