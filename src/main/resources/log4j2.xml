@@ -16,7 +16,7 @@
 
 		<RollingFile name="RollingFile"
 			fileName="${logging.path}/${application.name}.log"
-			filePattern="${logging.path}/${application.name}-%d{dd-MMMM-yyyy}-%i.log.gz">
+			filePattern="${logging.path}/${application.name}-%d{dd-MMMM-yyyy}-%i.log.zip">
 			<PatternLayout>
 				<pattern>%d %p %C{1.} [%t] %m%n</pattern>
 			</PatternLayout>
