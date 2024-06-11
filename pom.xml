@@ -91,7 +91,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
-			<version>3.2.2</version>
 		</dependency>-->
 
 		<!--<https:// mvnrepository.com/ artifact/ org.springframework.boot/ spring-boot-starter-validation-->
@@ -115,7 +114,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
-			<version>3.1.5</version>
 		</dependency>
 
 	</dependencies>
@@ -141,10 +139,8 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>{$java.version}</source> <!-- depending on your
-					project -->
-					<target>{$java.version}</target> <!-- depending on your
-					project -->
+					<source>{$java.version}</source> <!-- depending on your project -->
+					<target>{$java.version}</target> <!-- depending on your project -->
 					<annotationProcessorPaths>
 						<path>
 							<groupId>org.projectlombok</groupId>
