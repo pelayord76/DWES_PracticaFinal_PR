@@ -25,8 +25,9 @@ public class ClienteRequestDto {
 	private String duenio;
 
 	@NotBlank(message = "El número de teléfono no puede estar vacío")
+	@Pattern(regexp = "\\d", message = "El número de teléfono debe tener solo dígitos")
 	@Size(max = 9, message = "El número de teléfono no puede tener más de 9 dígitos")
-	private Integer telefono;
+	private String telefono;
 
 	@NotBlank(message = "La dirección del local no puede estar vacía")
 	@Size(min = 5, max = 100, message = "La direccion del local debe tener entre 5 y 100 caracteres")

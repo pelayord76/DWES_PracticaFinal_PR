@@ -6,6 +6,8 @@ import com.spring.start.dto.cliente.ClienteDataIngresosDTO;
 import com.spring.start.dto.cliente.ClienteDto;
 import com.spring.start.dto.cliente.ClienteRequestDto;
 import com.spring.start.dto.cliente.ClienteResponseDto;
+import com.spring.start.dto.factura.FacturaResponseDto;
+import com.spring.start.dto.maquina.MaquinaDto;
 
 /**
  * @author pelayord76
@@ -53,16 +55,30 @@ public interface ClienteService {
 	 *         totales
 	 */
 	List<ClienteDataIngresosDTO> findByIngresos();
-	
+
 	/**
 	 * 
 	 * @return lista de locales con sus ids para settearlos en el front
 	 */
 	List<ClienteDto> getLocalesEIds();
-	
+
 	/**
 	 * 
 	 * @return lista de todos los clientes con sus ides
 	 */
 	List<ClienteDto> getClientesEIds();
+
+	/**
+	 * 
+	 * @param id
+	 * @return lista de las maquinas asociadas al cliente
+	 */
+	List<MaquinaDto> findMaquinasByCliente(long id);
+
+	/**
+	 * 
+	 * @param id
+	 * @return lista de facturas asociadas al cliente
+	 */
+	List<FacturaResponseDto> findFacturasByCliente(long id);
 }

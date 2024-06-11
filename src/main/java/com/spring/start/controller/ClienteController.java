@@ -17,6 +17,8 @@ import com.spring.start.dto.cliente.ClienteDataIngresosDTO;
 import com.spring.start.dto.cliente.ClienteDto;
 import com.spring.start.dto.cliente.ClienteRequestDto;
 import com.spring.start.dto.cliente.ClienteResponseDto;
+import com.spring.start.dto.factura.FacturaResponseDto;
+import com.spring.start.dto.maquina.MaquinaDto;
 import com.spring.start.service.ClienteService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -95,5 +97,21 @@ public class ClienteController {
 	public List<ClienteDataIngresosDTO> findByIngresos() {
 		log.info("Peticion para encontrar todos los clientes con sus ingresos totales");
 		return clienteService.findByIngresos();
+	}
+	
+	@Operation(summary = "Buscar maquinas", description = "Buscar todas las maquinas relacionadas con el cliente especificado.", tags = {
+			"usuario", "get" })
+	@GetMapping("/{id}/maquina")
+	public List<MaquinaDto> findMaquinasByCliente(@PathVariable long id) {
+		log.info("Peticion para mostrar todas las maquinas del cliente con id " + id);
+		return clienteService.findMaquinasByCliente(id);
+	}
+	
+	@Operation(summary = "Buscar facturas", description = "Buscar todas las facturas relacionadas con el cliente especificado.", tags = {
+			"usuario", "get" })
+	@GetMapping("/{id}/factura")
+	public List<FacturaResponseDto> findFacturasByCliente(@PathVariable long id) {
+		log.info("Peticion para mostrar todas las facturas del cliente con id " + id);
+		return clienteService.findFacturasByCliente(id);
 	}
 }

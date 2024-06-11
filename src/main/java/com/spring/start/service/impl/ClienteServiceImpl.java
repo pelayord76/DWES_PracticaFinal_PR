@@ -10,6 +10,8 @@ import com.spring.start.dto.cliente.ClienteDataIngresosDTO;
 import com.spring.start.dto.cliente.ClienteDto;
 import com.spring.start.dto.cliente.ClienteRequestDto;
 import com.spring.start.dto.cliente.ClienteResponseDto;
+import com.spring.start.dto.factura.FacturaResponseDto;
+import com.spring.start.dto.maquina.MaquinaDto;
 import com.spring.start.entity.Cliente;
 import com.spring.start.mapper.ClienteMapper;
 import com.spring.start.repository.ClienteRepository;
@@ -87,5 +89,15 @@ public class ClienteServiceImpl implements ClienteService {
 	@Override
 	public List<ClienteDto> getClientesEIds() {
 		return clienteMapper.mapToClienteDto(clienteRepository.findAll());
+	}
+
+	@Override
+	public List<MaquinaDto> findMaquinasByCliente(long id) {
+		return clienteRepository.findMaquinasByCliente(id);
+	}
+
+	@Override
+	public List<FacturaResponseDto> findFacturasByCliente(long id) {
+		return clienteRepository.findFacturasByCliente(id);
 	}
 }

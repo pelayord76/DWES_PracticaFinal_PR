@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 
 import com.spring.start.dto.factura.FacturaRequestDto;
 import com.spring.start.dto.factura.FacturaResponseDto;
+import com.spring.start.entity.Cliente;
 import com.spring.start.entity.Factura;
 import com.spring.start.mapper.FacturaMapper;
+import com.spring.start.repository.ClienteRepository;
 import com.spring.start.repository.FacturaRepository;
 import com.spring.start.service.FacturaService;
 
@@ -24,6 +26,9 @@ public class FacturaServiceImpl implements FacturaService {
 
 	@Autowired
 	FacturaMapper facturaMapper;
+
+	@Autowired
+	ClienteRepository clienteRepository;
 
 	private String errorMsg = "No se encuentra la factura solicitada, id: ";
 
@@ -45,8 +50,17 @@ public class FacturaServiceImpl implements FacturaService {
 
 	@Override
 	public FacturaResponseDto add(FacturaRequestDto dto) {
-		facturaRepository.save(facturaMapper.mapFacturaRequestToFactura(dto));
-		return facturaMapper.mapFacturaRequestToFacturaResponse(dto);
+		Factura factura = facturaMapper.mapFacturaRequestToFactura(dto);
+		Optional<Cliente> clienteOptional = clienteRepository.findById(dto.getIdCliente());
+
+		if (clienteOptional.isEmpty()) {
+			log.error("No se encuentra el cliente solicitado, id: " + dto.getIdCliente());
+			throw new IllegalArgumentException("No se encuentra el cliente solicitado, id: " + dto.getIdCliente());
+		}
+
+		factura.setCliente(clienteOptional.get());
+		facturaRepository.save(factura);
+		return facturaMapper.mapToFacturaResponseDto(factura);
 	}
 
 	@Override
@@ -67,6 +81,24 @@ public class FacturaServiceImpl implements FacturaService {
 			log.error(errorMsg + id);
 			throw new IllegalArgumentException(errorMsg + id);
 		}
+		desvincularCliente(id);
 		facturaRepository.deleteById(id);
+	}
+
+	private void desvincularCliente(long id) {
+		Optional<Factura> facturaOptional = facturaRepository.findById(id);
+		if (facturaOptional.isEmpty()) {
+			log.error(errorMsg + id);
+			throw new IllegalArgumentException(errorMsg + id);
+		}
+		Factura factura = facturaOptional.get();
+		if (factura.getCliente() != null) {
+			List<Factura> facturas = factura.getCliente().getFacturas();
+
+			facturas.remove(factura);
+			factura.setCliente(null);
+
+			facturaRepository.save(factura);
+		}
 	}
 }

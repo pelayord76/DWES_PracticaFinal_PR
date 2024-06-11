@@ -44,7 +44,7 @@ public class Cliente {
 	private String duenio;
 
 	@Column(name = "telefono")
-	private Integer telefono;
+	private String telefono;
 
 	@Column(name = "direccion")
 	private String direccion;
