@@ -1,6 +1,6 @@
 package com.spring.start.entity;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.hibernate.annotations.Cascade;
@@ -46,14 +46,14 @@ public class Maquina {
 	private String nombre;
 
 	@Column(name = "fecha_vencimiento_licencia")
-	private LocalDateTime fechaVencimientoLicencia;
+	private LocalDate fechaVencimientoLicencia;
 
 	@Column(name = "almacenada")
 	private boolean almacenada;
 
 	// fecha en la que la maquina paso a estar en estado de almacenada
 	@Column(name = "fecha_almacenamiento")
-	private LocalDateTime fechaAlmacenada;
+	private LocalDate fechaAlmacenada;
 
 	// para una funcionalidad de las recaudaciones se necesita añadir de qué tipo es
 	// cada máquina, ya que se pueden diferenciar en dos tipos dependiendo del % de
@@ -88,7 +88,7 @@ public class Maquina {
 	public void setAlmacenada(boolean almacenada) {
 		this.almacenada = almacenada;
 		if (almacenada) {
-			this.fechaAlmacenada = LocalDateTime.now();
+			this.fechaAlmacenada = LocalDate.now();
 			this.cliente = null;
 		} else {
 			this.fechaAlmacenada = null;
