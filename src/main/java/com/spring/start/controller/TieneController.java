@@ -3,7 +3,6 @@ package com.spring.start.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +21,6 @@ import lombok.extern.slf4j.Slf4j;
 
 @Tag(name = "Usuario_maquina", description = "API de la entidad intermedia entre usuario y maquina")
 @RestController
-@CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/tiene")
 @Slf4j
 public class TieneController {
