@@ -55,31 +55,69 @@ public class MaquinaServiceImpl implements MaquinaService {
 	@Override
 	public MaquinaResponseDto add(MaquinaRequestDto dto) {
 		Maquina maquina = maquinaMapper.mapMaquinaRequestToMaquina(dto);
-		Optional<Cliente> clienteOptional = clienteRepository.findById(dto.getIdCliente());
-		if (clienteOptional.isEmpty()) {
-			log.error(errorClienteMsg + dto.getIdCliente());
-			throw new IllegalArgumentException(errorClienteMsg + dto.getIdCliente());
+
+		if (dto.getIdCliente() != null) {
+			Optional<Cliente> clienteOptional = clienteRepository.findById(dto.getIdCliente());
+
+			if (clienteOptional.isPresent()) {
+				maquina.setCliente(clienteOptional.get());
+			}
+
+			else {
+				log.error(errorClienteMsg + dto.getIdCliente());
+				throw new IllegalArgumentException(errorClienteMsg + dto.getIdCliente());
+			}
 		}
-		maquina.setCliente(clienteOptional.get());
+
+		else {
+			maquina.setCliente(null);
+		}
+
+		if (!maquina.isAlmacenada()) {
+			maquina.setFechaAlmacenada(null);
+		}
+
 		maquinaRepository.save(maquina);
 		return maquinaMapper.mapToMaquinaResponseDto(maquina);
 	}
 
 	@Override
 	public MaquinaResponseDto update(Long id, MaquinaRequestDto dto) {
-		Optional<Maquina> maquinaOptional = maquinaRepository.findById(id);
-		if (maquinaOptional.isEmpty()) {
+		if (!maquinaRepository.existsById(id)) {
 			log.error(errorMsg + id);
 			throw new IllegalArgumentException(errorMsg + id);
 		}
+
 		Maquina maquina = maquinaMapper.mapMaquinaRequestToMaquina(id, dto);
 
-		if (!clienteRepository.existsById(dto.getIdCliente())) {
-			log.error(errorClienteMsg + dto.getIdCliente());
-			throw new IllegalArgumentException(errorClienteMsg + dto.getIdCliente());
+		Maquina maquinaRepo = maquinaRepository.findById(id).get();
+
+		Long clienteNuevo = dto.getIdCliente();
+		Cliente clienteActual = maquinaRepo.getCliente();
+
+		boolean clienteDtoNoNulo = clienteNuevo != null;
+		boolean clienteActualNoNulo = clienteActual != null;
+
+		if (clienteActualNoNulo && !clienteDtoNoNulo) {
+			clienteActual.getMaquinas().remove(maquinaRepo);
+			maquinaRepo.setCliente(null);
 		}
 
-		maquina.setCliente(clienteRepository.findById(dto.getIdCliente()).get());
+		else if (clienteDtoNoNulo) {
+			Optional<Cliente> clienteOptional = clienteRepository.findById(clienteNuevo);
+
+			if (clienteOptional.isPresent()) {
+				maquina.setCliente(clienteOptional.get());
+			}
+
+			else {
+				log.error(errorClienteMsg + clienteNuevo);
+				throw new IllegalArgumentException(errorClienteMsg + clienteNuevo);
+			}
+		}
+		if (!maquina.isAlmacenada()) {
+			maquina.setFechaAlmacenada(null);
+		}
 
 		maquinaRepository.save(maquina);
 		return maquinaMapper.mapToMaquinaResponseDto(maquina);
