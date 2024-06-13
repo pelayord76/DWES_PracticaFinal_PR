@@ -1,14 +1,21 @@
 package com.spring.start.entity;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.spring.start.enums.Rol;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -26,7 +33,9 @@ import lombok.ToString;
 @Setter
 @ToString
 @Table(name = "usuario")
-public class Usuario {
+public class Usuario implements UserDetails {
+
+	private static final long serialVersionUID = -2485874026833056327L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,7 +43,7 @@ public class Usuario {
 
 	@Column(name = "nombre")
 	private String nombre;
-	
+
 	@Column(name = "username")
 	private String username;
 
@@ -43,10 +52,39 @@ public class Usuario {
 
 	@Column(name = "password")
 	private String password;
+	
+	@Column(name = "rol")
+	@Enumerated(EnumType.STRING)
+	private Rol rol;
 
 	// relacion N:N con maquinas con clave embebida a traves de clase 'Tiene'
 	@OneToMany(targetEntity = Tiene.class, mappedBy = "usuario")
 	@JsonManagedReference("tiene_usuario")
 	@Cascade(CascadeType.ALL)
 	private List<Tiene> tiene;
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return List.of(new SimpleGrantedAuthority((rol.name())));
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return false;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return false;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return false;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return false;
+	}
 }

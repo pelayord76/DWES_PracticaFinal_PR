@@ -1,4 +1,4 @@
-/*package com.spring.start.servicios;
+package com.spring.start.config;
 
 import java.util.Optional;
 
@@ -8,27 +8,21 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.spring.start.usuarios.Usuario;
-import com.spring.start.usuarios.UsuarioDAO;
+import com.spring.start.entity.Usuario;
+import com.spring.start.repository.UsuarioRepository;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
-	
-	
-	@Autowired
-	private UsuarioDAO usuarioDao;
-	
-	@Override
-	public UserDetails loadUserByUsername(String nombre) throws UsernameNotFoundException {
 
-		Optional<Usuario> usuario = usuarioDao.getUsuarioByNombre(nombre);
-		if(usuario.isPresent()) {
-			
-			return (UserDetails)usuario.get();
-		}
-		
-		throw new UsernameNotFoundException(nombre);
-	}
-}*/
-package com.spring.start.config;
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
+    @Override
+    public UserDetails loadUserByUsername(String nombre) throws UsernameNotFoundException {
+        Optional<Usuario> usuario = usuarioRepository.findByNombre(nombre);
+        if (usuario.isPresent()) {
+            return usuario.get();
+        }
+        throw new UsernameNotFoundException(nombre);
+    }
+}

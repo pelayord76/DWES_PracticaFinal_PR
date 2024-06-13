@@ -12,13 +12,6 @@ import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
 import io.swagger.v3.oas.models.servers.Server;
 
-/**
- * clase de configuracion del swagger
- * 
- * 
- * @author pelayord
- */
-
 @Configuration
 public class SwaggerConfig {
 
@@ -47,7 +40,5 @@ public class SwaggerConfig {
 		prodServer.setDescription("Server URL in Production environment");
 
 		return new OpenAPI().info(info).servers(List.of(devServer, prodServer));
-
 	}
-
 }

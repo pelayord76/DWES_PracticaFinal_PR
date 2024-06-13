@@ -71,6 +71,16 @@ public class FacturaServiceImpl implements FacturaService {
 			throw new IllegalArgumentException(errorMsg + id);
 		}
 		Factura factura = facturaMapper.mapFacturaRequestToFactura(id, dto);
+		
+		Optional<Cliente> clienteOptional = clienteRepository.findById(dto.getIdCliente());
+
+		if (clienteOptional.isEmpty()) {
+			log.error("No se encuentra el cliente solicitado, id: " + dto.getIdCliente());
+			throw new IllegalArgumentException("No se encuentra el cliente solicitado, id: " + dto.getIdCliente());
+		}
+
+		factura.setCliente(clienteOptional.get());
+		
 		facturaRepository.save(factura);
 		return facturaMapper.mapToFacturaResponseDto(factura);
 	}
