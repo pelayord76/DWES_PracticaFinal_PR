@@ -1,4 +1,4 @@
-package com.spring.start.config;
+package com.spring.start.service.impl;
 
 import java.util.Optional;
 
@@ -14,15 +14,15 @@ import com.spring.start.repository.UsuarioRepository;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+	@Autowired
+	private UsuarioRepository usuarioRepository;
 
-    @Override
-    public UserDetails loadUserByUsername(String nombre) throws UsernameNotFoundException {
-        Optional<Usuario> usuario = usuarioRepository.findByNombre(nombre);
-        if (usuario.isPresent()) {
-            return usuario.get();
-        }
-        throw new UsernameNotFoundException(nombre);
-    }
+	@Override
+	public UserDetails loadUserByUsername(String nombre) throws UsernameNotFoundException {
+		Optional<Usuario> usuario = usuarioRepository.findByNombre(nombre);
+		if (usuario.isPresent()) {
+			return usuario.get();
+		}
+		throw new UsernameNotFoundException(nombre);
+	}
 }

@@ -35,7 +35,7 @@ import lombok.ToString;
 @Table(name = "usuario")
 public class Usuario implements UserDetails {
 
-	private static final long serialVersionUID = -2485874026833056327L;
+	private static final long serialVersionUID = 6163333875297925103L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,7 +52,7 @@ public class Usuario implements UserDetails {
 
 	@Column(name = "password")
 	private String password;
-	
+
 	@Column(name = "rol")
 	@Enumerated(EnumType.STRING)
 	private Rol rol;
@@ -70,21 +70,25 @@ public class Usuario implements UserDetails {
 
 	@Override
 	public boolean isAccountNonExpired() {
-		return false;
+		// TODO Auto-generated method stub
+		return true;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
-		return false;
+		// TODO Auto-generated method stub
+		return true;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-		return false;
+		// TODO Auto-generated method stub
+		return true;
 	}
 
 	@Override
 	public boolean isEnabled() {
-		return false;
+		// TODO Auto-generated method stub
+		return true;
 	}
 }
