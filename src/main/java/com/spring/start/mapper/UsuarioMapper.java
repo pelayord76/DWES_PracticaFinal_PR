@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.mapstruct.Mapper;
 
+import com.spring.start.dto.sign.SignUpDto;
 import com.spring.start.dto.usuario.UsuarioCreateRequestDto;
 import com.spring.start.dto.usuario.UsuarioResponseDto;
 import com.spring.start.dto.usuario.UsuarioUpdateRequestDto;
@@ -23,4 +24,6 @@ public interface UsuarioMapper {
 	public UsuarioResponseDto mapUsuarioCreateRequestToUsuarioResponse(UsuarioCreateRequestDto dto);
 
 	public UsuarioResponseDto mapUsuarioUpdateRequestToUsuarioResponse(UsuarioUpdateRequestDto dto);
+	
+	public Usuario mapSignUpDtoToUsuario(SignUpDto dto);
 }
