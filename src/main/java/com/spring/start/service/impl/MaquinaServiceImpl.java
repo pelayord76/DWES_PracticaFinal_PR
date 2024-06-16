@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.start.dto.maquina.MaquinaContratoResponseDto;
 import com.spring.start.dto.maquina.MaquinaDataIngresosDTO;
 import com.spring.start.dto.maquina.MaquinaDto;
 import com.spring.start.dto.maquina.MaquinaRequestDto;
@@ -176,5 +177,10 @@ public class MaquinaServiceImpl implements MaquinaService {
 	@Override
 	public List<MaquinaDto> getMaquinasByLocal(long id) {
 		return maquinaRepository.findMaquinasByLocal(id);
+	}
+
+	@Override
+	public List<MaquinaContratoResponseDto> findByFechaVencimientoLicencia(String anio) {
+		return maquinaRepository.findByFechaVencimientoLicencia(anio);
 	}
 }

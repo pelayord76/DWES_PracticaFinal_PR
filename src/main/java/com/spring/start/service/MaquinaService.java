@@ -2,6 +2,7 @@ package com.spring.start.service;
 
 import java.util.List;
 
+import com.spring.start.dto.maquina.MaquinaContratoResponseDto;
 import com.spring.start.dto.maquina.MaquinaDataIngresosDTO;
 import com.spring.start.dto.maquina.MaquinaDto;
 import com.spring.start.dto.maquina.MaquinaRequestDto;
@@ -75,11 +76,18 @@ public interface MaquinaService {
 	 *         detalle
 	 */
 	List<MaquinaRecaudacionResponseDto> getRecaudacionesByMaquina(long id);
-	
+
 	/**
 	 * 
 	 * @param id
 	 * @return maquinas vinculadas al cliente pasado
 	 */
 	List<MaquinaDto> getMaquinasByLocal(long id);
+
+	/**
+	 * 
+	 * @param anio
+	 * @return
+	 */
+	List<MaquinaContratoResponseDto> findByFechaVencimientoLicencia(String anio);
 }

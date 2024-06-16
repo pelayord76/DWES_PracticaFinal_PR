@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spring.start.dto.cliente.ClienteContratoResponseDto;
 import com.spring.start.dto.cliente.ClienteDataIngresosDTO;
 import com.spring.start.dto.cliente.ClienteDto;
 import com.spring.start.dto.cliente.ClienteRequestDto;
@@ -48,11 +49,11 @@ public class ClienteController {
 		log.info("Peticion para mostrar todos los clientes");
 		return clienteService.findAll();
 	}
-	
+
 	@Operation(summary = "Buscar todo", description = "Buscar todos los clientes de la base de datos.", tags = {
 			"cliente", "get" })
 	@GetMapping("/clientes")
-	public List<ClienteDto> getClientesEIds(){
+	public List<ClienteDto> getClientesEIds() {
 		log.info("Peticion para encontrar todos los clientes con sus ides");
 		return clienteService.getClientesEIds();
 	}
@@ -96,7 +97,23 @@ public class ClienteController {
 		log.info("Peticion para encontrar todos los clientes con sus ingresos totales");
 		return clienteService.findByIngresos();
 	}
-	
+
+	@Operation(summary = "Buscar por ingresos", description = "Buscar los clientes de la base de datos con los menores ingresos históricos.", tags = {
+			"cliente", "get" })
+	@GetMapping("/data/ingresos/min")
+	public List<ClienteDataIngresosDTO> findByIngresosAsc() {
+		log.info("Peticion para encontrar los clientes con los menores ingresos totales");
+		return clienteService.findByIngresosAsc();
+	}
+
+	@Operation(summary = "Buscar por ingresos", description = "Buscar los clientes de la base de datos con los mayores ingresos históricos.", tags = {
+			"cliente", "get" })
+	@GetMapping("/data/ingresos/max")
+	public List<ClienteDataIngresosDTO> findByIngresosDesc() {
+		log.info("Peticion para encontrar los clientes con los mayores ingresos totales");
+		return clienteService.findByIngresosDesc();
+	}
+
 	@Operation(summary = "Buscar maquinas", description = "Buscar todas las maquinas relacionadas con el cliente especificado.", tags = {
 			"usuario", "get" })
 	@GetMapping("/{id}/maquina")
@@ -104,12 +121,20 @@ public class ClienteController {
 		log.info("Peticion para mostrar todas las maquinas del cliente con id " + id);
 		return clienteService.findMaquinasByCliente(id);
 	}
-	
+
 	@Operation(summary = "Buscar facturas", description = "Buscar todas las facturas relacionadas con el cliente especificado.", tags = {
 			"usuario", "get" })
 	@GetMapping("/{id}/factura")
 	public List<FacturaResponseDto> findFacturasByCliente(@PathVariable long id) {
 		log.info("Peticion para mostrar todas las facturas del cliente con id " + id);
 		return clienteService.findFacturasByCliente(id);
+	}
+
+	@Operation(summary = "Buscar clientes", description = "Buscar todos los clientes cuyo contrato venza el mismo año que el especificado por parametro.", tags = {
+			"cliente", "get" })
+	@GetMapping("/contrato/{anio}")
+	public List<ClienteContratoResponseDto> findByFechaVencimientoContrato(@PathVariable String anio) {
+		log.info("Peticion para mostrar todos los clientes cuya fecha de vencimiento de contrato sea del año " + anio);
+		return clienteService.findByFechaVencimientoContrato(anio);
 	}
 }

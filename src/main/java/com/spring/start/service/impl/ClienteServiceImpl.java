@@ -4,8 +4,11 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.spring.start.dto.cliente.ClienteContratoResponseDto;
 import com.spring.start.dto.cliente.ClienteDataIngresosDTO;
 import com.spring.start.dto.cliente.ClienteDto;
 import com.spring.start.dto.cliente.ClienteRequestDto;
@@ -99,5 +102,22 @@ public class ClienteServiceImpl implements ClienteService {
 	@Override
 	public List<FacturaResponseDto> findFacturasByCliente(long id) {
 		return clienteRepository.findFacturasByCliente(id);
+	}
+
+	@Override
+	public List<ClienteDataIngresosDTO> findByIngresosAsc() {
+		Pageable top5 = PageRequest.of(0, 5);
+		return clienteRepository.findByIngresosAsc(top5);
+	}
+
+	@Override
+	public List<ClienteDataIngresosDTO> findByIngresosDesc() {
+		Pageable top5 = PageRequest.of(0, 5);
+		return clienteRepository.findByIngresosDesc(top5);
+	}
+
+	@Override
+	public List<ClienteContratoResponseDto> findByFechaVencimientoContrato(String anio) {
+		return clienteRepository.findByFechaVencimientoContrato(anio);
 	}
 }

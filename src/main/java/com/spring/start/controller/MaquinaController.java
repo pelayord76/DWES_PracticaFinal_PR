@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spring.start.dto.maquina.MaquinaContratoResponseDto;
 import com.spring.start.dto.maquina.MaquinaDataIngresosDTO;
 import com.spring.start.dto.maquina.MaquinaDto;
 import com.spring.start.dto.maquina.MaquinaRequestDto;
@@ -110,5 +111,13 @@ public class MaquinaController {
 	public List<MaquinaDto> getMaquinasByLocal(@PathVariable Long id) {
 		log.info("Peticion para mostrar las maquinas del cliente con id " + id);
 		return maquinaService.getMaquinasByLocal(id);
+	}
+
+	@Operation(summary = "Buscar clientes", description = "Buscar todas las maquinas cuya licencia venza el mismo año que el especificado por parametro.", tags = {
+			"cliente", "get" })
+	@GetMapping("/licencia/{anio}")
+	public List<MaquinaContratoResponseDto> findByFechaVencimientoContrato(@PathVariable String anio) {
+		log.info("Peticion para mostrar todas las maquinas cuya fecha de vencimiento de contrato sea del año " + anio);
+		return maquinaService.findByFechaVencimientoLicencia(anio);
 	}
 }

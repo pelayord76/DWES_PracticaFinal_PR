@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import com.spring.start.dto.maquina.MaquinaContratoResponseDto;
 import com.spring.start.dto.maquina.MaquinaDataIngresosDTO;
 import com.spring.start.dto.maquina.MaquinaDto;
 import com.spring.start.dto.recaudacion.MaquinaRecaudacionResponseDto;
@@ -24,4 +25,6 @@ public interface MaquinaRepository extends JpaRepository<Maquina, Long> {
 	@Query("SELECT new com.spring.start.dto.maquina.MaquinaDto(m.id, m.nombre)"
 			+ "FROM Maquina m WHERE m.cliente.id = :idCliente")
 	List<MaquinaDto> findMaquinasByLocal(@Param("idCliente") long idCliente);
+
+	List<MaquinaContratoResponseDto> findByFechaVencimientoLicencia(@Param("anio") String anio);
 }

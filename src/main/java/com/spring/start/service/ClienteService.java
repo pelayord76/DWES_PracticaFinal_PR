@@ -2,6 +2,7 @@ package com.spring.start.service;
 
 import java.util.List;
 
+import com.spring.start.dto.cliente.ClienteContratoResponseDto;
 import com.spring.start.dto.cliente.ClienteDataIngresosDTO;
 import com.spring.start.dto.cliente.ClienteDto;
 import com.spring.start.dto.cliente.ClienteRequestDto;
@@ -81,4 +82,23 @@ public interface ClienteService {
 	 * @return lista de facturas asociadas al cliente
 	 */
 	List<FacturaResponseDto> findFacturasByCliente(long id);
+	
+	/**
+	 * 
+	 * @return
+	 */
+	List<ClienteDataIngresosDTO> findByIngresosAsc();
+	
+	/**
+	 * 
+	 * @return
+	 */
+	List<ClienteDataIngresosDTO> findByIngresosDesc();
+
+	/**
+	 * 
+	 * @param anio 
+	 * @return
+	 */
+	List<ClienteContratoResponseDto> findByFechaVencimientoContrato(String anio);
 }
