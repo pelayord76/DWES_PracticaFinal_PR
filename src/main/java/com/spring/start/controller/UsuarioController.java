@@ -80,13 +80,4 @@ public class UsuarioController {
 		return usuarioService.findMaquinasByUsuario(id);
 
 	}
-
-//	@Operation(summary = "Buscar maquinas", description = "Buscar todas las maquinas no relacionadas con el usuario especificado.", tags = {
-//			"usuario", "get" })
-//	@GetMapping("/{id}/maquina/unrelated")
-//	public List<MaquinaUsuarioResponseDto> findMaquinasNotRelatedToUsuario(@PathVariable long id) {
-//		log.info("Peticion para mostrar todas las maquinas no relacionadas con el usuario con id " + id);
-//		return usuarioService.findMaquinasNotRelatedToUsuario(id);
-//
-//	}
 }
