@@ -6,14 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.start.dto.maquina.MaquinaUsuarioResponseDto;
-import com.spring.start.dto.usuario.UsuarioCreateRequestDto;
 import com.spring.start.dto.usuario.UsuarioResponseDto;
 import com.spring.start.dto.usuario.UsuarioUpdateRequestDto;
 import com.spring.start.service.UsuarioService;
@@ -48,13 +46,14 @@ public class UsuarioController {
 		return usuarioService.findAll();
 	}
 
-	@Operation(summary = "Crear", description = "Crear un usuario e introducirlo en la base de datos.", tags = {
-			"usuario", "post" })
-	@PostMapping
-	public UsuarioResponseDto add(@Valid @RequestBody UsuarioCreateRequestDto dto) {
-		log.info("Peticion para añadir un usuario");
-		return usuarioService.add(dto);
-	}
+	//se crean mediante registro
+//	@Operation(summary = "Crear", description = "Crear un usuario e introducirlo en la base de datos.", tags = {
+//			"usuario", "post" })
+//	@PostMapping
+//	public UsuarioResponseDto add(@Valid @RequestBody UsuarioCreateRequestDto dto) {
+//		log.info("Peticion para añadir un usuario");
+//		return usuarioService.add(dto);
+//	}
 
 	@Operation(summary = "Modificar", description = "Buscar un usuario por id y añadirle nuevos campos.", tags = {
 			"usuario", "put" })
