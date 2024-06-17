@@ -37,7 +37,8 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 			+ "ORDER BY SUM(r.cantidadRecaudada) DESC")
 	List<ClienteDataIngresosDTO> findByIngresosDesc(Pageable pageable);
 
-	
-	List<ClienteContratoResponseDto> findByFechaVencimientoContrato(@Param("anio") String anio);
+	@Query("SELECT new com.spring.start.dto.cliente.ClienteContratoResponseDto(c.local, c.fechaVencimientoContrato) "
+			+ "FROM Cliente c WHERE YEAR(c.fechaVencimientoContrato) = :anio")
+	List<ClienteContratoResponseDto> findByFechaVencimientoContrato(@Param("anio") int anio);
 
 }

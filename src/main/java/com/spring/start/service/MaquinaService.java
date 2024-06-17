@@ -89,5 +89,5 @@ public interface MaquinaService {
 	 * @param anio
 	 * @return
 	 */
-	List<MaquinaContratoResponseDto> findByFechaVencimientoLicencia(String anio);
+	List<MaquinaContratoResponseDto> findByFechaVencimientoLicencia(int anio);
 }

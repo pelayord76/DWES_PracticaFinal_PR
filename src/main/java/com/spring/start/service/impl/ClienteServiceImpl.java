@@ -117,7 +117,7 @@ public class ClienteServiceImpl implements ClienteService {
 	}
 
 	@Override
-	public List<ClienteContratoResponseDto> findByFechaVencimientoContrato(String anio) {
+	public List<ClienteContratoResponseDto> findByFechaVencimientoContrato(int anio) {
 		return clienteRepository.findByFechaVencimientoContrato(anio);
 	}
 }

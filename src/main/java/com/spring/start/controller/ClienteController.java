@@ -133,7 +133,7 @@ public class ClienteController {
 	@Operation(summary = "Buscar clientes", description = "Buscar todos los clientes cuyo contrato venza el mismo año que el especificado por parametro.", tags = {
 			"cliente", "get" })
 	@GetMapping("/contrato/{anio}")
-	public List<ClienteContratoResponseDto> findByFechaVencimientoContrato(@PathVariable String anio) {
+	public List<ClienteContratoResponseDto> findByFechaVencimientoContrato(@PathVariable int anio) {
 		log.info("Peticion para mostrar todos los clientes cuya fecha de vencimiento de contrato sea del año " + anio);
 		return clienteService.findByFechaVencimientoContrato(anio);
 	}

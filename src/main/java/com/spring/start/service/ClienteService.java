@@ -100,5 +100,5 @@ public interface ClienteService {
 	 * @param anio 
 	 * @return
 	 */
-	List<ClienteContratoResponseDto> findByFechaVencimientoContrato(String anio);
+	List<ClienteContratoResponseDto> findByFechaVencimientoContrato(int anio);
 }

@@ -180,7 +180,7 @@ public class MaquinaServiceImpl implements MaquinaService {
 	}
 
 	@Override
-	public List<MaquinaContratoResponseDto> findByFechaVencimientoLicencia(String anio) {
+	public List<MaquinaContratoResponseDto> findByFechaVencimientoLicencia(int anio) {
 		return maquinaRepository.findByFechaVencimientoLicencia(anio);
 	}
 }

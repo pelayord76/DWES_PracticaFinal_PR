@@ -26,5 +26,8 @@ public interface MaquinaRepository extends JpaRepository<Maquina, Long> {
 			+ "FROM Maquina m WHERE m.cliente.id = :idCliente")
 	List<MaquinaDto> findMaquinasByLocal(@Param("idCliente") long idCliente);
 
-	List<MaquinaContratoResponseDto> findByFechaVencimientoLicencia(@Param("anio") String anio);
+	
+	@Query("SELECT new com.spring.start.dto.maquina.MaquinaContratoResponseDto(m.nombre, m.fechaVencimientoLicencia) "
+			+ "FROM Maquina m WHERE YEAR(m.fechaVencimientoLicencia) = :anio")
+	List<MaquinaContratoResponseDto> findByFechaVencimientoLicencia(@Param("anio") int anio);
 }

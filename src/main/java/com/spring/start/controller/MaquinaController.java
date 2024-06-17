@@ -116,7 +116,7 @@ public class MaquinaController {
 	@Operation(summary = "Buscar clientes", description = "Buscar todas las maquinas cuya licencia venza el mismo año que el especificado por parametro.", tags = {
 			"cliente", "get" })
 	@GetMapping("/licencia/{anio}")
-	public List<MaquinaContratoResponseDto> findByFechaVencimientoContrato(@PathVariable String anio) {
+	public List<MaquinaContratoResponseDto> findByFechaVencimientoContrato(@PathVariable int anio) {
 		log.info("Peticion para mostrar todas las maquinas cuya fecha de vencimiento de contrato sea del año " + anio);
 		return maquinaService.findByFechaVencimientoLicencia(anio);
 	}
