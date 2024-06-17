@@ -16,8 +16,12 @@ import com.spring.start.dto.cliente.ClienteResponseDto;
 import com.spring.start.dto.factura.FacturaResponseDto;
 import com.spring.start.dto.maquina.MaquinaDto;
 import com.spring.start.entity.Cliente;
+import com.spring.start.entity.Factura;
+import com.spring.start.entity.Maquina;
 import com.spring.start.mapper.ClienteMapper;
 import com.spring.start.repository.ClienteRepository;
+import com.spring.start.repository.FacturaRepository;
+import com.spring.start.repository.MaquinaRepository;
 import com.spring.start.service.ClienteService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +32,12 @@ public class ClienteServiceImpl implements ClienteService {
 
 	@Autowired
 	ClienteRepository clienteRepository;
+
+	@Autowired
+	FacturaRepository facturaRepository;
+
+	@Autowired
+	MaquinaRepository maquinaRepository;
 
 	@Autowired
 	ClienteMapper clienteMapper;
@@ -76,7 +86,35 @@ public class ClienteServiceImpl implements ClienteService {
 			log.error(errorMsg + id);
 			throw new IllegalArgumentException(errorMsg + id);
 		}
+		desvincularMaquinas(id);
+		desvincularFacturas(id);
 		clienteRepository.deleteById(id);
+	}
+
+	private void desvincularFacturas(long id) {
+		Cliente cliente = clienteRepository.findById(id).get();
+		if (cliente.getFacturas().isEmpty()) {
+		} else {
+			for (Factura f : cliente.getFacturas()) {
+				f.setCliente(null);
+				facturaRepository.save(f);
+			}
+			cliente.setFacturas(null);
+			clienteRepository.save(cliente);
+		}
+	}
+
+	private void desvincularMaquinas(long id) {
+		Cliente cliente = clienteRepository.findById(id).get();
+		if (cliente.getMaquinas().isEmpty()) {
+		} else {
+			for (Maquina m : cliente.getMaquinas()) {
+				m.setCliente(null);
+				maquinaRepository.save(m);
+			}
+			cliente.setMaquinas(null);
+			clienteRepository.save(cliente);
+		}
 	}
 
 	@Override
