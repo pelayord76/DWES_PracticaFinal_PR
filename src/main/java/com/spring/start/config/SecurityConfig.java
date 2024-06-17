@@ -33,7 +33,7 @@ public class SecurityConfig {
 						)
 				.authenticationProvider(authProvider)
 				.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-				.logout(logout -> logout.permitAll());
+				.logout(logout -> logout.logoutUrl("/logout").permitAll());
 
 		return http.build();
 	}
