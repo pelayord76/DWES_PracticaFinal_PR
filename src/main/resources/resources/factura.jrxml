@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports
+    http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+    name="factura_report" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20"
+    topMargin="20" bottomMargin="20" uuid="d27c7f2c-0c44-4f75-bcbb-2d64be6cddb6">
+
+    <property name="ireport.zoom" value="1.0"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="0"/>
+
+    <queryString>
+        <![CDATA[SELECT id, iva, fechaEmision, <!--cliente--> FROM factura]]>
+    </queryString>
+
+    <field name="id" class="java.lang.Long"/>
+    <field name="iva" class="java.lang.Double"/>
+    <field name="fechaEmision" class="java.time.LocalDate"/>
+    <!--<field name="cliente" class="java.lang.Long"/>-->
+
+    <title>
+        <band height="50">
+            <staticText>
+                <reportElement x="0" y="0" width="555" height="30" uuid="c137aa20-4b5d-4c77-8907-7b8cf8b9d2d2"/>
+                <textElement>
+                    <font size="18" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Reporte de Facturas]]></text>
+            </staticText>
+        </band>
+    </title>
+
+    <columnHeader>
+        <band height="30">
+            <staticText>
+                <reportElement x="0" y="0" width="100" height="30" uuid="0a0d4b44-6718-4e58-a814-9148d9e2c3fa"/>
+                <textElement>
+                    <font size="12" isBold="true"/>
+                </textElement>
+                <text><![CDATA[ID]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="100" y="0" width="100" height="30" uuid="4c8ecf50-f5e1-4e5f-a8b1-8a328a6f5f60"/>
+                <textElement>
+                    <font size="12" isBold="true"/>
+                </textElement>
+                <text><![CDATA[IVA]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="200" y="0" width="100" height="30" uuid="6c3edc5c-f8c3-4d70-91c2-0c8c6c9f68c3"/>
+                <textElement>
+                    <font size="12" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Fecha Emisión]]></text>
+            </staticText>
+           <!--<staticText>
+                <reportElement x="300" y="0" width="100" height="30" uuid="5a4e3c25-9c4f-4532-9b8d-9c0e47b8b2e0"/>
+                <textElement>
+                    <font size="12" isBold="true"/>
+                </textElement>
+                <text><![CDATA[ID Cliente]]></text>
+            </staticText>-->
+        </band>
+    </columnHeader>
+
+    <detail>
+        <band height="30">
+            <textField>
+                <reportElement x="0" y="0" width="100" height="30" uuid="7b6e3a14-9a0a-4e3e-8a8e-16c0b47ab8a9"/>
+                <textElement/>
+                <textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="100" y="0" width="100" height="30" uuid="bdc5f43b-0b4e-4a5e-83a8-5a62bbf98a4a"/>
+                <textElement/>
+                <textFieldExpression><![CDATA[$F{iva}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="200" y="0" width="100" height="30" uuid="d8eac414-5a2b-438b-a8c5-1b7e7c0eab4b"/>
+                <textElement/>
+                <textFieldExpression><![CDATA[$F{fechaEmision}]]></textFieldExpression>
+            </textField>
+            <!--<textField>
+                <reportElement x="300" y="0" width="100" height="30" uuid="f8d9a5f4-6e5a-4d5c-8a5d-9d0e47d8f5e1"/>
+                <textElement/>
+                <textFieldExpression><![CDATA[$F{cliente}]]></textFieldExpression>
+            </textField>-->
+        </band>
+    </detail>
+
+    <pageFooter>
+        <band height="30">
+            <staticText>
+                <reportElement x="0" y="0" width="555" height="30" uuid="c62ec320-4a5d-41c5-8c3b-1b8d8b8b5b0b"/>
+                <textElement>
+                    <font size="12" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Fin del reporte]]></text>
+            </staticText>
+        </band>
+    </pageFooter>
+
+</jasperReport>

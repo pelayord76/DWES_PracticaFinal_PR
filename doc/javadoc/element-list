@@ -1,0 +1,16 @@
+com.spring.start
+com.spring.start.config
+com.spring.start.controller
+com.spring.start.dto
+com.spring.start.dto.cliente
+com.spring.start.dto.factura
+com.spring.start.dto.maquina
+com.spring.start.dto.recaudacion
+com.spring.start.dto.usuario
+com.spring.start.entity
+com.spring.start.enums
+com.spring.start.mapper
+com.spring.start.repository
+com.spring.start.service
+com.spring.start.service.impl
+com.spring.start.util
