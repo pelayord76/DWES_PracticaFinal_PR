@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.start.dto.factura.FacturaRequestDto;
 import com.spring.start.dto.factura.FacturaResponseDto;
+import com.spring.start.dto.factura.PdfDto;
 import com.spring.start.entity.Cliente;
 import com.spring.start.entity.Factura;
 import com.spring.start.mapper.FacturaMapper;
@@ -145,7 +146,9 @@ public class FacturaServiceImpl implements FacturaService {
 			log.error(errorMsg + id);
 			throw new IllegalArgumentException(errorMsg + id);
 		}
-
+		
+		PdfDto datos = facturaRepository.generarPdf(id);
+		
 		// Cargar la plantilla JRXML desde los recursos
 		Resource resource = resourceLoader.getResource("classpath:resources/factura.jrxml");
 		InputStream inputStream = resource.getInputStream();
@@ -154,7 +157,7 @@ public class FacturaServiceImpl implements FacturaService {
 		JasperReport jasperReport = JasperCompileManager.compileReport(inputStream);
 
 		// Fuente de datos y parámetros
-		JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(Collections.singletonList(facturaOptional.get()));
+		JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(Collections.singletonList(datos));
 		Map<String, Object> parameters = new HashMap<>();
 
 		// Llenar el reporte

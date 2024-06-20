@@ -9,15 +9,14 @@
     <property name="ireport.zoom" value="1.0"/>
     <property name="ireport.x" value="0"/>
     <property name="ireport.y" value="0"/>
-
-    <queryString>
-        <![CDATA[SELECT id, iva, fechaEmision, <!--cliente--> FROM factura]]>
-    </queryString>
-
+    
     <field name="id" class="java.lang.Long"/>
-    <field name="iva" class="java.lang.Double"/>
-    <field name="fechaEmision" class="java.time.LocalDate"/>
-    <!--<field name="cliente" class="java.lang.Long"/>-->
+	<field name="iva" class="java.lang.Double"/>
+	<field name="fechaEmision" class="java.time.LocalDate"/>
+	<field name="local" class="java.lang.String"/>
+	<field name="duenio" class="java.lang.String"/>
+	<field name="cif" class="java.lang.String"/>
+	<field name="totalRecaudaciones" class="java.lang.Double"/>
 
     <title>
         <band height="50">
@@ -48,19 +47,40 @@
                 <text><![CDATA[IVA]]></text>
             </staticText>
             <staticText>
-                <reportElement x="200" y="0" width="100" height="30" uuid="6c3edc5c-f8c3-4d70-91c2-0c8c6c9f68c3"/>
+                <reportElement x="200" y="0" width="150" height="30" uuid="6c3edc5c-f8c3-4d70-91c2-0c8c6c9f68c3"/>
                 <textElement>
                     <font size="12" isBold="true"/>
                 </textElement>
                 <text><![CDATA[Fecha Emisión]]></text>
             </staticText>
-           <!--<staticText>
-                <reportElement x="300" y="0" width="100" height="30" uuid="5a4e3c25-9c4f-4532-9b8d-9c0e47b8b2e0"/>
+            <staticText>
+                <reportElement x="350" y="0" width="100" height="30" uuid="5a4e3c25-9c4f-4532-9b8d-9c0e47b8b2e0"/>
                 <textElement>
                     <font size="12" isBold="true"/>
                 </textElement>
-                <text><![CDATA[ID Cliente]]></text>
-            </staticText>-->
+                <text><![CDATA[Local]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="450" y="0" width="100" height="30" uuid="5a4e3c25-9c4f-4532-9b8d-9c0e47b8b2e0"/>
+                <textElement>
+                    <font size="12" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Dueño]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="650" y="0" width="100" height="30" uuid="5a4e3c25-9c4f-4532-9b8d-9c0e47b8b2e0"/>
+                <textElement>
+                    <font size="12" isBold="true"/>
+                </textElement>
+                <text><![CDATA[CIF]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="750" y="0" width="100" height="30" uuid="5a4e3c25-9c4f-4532-9b8d-9c0e47b8b2e0"/>
+                <textElement>
+                    <font size="12" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Total Recaudaciones]]></text>
+            </staticText>
         </band>
     </columnHeader>
 
@@ -77,15 +97,30 @@
                 <textFieldExpression><![CDATA[$F{iva}]]></textFieldExpression>
             </textField>
             <textField>
-                <reportElement x="200" y="0" width="100" height="30" uuid="d8eac414-5a2b-438b-a8c5-1b7e7c0eab4b"/>
+                <reportElement x="200" y="0" width="150" height="30" uuid="d8eac414-5a2b-438b-a8c5-1b7e7c0eab4b"/>
                 <textElement/>
                 <textFieldExpression><![CDATA[$F{fechaEmision}]]></textFieldExpression>
             </textField>
-            <!--<textField>
-                <reportElement x="300" y="0" width="100" height="30" uuid="f8d9a5f4-6e5a-4d5c-8a5d-9d0e47d8f5e1"/>
+            <textField>
+                <reportElement x="350" y="0" width="100" height="30" uuid="d8eac414-5a2b-438b-a8c5-1b7e7c0eab4b"/>
                 <textElement/>
-                <textFieldExpression><![CDATA[$F{cliente}]]></textFieldExpression>
-            </textField>-->
+                <textFieldExpression><![CDATA[$F{local}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="450" y="0" width="100" height="30" uuid="d8eac414-5a2b-438b-a8c5-1b7e7c0eab4b"/>
+                <textElement/>
+                <textFieldExpression><![CDATA[$F{duenio}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="650" y="0" width="100" height="30" uuid="d8eac414-5a2b-438b-a8c5-1b7e7c0eab4b"/>
+                <textElement/>
+                <textFieldExpression><![CDATA[$F{cif}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="750" y="0" width="100" height="30" uuid="d8eac414-5a2b-438b-a8c5-1b7e7c0eab4b"/>
+                <textElement/>
+                <textFieldExpression><![CDATA[$F{totalRecaudaciones}]]></textFieldExpression>
+            </textField>
         </band>
     </detail>
 
