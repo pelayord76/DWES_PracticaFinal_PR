@@ -22,6 +22,8 @@ public interface FacturaRepository extends JpaRepository<Factura, Long> {
 			+ "JOIN c.maquinas m "
 			+ "JOIN m.recaudaciones r "
 			+ "WHERE f.id = :id "
+			+ "AND FUNCTION('YEAR', r.fecha) = FUNCTION('YEAR', f.fechaEmision) "
+			+ "AND FUNCTION('MONTH', r.fecha) = FUNCTION('MONTH', f.fechaEmision) "
 			+ "GROUP BY "
 			+ "f.id, "
 			+ "c.local, "
