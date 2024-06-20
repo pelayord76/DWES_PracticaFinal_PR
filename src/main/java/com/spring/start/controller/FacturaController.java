@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spring.start.dto.ApiResponse;
 import com.spring.start.dto.factura.FacturaRequestDto;
 import com.spring.start.dto.factura.FacturaResponseDto;
 import com.spring.start.service.FacturaService;
+import com.spring.start.util.ResponseUtil;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -35,48 +38,51 @@ public class FacturaController {
 	@Operation(summary = "Buscar individualmente", description = "Buscar una factura por id.", tags = { "factura",
 			"get" })
 	@GetMapping("/{id}")
-	public FacturaResponseDto getFactura(@PathVariable Long id) {
+	public ResponseEntity<ApiResponse<FacturaResponseDto>> getFactura(@PathVariable Long id) {
 		log.info("Peticion para mostrar la factura con id " + id);
-		return facturaService.findById(id);
+		return ResponseUtil.response(facturaService.findById(id), HttpStatus.FOUND, "Mostrando la factura");
 	}
 
 	@Operation(summary = "Buscar todo", description = "Buscar todas las facturas de la base de datos.", tags = {
 			"factura", "get" })
 	@GetMapping
-	public List<FacturaResponseDto> findAll() {
+	public ResponseEntity<ApiResponse<List<FacturaResponseDto>>> findAll() {
 		log.info("Peticion para mostrar todas las facturas");
-		return facturaService.findAll();
+		return ResponseUtil.response(facturaService.findAll(), HttpStatus.FOUND, "Mostrando todas las facturas");
 	}
 
 	@Operation(summary = "Crear", description = "Crear una factura e introducirla en la base de datos.", tags = {
 			"factura", "post" })
 	@PostMapping
-	public FacturaResponseDto addFactura(@RequestBody FacturaRequestDto dto) {
+	public ResponseEntity<ApiResponse<FacturaResponseDto>> addFactura(@RequestBody FacturaRequestDto dto) {
 		log.info("Peticion para añadir una factura");
-		return facturaService.add(dto);
+		return ResponseUtil.response(facturaService.add(dto), HttpStatus.ACCEPTED, "Factura creada con éxito");
 	}
 
 	@Operation(summary = "Modificar", description = "Buscar una factura por id y añadirle nuevos campos.", tags = {
 			"factura", "put" })
 	@PutMapping("/{id}")
-	public FacturaResponseDto editFactura(@PathVariable Long id, @RequestBody FacturaRequestDto dto) {
+	public ResponseEntity<ApiResponse<FacturaResponseDto>> editFactura(@PathVariable Long id,
+			@RequestBody FacturaRequestDto dto) {
 		log.info("Peticion para actualizar la factura con id " + id);
-		return facturaService.update(id, dto);
+		return ResponseUtil.response(facturaService.update(id, dto), HttpStatus.ACCEPTED, "Factura editada con éxito");
 	}
 
 	@Operation(summary = "Borrar", description = "Borrar una factura de la base ded datos por su id.", tags = {
 			"factura", "delete" })
 	@DeleteMapping("/{id}")
-	public void deleteFactura(@PathVariable Long id) {
+	public ResponseEntity<ApiResponse<Object>> deleteFactura(@PathVariable Long id) {
 		log.info("Peticion para borrar la factura con id " + id);
 		facturaService.delete(id);
+		return ResponseUtil.response(null, HttpStatus.NO_CONTENT, "Factura eliminada con éxito");
 	}
 
 	@Operation(summary = "Buscar todo", description = "Buscar todas las facturas de la base de datos.", tags = {
 			"factura", "get" })
 	@GetMapping("/{id}/pdf")
-	public ResponseEntity<byte[]> generarPdf(@PathVariable Long id) throws JRException, IOException {
+	public ResponseEntity<ApiResponse<ResponseEntity<byte[]>>> generarPdf(@PathVariable Long id)
+			throws JRException, IOException {
 		log.info("Peticion para generar pdf de la factura");
-		return facturaService.generarPdf(id);
+		return ResponseUtil.response(facturaService.generarPdf(id), HttpStatus.ACCEPTED, "PDF de factura generado");
 	}
 }
